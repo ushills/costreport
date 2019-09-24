@@ -1,19 +1,30 @@
-.title {
-    font-weight: bold;
+body {
+    color: #222;
+    margin: 0px;
+    padding: 0px;
+    font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+    font-size: 17px;
 }
 
 .main_content {
-    padding: 20px;
+    background: #fff;
+    margin: 0px;
+    /* padding: 0px 0px 50px; */
 }
 
-nav {
-    background-color: #000;
-    padding: 10px;
-    font-size: 20px;
+.project-list {
+    padding: 0px 0;
+    font-size: 12px;
+}
+
+
+footer {
+    margin-top: 50px;
+    padding: 30px;
+    text-align: center;
     color: white;
 }
 
-nav > a {
-    color: white;
-    margin-right: 10px;
+footer a {
+    color: #2495f2;
 }

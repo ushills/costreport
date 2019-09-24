@@ -4,10 +4,13 @@
 <h2>Projects</h2>
 
 {% for p in projects %}
-
-<div>
-    {{ p.project_no }} - {{p.project_name}}
+<div class="container project-list">
+    <span class="project-number">
+        <a href="{{ p.project_no }}">{{ p.project_no }}</a>
+    </span>
+    <span class="project-name">
+        {{p.project_name}} <br>
+    </span>
 </div>
-
 {% endfor %}
 {% endblock %}
