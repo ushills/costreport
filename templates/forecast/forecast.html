@@ -1,0 +1,14 @@
+{% extends "shared/_layout.html" %}
+{% block main_content %}
+
+<h2>Forecast</h2>
+
+{% for f in forecast_detail %}
+
+<div>
+    {{ f.cost_code }} - {{ f.cost_code_description }} - {{ f.cost_allowance }} - {{ f.cost_forecast }} -
+    {{ f.cost_remaining }}
+</div>
+
+{% endfor %}
+{% endblock %}
