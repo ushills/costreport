@@ -5,9 +5,9 @@ import costreport.services.forecast_service as forecast_service
 blueprint = flask.Blueprint("forecast", __name__, template_folder="templates")
 
 
-@blueprint.route("/forecast")
-def forecast():
+@blueprint.route("/forecast/<project>")
+def forecast(project):
     forecast_detail = forecast_service.get_forecast_detail()
     return flask.render_template(
-        "forecast/forecast.html", forecast_detail=forecast_detail
+        "forecast/forecast.html", project=project, forecast_detail=forecast_detail
     )

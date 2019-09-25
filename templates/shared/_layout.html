@@ -23,8 +23,10 @@
 
     <nav>
         <a href="/projects">Projects</a>
-        <a href="/forecast">Forecast</a>
-        <a href="/dashboard">Dashboard</a>
+        {% if project|length %}
+        <a href="/forecast/{{ project }}">Forecast</a>
+        <a href="/dashboard/{{ project }}">Dashboard</a>
+        {% endif %}
     </nav>
 
     <div class="main_content">
