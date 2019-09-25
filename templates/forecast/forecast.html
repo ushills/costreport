@@ -5,10 +5,25 @@
 
 {% for f in forecast_detail %}
 
-<div>
-    {{ f.cost_code }} - {{ f.cost_code_description }} - {{ f.cost_allowance }} - {{ f.cost_forecast }} -
-    {{ f.cost_remaining }}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 col-sm-2 col-xs-12">
+            {{ f.cost_code }}
+        </div>
+        <div class="col-lg-4 col-sm-10 col-xs-12">
+            {{ f.cost_code_description }}
+        </div>
+        <div class="col-lg-2 col-sm-2 col-xs-12">
+            {{ f.cost_allowance }}
+        </div>
+        <div class="col-lg-2 col-sm-2 col-xs-12">
+            {{ f.cost_forecast }}
+        </div>
+        <div class="col-lg-2 col-sm-2 col-xs-12">
+            {{ f.cost_remaining }}
+        </div>
+    </div>
 </div>
-
+</div>
 {% endfor %}
 {% endblock %}
