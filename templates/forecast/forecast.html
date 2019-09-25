@@ -23,18 +23,19 @@
                 {% else %}
             <tr>
                 {% endif %}
-                <td>{{ f.cost_code }}</td>
-                <td>{{ f.cost_code_description }}</td>
-                <td>{{ '{:,}'.format(f.cost_allowance) }}</td>
-                <td>{{ '{:,}'.format(f.cost_forecast) }}</td>
-                <td>{{ '{:,}'.format(f.cost_allowance - f.cost_forecast) }}</td>
+                <td><a href="#">{{ f.cost_code }}</a></td>
+                <td><a href="#">{{ f.cost_code_description }}</a></td>
+                <td><a href="#">{{ '{:,}'.format(f.cost_allowance) }}</a></td>
+                <td><a href="#">{{ '{:,}'.format(f.cost_forecast) }}</a></td>
+                <td><a href="#">{{ '{:,}'.format(f.cost_allowance - f.cost_forecast) }}</a></td>
             </tr>
             {% endfor %}
             <tr>
                 <td colspan="2">Totals</td>
-                <td>{{ '{:,}'.format(forecast_detail | sum(attribute='cost_allowance'))}}</td>
-                <td>{{ '{:,}'.format(forecast_detail | sum(attribute='cost_forecast'))}}</td>
-                <td>{{ '{:,}'.format(forecast_detail | sum(attribute='cost_allowance') - forecast_detail | sum(attribute='cost_forecast'))}}
+                <td><a href="#">{{ '{:,}'.format(forecast_detail | sum(attribute='cost_allowance'))}}</a></td>
+                <td><a href="#">{{ '{:,}'.format(forecast_detail | sum(attribute='cost_forecast'))}}</a></td>
+                <td><a
+                        href="#">{{ '{:,}'.format(forecast_detail | sum(attribute='cost_allowance') - forecast_detail | sum(attribute='cost_forecast'))}}</a>
                 </td>
             </tr>
         </tbody>

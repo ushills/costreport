@@ -27,8 +27,28 @@ footer a {
     font-size: 14px;
 }
 
-.forecast .table a {
-    font-style: normal
+.forecast .table tbody tr:last-child {
+    font-weight: bold;
+}
+
+a:link{
+    color: #222;
+}
+
+a:visited{
+    color: #222;
+}
+
+a:hover{
+    text-decoration: none;
+    color: #666;
+}
+
+}
+
+.table a:hover {
+    color: #666;
+
 }
 
 .projects .table{

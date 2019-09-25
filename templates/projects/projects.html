@@ -15,7 +15,7 @@
             {% for p in projects %}
             <tr>
                 <td><a href="{{ p.project_no }}">{{ p.project_no }}</a></td>
-                <td><a href="{{ p.project_no }}">{{ p.project_name }}</a></td>
+                <td><a href="{{ p.project_no }}">{{ p.project_name.title() }}</a></td>
             </tr>
             {% endfor %}
         </tbody>
