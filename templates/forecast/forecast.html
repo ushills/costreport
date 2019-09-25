@@ -3,27 +3,32 @@
 
 <h2>Forecast</h2>
 
-{% for f in forecast_detail %}
+
 
 <div class="container">
-    <div class="row">
-        <div class="col-lg-2 col-sm-2 col-xs-12">
-            {{ f.cost_code }}
-        </div>
-        <div class="col-lg-4 col-sm-10 col-xs-12">
-            {{ f.cost_code_description }}
-        </div>
-        <div class="col-lg-2 col-sm-2 col-xs-12">
-            {{ f.cost_allowance }}
-        </div>
-        <div class="col-lg-2 col-sm-2 col-xs-12">
-            {{ f.cost_forecast }}
-        </div>
-        <div class="col-lg-2 col-sm-2 col-xs-12">
-            {{ f.cost_remaining }}
-        </div>
-    </div>
+    <table class="table table-hover table-sm">
+        <thead>
+            <tr>
+                <th scope="col">Cost Code</th>
+                <th scope="col">Description</th>
+                <th scope="col">Cost Allowance</th>
+                <th scope="col">Cost Forecast</th>
+                <th scope="col">Remaining Allowance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for f in forecast_detail %}
+            <tr>
+                <th scope="row">{{ f.cost_code }}</th>
+                <td>{{ f.cost_code_description }}</td>
+                <td>{{ f.cost_allowance }}</td>
+                <td>{{ f.cost_forecast }}</td>
+                <td>{{ f.cost_remaining }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
 </div>
-</div>
-{% endfor %}
+
 {% endblock %}
