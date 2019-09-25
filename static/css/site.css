@@ -2,7 +2,7 @@ body {
     color: #222;
     margin: 0px;
     padding: 0px;
-    font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+    font-family: 'Work Sans', Helvetica, Arial, sans-serif;
     font-size: 17px;
 }
 
@@ -11,12 +11,6 @@ body {
     margin: 0px;
     /* padding: 0px 0px 50px; */
 }
-
-.project-list {
-    padding: 0px 0;
-    font-size: 12px;
-}
-
 
 footer {
     margin-top: 50px;
@@ -27,4 +21,20 @@ footer {
 
 footer a {
     color: #2495f2;
+}
+
+.forecast .table {
+    font-size: 14px;
+}
+
+.forecast .table a {
+    font-style: normal
+}
+
+.projects .table{
+    font-size: 14px;
+}
+
+.projects .table a:hover {
+    font-style: normal
 }

@@ -5,11 +5,11 @@
 
 
 
-<div class="container">
+<div class="container forecast table-responsive">
     <table class="table table-hover table-sm">
         <thead>
             <tr>
-                <th scope="col">Cost Code</th>
+                <th scope="col" style="width: 60px">Cost Code</th>
                 <th scope="col">Description</th>
                 <th scope="col">Cost Allowance</th>
                 <th scope="col">Cost Forecast</th>
@@ -18,16 +18,28 @@
         </thead>
         <tbody>
             {% for f in forecast_detail %}
+            {% if f.cost_allowance - f.cost_forecast < 0 %}
+            <tr class="table-danger">
+                {% else %}
             <tr>
-                <th scope="row">{{ f.cost_code }}</th>
+                {% endif %}
+                <td>{{ f.cost_code }}</td>
                 <td>{{ f.cost_code_description }}</td>
-                <td>{{ f.cost_allowance }}</td>
-                <td>{{ f.cost_forecast }}</td>
-                <td>{{ f.cost_remaining }}</td>
+                <td>{{ '{:,}'.format(f.cost_allowance) }}</td>
+                <td>{{ '{:,}'.format(f.cost_forecast) }}</td>
+                <td>{{ '{:,}'.format(f.cost_allowance - f.cost_forecast) }}</td>
             </tr>
             {% endfor %}
+            <tr>
+                <td colspan="2">Totals</td>
+                <td>{{ '{:,}'.format(forecast_detail | sum(attribute='cost_allowance'))}}</td>
+                <td>{{ '{:,}'.format(forecast_detail | sum(attribute='cost_forecast'))}}</td>
+                <td>{{ '{:,}'.format(forecast_detail | sum(attribute='cost_allowance') - forecast_detail | sum(attribute='cost_forecast'))}}
+                </td>
+            </tr>
         </tbody>
     </table>
+
 
 </div>
 
