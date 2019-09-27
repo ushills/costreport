@@ -19,18 +19,6 @@ footer {
     color: white;
 }
 
-footer a {
-    color: #2495f2;
-}
-
-.forecast .table {
-    font-size: 14px;
-}
-
-.forecast .table tbody tr:last-child {
-    font-weight: bold;
-}
-
 a:link{
     color: #222;
 }
@@ -57,4 +45,29 @@ a:hover{
 
 .projects .table a:hover {
     font-style: normal
+}
+
+/* forecast template formatting */
+.forecast .first_row{
+    font-size: 14px;
+}
+
+.forecast .second_row{
+    font-size: 10px;
+    font-style: italic;
+    color: #666;
+}
+
+.forecast .progress{
+    margin-left: 15px;
+    margin-right: -15px;
+    padding-left: 0px;
+    padding-right: 0px;
+    height: 12px;
+    font-size: 10px;
+    text-align: right;
+}
+
+.forecast .row .values {
+    text-align: right;
 }

@@ -16,6 +16,6 @@ def get_forecast_detail():
             "cost_code": "C72653",
             "cost_code_description": "Boilers",
             "cost_allowance": 26323,
-            "cost_forecast": 26325,
+            "cost_forecast": 26324,
         },
     ]
