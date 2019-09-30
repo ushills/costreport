@@ -7,7 +7,9 @@
 
     {% for f in forecast_detail %}
     <div class="first_row row">
-        <div class="col-1">{{ f.cost_code }}</div>
+        <div class="col-1"><a
+                href={{ url_for('project_costdetail.costdetail', project=project, cost_code=f.cost_code)}}>{{ f.cost_code }}</a>
+        </div>
         <div class="col-3">{{ f.cost_code_description }}</div>
         <div class="values col-2">{{ '{:,}'.format(f.cost_forecast)}}</div>
     </div>
