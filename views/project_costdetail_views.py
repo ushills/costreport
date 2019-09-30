@@ -10,10 +10,12 @@ blueprint = flask.Blueprint("project_costdetail", __name__, template_folder="tem
 def costdetail(project):
     cost_code = request.args.get("cost_code")
     cost_detail = costdetail_service.get_cost_detail(project, cost_code)
-    print(cost_detail)
+    cost_summary = costdetail_service.get_cost_summary(project, cost_code)
+    print(cost_summary)
     return flask.render_template(
         "cost_detail/costdetail.html",
         project=project,
         cost_code=cost_code,
         cost_detail=cost_detail,
+        cost_summary=cost_summary,
     )

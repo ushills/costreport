@@ -1,5 +1,4 @@
 def get_cost_detail(project, cost_code):
-    # return project, cost_code
     return [
         {
             "transaction_id": 1,
@@ -32,4 +31,14 @@ def get_cost_detail(project, cost_code):
             "user": "Bob",
         },
     ]
+
+
+def get_cost_summary(project, cost_code):
+    cost_summary = {
+        "cost_code": "C34223",
+        "cost_code_description": "Space Heating & Air Treatment",
+        "cost_allowance": 56000,
+        "cost_forecast": 45000,
+    }
+    return cost_summary
 
