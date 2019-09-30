@@ -10,7 +10,7 @@ app = flask.Flask(__name__)
 
 def main():
     register_blueprints()
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True)
 
 
 def register_blueprints():

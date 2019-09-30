@@ -14,12 +14,11 @@
         <tbody>
             {% for p in projects %}
             <tr>
-                <td><a href="dashboard/{{ p.project_no }}">{{ p.project_no }}</a></td>
-                <td><a href="dashboard/{{ p.project_no }}">{{ p.project_name.title() }}</a></td>
-            </tr>
-            {% endfor %}
+                <td><a href={{ url_for('project_dashboard.dashboard', project=p.project_no)}}>{{ p.project_no }}</a>
+                </td>
+                <td><a href={{ url_for('project_dashboard.dashboard', project=p.project_no)}}>{{ p.project_name.title() }}
+                    </a> </td>
+            </tr> {% endfor %}
         </tbody>
     </table>
-
-</div>
-{% endblock %}
+</div> {% endblock %}
