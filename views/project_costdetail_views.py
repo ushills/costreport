@@ -1,12 +1,14 @@
 import flask
+from flask import request
 
 import costreport.services.costdetail_service as costdetail_service
 
 blueprint = flask.Blueprint("project_costdetail", __name__, template_folder="templates")
 
 
-@blueprint.route("/<project>/costdetail/<cost_code>")
-def costdetail(project, cost_code):
+@blueprint.route("/<project>/costdetail")
+def costdetail(project):
+    cost_code = request.args.get("cost_code")
     cost_detail = costdetail_service.get_cost_detail(project, cost_code)
     return flask.render_template(
         "cost_detail/costdetail.html",
