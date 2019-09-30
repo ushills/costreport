@@ -71,3 +71,28 @@ a:hover{
 .forecast .row .values {
     text-align: right;
 }
+
+/* cost detail template formatting */
+.costdetail .first_row{
+}
+
+.costdetail .second_row{
+    font-size: 16px;
+}
+
+.costdetail .supplier{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.costdetail .date {
+    font-size: 16px;
+    color: #666;
+}
+
+.costdetail .user{
+    font-size: 12px;
+    font-style: italic;
+    color: #666;
+    text-align: right;
+}

@@ -4,13 +4,29 @@
 <h2>Cost Detail - {{ project}} </h2>
 <h3>{{ cost_code }}</h3>
 
-<div class="container costdetail">
+<div class="container-fluid costdetail">
     {% for c in cost_detail %}
-    {{ c.transaction_date }}
-    {{ c.supplier }}
-    {{ c.transaction_amount }}
-    {{ c.user }}
-    <br>
+    <div class="first_row row">
+        <div class="date col-1">
+            {{ c.transaction_date }}
+        </div>
+        <div class="supplier col-3">
+            {{ c.supplier }}
+        </div>
+        <div class="values col-2">
+            {{ '{:,}'.format(c.transaction_amount) }}
+        </div>
+    </div>
+    <div class="second_row row">
+        <div class="col-6 offset-1">
+            {{ c.transaction_description }}
+        </div>
+    </div>
+    <div class="user row">
+        <div class="col-1 offset-3">
+            {{ c.user }}
+        </div>
+    </div>
     {% endfor %}
 
 </div> {% endblock %}

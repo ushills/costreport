@@ -8,7 +8,18 @@ def get_cost_detail(project, cost_code):
             "cost_code": "C34223",
             "supplier": "Subcontractor A",
             "transaction_amount": 34213,
+            "transaction_description": "Starting allocation of tender sum",
             "user": "Bob",
+        },
+        {
+            "transaction_id": 3,
+            "transaction_date": "13/10/19",
+            "project": "12345",
+            "cost_code": "C34223",
+            "supplier": "Subcontractor A",
+            "transaction_amount": 3344,
+            "transaction_description": "Variation 1",
+            "user": "Alice",
         },
         {
             "transaction_id": 2,
@@ -17,6 +28,7 @@ def get_cost_detail(project, cost_code):
             "cost_code": "C34223",
             "supplier": "Subcontractor B",
             "transaction_amount": 232,
+            "transaction_description": "Starting alloctanion of tender sum",
             "user": "Bob",
         },
     ]
