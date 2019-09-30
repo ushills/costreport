@@ -1,9 +1,16 @@
 {% extends "shared/_layout.html" %}
 {% block main_content %}
 
-<h2>Cost Detail</h2>
+<h2>Cost Detail - {{ project}} </h2>
+<h3>{{ cost_code }}</h3>
 
 <div class="container costdetail">
-    {{ project }} - {{ cost_code }}
+    {% for c in cost_detail %}
+    {{ c.transaction_date }}
+    {{ c.supplier }}
+    {{ c.transaction_amount }}
+    {{ c.user }}
+    <br>
+    {% endfor %}
 
 </div> {% endblock %}
