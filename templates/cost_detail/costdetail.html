@@ -3,68 +3,68 @@
 
 <h2>Cost Detail - {{ project}} </h2>
 
-<div class="container-fluid cost_summary border-bottom">
+<div class="container-fluid cost_detail">
 
-
-    <div class="first_row row">
-        <div class="col-1"><a
-                href={{ url_for('project_costdetail.costdetail', project=project, cost_code=cost_summary.cost_code)}}>{{ cost_summary.cost_code }}</a>
+    <div class="cost_summary border-bottom">
+        <div class="first_row row">
+            <div class="col-1"><a
+                    href={{ url_for('project_costdetail.costdetail', project=project, cost_code=cost_summary.cost_code)}}>{{ cost_summary.cost_code }}</a>
+            </div>
+            <div class="col-3">{{ cost_summary.cost_code_description }}</div>
+            <div class="values col-2">{{ '{:,}'.format(cost_summary.cost_forecast)}}</div>
         </div>
-        <div class="col-3">{{ cost_summary.cost_code_description }}</div>
-        <div class="values col-2">{{ '{:,}'.format(cost_summary.cost_forecast)}}</div>
+        <div class="row">
+            {% if cost_summary.cost_forecast > cost_summary.cost_allowance %}
+            <!-- Negative Progress Bar -->
+            <div class="progress col-4">
+                <!-- Grey element of progress bar -->
+                <div class="progress-bar-striped progress-bar-animated" role="progressbar"
+                    style="width: {{ (100 + ((cost_summary.cost_allowance - cost_summary.cost_forecast) / cost_summary.cost_forecast) * 100) }}% ;  background-color: #dc3545;">
+                </div>
+                <!-- Red element of progress bar -->
+                <div class="progress-bar bg-danger" role="progressbar"
+                    style="width: {{ -((cost_summary.cost_allowance - cost_summary.cost_forecast) / cost_summary.cost_forecast) * 100 }}%">
+                    {{ '{:,}'.format(cost_summary.cost_allowance - cost_summary.cost_forecast) }}
+                </div>
+            </div>
+            {% else %}
+            <!-- Positive Progress Bar -->
+            <div class="progress col-4">
+                <div class="progress-bar bg-success" role="progressbar" aria-valuemin="0"
+                    aria-valuemax="{{ cost_summary.cost_allowance }}" aria-valuenow="{{ cost_summary.cost_forecast }}"
+                    style="width: {{ (cost_summary.cost_forecast / cost_summary.cost_allowance) * 100 }}%; ">
+                    {{ '{:,}'.format(cost_summary.cost_allowance - cost_summary.cost_forecast) }}
+                </div>
+            </div>
+            {% endif %}
+            <div class="second_row values col-2">{{ '{:,}'.format(cost_summary.cost_allowance) }}</div>
+        </div>
     </div>
-    <div class="row">
-        {% if cost_summary.cost_forecast > cost_summary.cost_allowance %}
-        <!-- Negative Progress Bar -->
-        <div class="progress col-4">
-            <!-- Grey element of progress bar -->
-            <div class="progress-bar-striped progress-bar-animated" role="progressbar"
-                style="width: {{ (100 + ((cost_summary.cost_allowance - cost_summary.cost_forecast) / cost_summary.cost_forecast) * 100) }}% ;  background-color: #dc3545;">
-            </div>
-            <!-- Red element of progress bar -->
-            <div class="progress-bar bg-danger" role="progressbar"
-                style="width: {{ -((cost_summary.cost_allowance - cost_summary.cost_forecast) / cost_summary.cost_forecast) * 100 }}%">
-                {{ '{:,}'.format(cost_summary.cost_allowance - cost_summary.cost_forecast) }}
-            </div>
-        </div>
-        {% else %}
-        <!-- Positive Progress Bar -->
-        <div class="progress col-4">
-            <div class="progress-bar bg-success" role="progressbar" aria-valuemin="0"
-                aria-valuemax="{{ cost_summary.cost_allowance }}" aria-valuenow="{{ cost_summary.cost_forecast }}"
-                style="width: {{ (cost_summary.cost_forecast / cost_summary.cost_allowance) * 100 }}%; ">
-                {{ '{:,}'.format(cost_summary.cost_allowance - cost_summary.cost_forecast) }}
-            </div>
-        </div>
-        {% endif %}
-        <div class="second_row values col-2">{{ '{:,}'.format(cost_summary.cost_allowance) }}</div>
-    </div>
 
+    <div class="cost_transaction">
+        {% for c in cost_detail %}
+        <div class="row">
+            <div class="date col-1">
+                {{ c.transaction_date }}
+            </div>
+            <div class="supplier col-3">
+                {{ c.supplier }}
+            </div>
+            <div class="values col-2">
+                {{ '{:,}'.format(c.transaction_amount) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="description col-6 offset-1">
+                {{ c.transaction_description }}
+            </div>
+        </div>
+        <div class="user row border-bottom">
+            <div class="col-4">
+                {{ c.user }}
+            </div>
+        </div>
+        {% endfor %}
+
+    </div> {% endblock %}
 </div>
-
-<div class="container-fluid costdetail">
-    {% for c in cost_detail %}
-    <div class="first_row row">
-        <div class="date col-1">
-            {{ c.transaction_date }}
-        </div>
-        <div class="supplier col-3">
-            {{ c.supplier }}
-        </div>
-        <div class="values col-2">
-            {{ '{:,}'.format(c.transaction_amount) }}
-        </div>
-    </div>
-    <div class="second_row row">
-        <div class="col-6 offset-1">
-            {{ c.transaction_description }}
-        </div>
-    </div>
-    <div class="user row border-bottom">
-        <div class="col-4">
-            {{ c.user }}
-        </div>
-    </div>
-    {% endfor %}
-
-</div> {% endblock %}

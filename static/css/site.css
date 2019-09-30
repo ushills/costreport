@@ -56,6 +56,7 @@ a:hover{
     font-size: 10px;
     font-style: italic;
     color: #666;
+    padding-bottom: 5px;
 }
 
 .forecast .progress{
@@ -73,27 +74,52 @@ a:hover{
 }
 
 /* cost detail template formatting */
-.costdetail .first_row{
+
+.cost_summary {
+    padding-bottom: 10px;
 }
 
-.costdetail .second_row{
+.cost_summary .first_row{
+    padding-bottom: 5px;
+}
+
+.cost_summary .second_row{
+    font-size: 14px;
+    font-style: italic;
+    color: #666;
+}
+
+.cost_summary .progress{
+    margin-left: 15px;
+    margin-right: -15px;
+    padding-left: 0px;
+    padding-right: 0px;
+    height: 18px;
+    font-size: 14px;
+}
+
+.cost_detail .row .values {
+    text-align: right;
+}
+
+.cost_transaction .description{
     font-size: 16px;
-    /* border-bottom: 1px solid #666; */
 }
 
-.costdetail .supplier{
+.cost_transaction .supplier{
     font-size: 18px;
     font-weight: bold;
 }
 
-.costdetail .date {
+.cost_transaction .date {
     font-size: 16px;
     color: #666;
 }
 
-.costdetail .user{
+.cost_transaction .user{
     font-size: 12px;
     font-style: italic;
     color: #666;
     text-align: right;
 }
+

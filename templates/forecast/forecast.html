@@ -13,7 +13,7 @@
         <div class="col-3">{{ f.cost_code_description }}</div>
         <div class="values col-2">{{ '{:,}'.format(f.cost_forecast)}}</div>
     </div>
-    <div class="row">
+    <div class="row border-bottom">
         {% if f.cost_forecast > f.cost_allowance %}
         <!-- Negative Progress Bar -->
         <div class="progress col-4">
