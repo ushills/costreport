@@ -40,7 +40,11 @@ a:hover{
 }
 
 /* forecast template formatting */
-.forecast .first_row{
+.forecast .forecast_summary{
+    padding-bottom: 20px;
+}
+
+.forecast .cost_code_row{
     font-size: 14px;
 }
 

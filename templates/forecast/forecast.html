@@ -3,10 +3,30 @@
 
 <h2>Forecast - {{ project }}</h2>
 
+
+
 <div class="container-fluid forecast">
+    <div class="forecast_summary">
+        <div class="row">
+            <div class="col-4">Forecast Income:</div>
+            <div class="col-2 values">2,626,636</div>
+        </div>
+        <div class="row">
+            <div class="col-4">Forecast Cost:</div>
+            <div class="col-2 values">2,343,224</div>
+        </div>
+        <div class="row">
+            <div class="col-4">Forecast Profit:</div>
+            <div class="col-2 values">324,231</div>
+        </div>
+        <div class="row border-bottom">
+            <div class="col-4">Forecast Profit Percentage:</div>
+            <div class="col-2 values"> 8%</div>
+        </div>
+    </div>
 
     {% for f in forecast_detail %}
-    <div class="first_row row">
+    <div class="cost_code_row row">
         <div class="col-1"><a
                 href={{ url_for('project_costdetail.costdetail', project=project, cost_code=f.cost_code)}}>{{ f.cost_code }}</a>
         </div>
