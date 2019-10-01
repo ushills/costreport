@@ -19,3 +19,12 @@ def get_forecast_detail():
             "cost_forecast": 26324,
         },
     ]
+
+
+def get_summary_detail():
+    return {
+        "forecast_income": 2636636,
+        "forecast_cost": 2343224,
+        "forecast_profit": 324231,
+        "forecast_profit_percentage": 0.085,
+    }
