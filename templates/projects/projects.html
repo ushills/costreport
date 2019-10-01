@@ -6,8 +6,8 @@
 <div class="container-fluid projects">
     {% for p in projects %}
     <div class="row border-bottom">
-        <a href={{ url_for('project_dashboard.dashboard', project=p.project_no)}} class="col-1">{{ p.project_no }}</a>
-        <a href={{ url_for('project_dashboard.dashboard', project=p.project_no)}}
+        <a href={{ url_for('project_dashboard.dashboard', project=p.project_id)}} class="col-1">{{ p.project_id }}</a>
+        <a href={{ url_for('project_dashboard.dashboard', project=p.project_id)}}
             class="col-5">{{ p.project_name.title() }}</a>
     </div>
     {% endfor %}
