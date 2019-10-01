@@ -8,7 +8,7 @@
     <div class="cost_summary border-bottom">
         <div class="first_row row">
             <div class="col-1"><a
-                    href={{ url_for('project_costdetail.costdetail', project=project, cost_code=cost_summary.cost_code)}}>{{ cost_summary.cost_code }}</a>
+                    href="{{ url_for('project_costdetail.costdetail', project=project, cost_code=cost_summary.cost_code)}}">{{ cost_summary.cost_code }}</a>
             </div>
             <div class="col-3">{{ cost_summary.cost_code_description }}</div>
             <div class="values col-2">{{ '{:,}'.format(cost_summary.cost_forecast)}}</div>
