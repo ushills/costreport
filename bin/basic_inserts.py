@@ -1,12 +1,12 @@
 import os
 import sys
 
+# Make it run more easily outside of VSCode
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
+
 import costreport.data.db_session as db_session
 from costreport.data.projects import Project
 from costreport.data.costcodes import Costcodes
-
-# Make it run more easily outside of VSCode
-# sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 
 def main():
