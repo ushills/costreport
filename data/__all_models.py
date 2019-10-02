@@ -3,8 +3,7 @@
 # we need to preload the models and ensure they
 # are all loaded.
 
-# noinspection PyUnresolvedReferences
-import costreport.data.projects
 
-# noinspection PyUnresolvedReferences
+import costreport.data.projects
+import costreport.data.costcodes
 import costreport.data.transactions
