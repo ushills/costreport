@@ -19,5 +19,5 @@ class Transaction(SqlAlchemyBase):
     cost_code_id: int = sa.Column(
         sa.Integer, sa.ForeignKey("costcodes.costcode_id", nullable=False, index=True)
     )
-    value = sa.Column(sa.Decimal(9, 2), nullable=False)
+    value = sa.Column(sa.Numeric(asdecimal=True), nullable=False)
     note: str = sa.Column(sa.String)
