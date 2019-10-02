@@ -5,3 +5,6 @@
 
 # noinspection PyUnresolvedReferences
 import costreport.data.projects
+
+# noinspection PyUnresolvedReferences
+import costreport.data.transactions
