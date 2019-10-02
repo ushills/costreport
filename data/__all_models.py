@@ -5,6 +5,5 @@
 
 
 import costreport.data.projects
-
-# import costreport.data.costcodes
-# import costreport.data.transactions
+import costreport.data.costcodes
+import costreport.data.transactions
