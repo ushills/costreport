@@ -1,0 +1,255 @@
+costcode_id,costcode_category,cost_code_description
+0, Unallocated, Unallocated
+20000,Labour,Basic Salaries
+20010,Labour,Overtime
+20040,Labour,Bonus Pay
+20050,Labour,Car Allowance
+20060,Labour,Location Allowance
+20070,Labour,Productivity Allowance
+20120,Labour,Other Payroll Allowance
+20130,Labour,Holiday Pay
+20140,Labour,Employers NI
+20190,Labour,Employers Pension
+20200,Labour,Medical
+20240,Labour,Redundancy / Leave Pay
+20250,Labour,Sick Pay
+20270,Labour,Smart Pension Adjustment
+20280,Labour,Steer Adjustment
+20290,Labour,Steer Allowance
+20305,Labour,Apprenticeship Levy Cost
+20340,Labour,Staff / Operatives Welfare
+20350,Labour,Childcare Vouchers
+23400,Prelims,Hotel & Subsistence
+20390,Staff,Staff Recharges - See Staff Costs Sheet
+20391,Staff,Staff Recharges - CAD
+20392,Staff,Staff Recharges - Design
+21000,Prelims,Agency Staff
+21100,Labour,Recruitment Costs
+21220,Labour,Laundry
+21700,Sub Contract,Sub Contractor Costs - Supply and Fit
+21910,Sub Contract,Builderswork/ Struct.steel/
+21911,Sub Contract,Builders [Strip Out]
+21912,Sub Contract,Scaffolding (Package-erect)
+21913,Sub Contract,Structural Steelwork
+21914,Sub Contract,Diamond drilling
+21915,Sub Contract,Fire Stopping
+21916,Sub Contract,Cable Installation
+21917,Sub Contract,Electrical Testing
+21918,Plant,H V Switchgear
+21919,Plant,L V Switchgear
+21920,Sub Contract,Starkstrom
+21921,Sub Contract,Generators
+21922,Sub Contract,Commissions & Testing / Water Treatment
+21923,Prelims,O&M Manuals
+21924,Sub Contract,Control systems
+21925,Sub Contract,BMS
+21926,Sub Contract,Fire/Disabled Alarms
+21927,Sub Contract,Public Address
+21928,Sub Contract,Nurse Call
+21929,Sub Contract,Voice & Data + TV/Satellite
+21930,Sub Contract,Ductwork
+21931,Sub Contract,Smoke Ventilation
+21932,Sub Contract,PVC Ventilation
+21933,Sub Contract,Flues(Supply& Install)
+21934,Sub Contract,Fabric
+21935,Sub Contract,Other sub-contractors
+21936,Sub Contract,Lifts
+21937,Sub Contract,Lightning protection
+21938,Sub Contract,Plant movement / lifting & pos
+21939,Sub Contract,Prefabrication
+21940,Sub Contract,Sprinklers
+21941,Sub Contract,Thermal Insulation
+21942,Sub Contract,Trace Heating/Perimeter heat
+21943,Sub Contract,Perimeter
+21944,Sub Contract,Under floor
+21945,Sub Contract,Leak Detection
+21946,Sub Contract,Water Treatment & containment
+21947,Sub Contract,Chlorination
+21948,Sub Contract,Sectional Tanks
+21949,Sub Contract,Diversions to Electrical Cable Incoming
+21950,Sub Contract,Pipefreezing Contractor
+21951,Sub Contract,Underground Pipework
+21952,Sub Contract,Medical / Industrial Gas
+21953,Sub Contract,HV Mains Diversion
+21954,Sub Contract,Specialist Installation
+21955,Sub Contract,Air Conditioning
+21956,Sub Contract,Chillers/Cooling Equipment/Install
+21957,Sub Contract,Project Specific Installation
+21958,Prelims,Design Services
+22050,Prelims,Plant Hire
+22060,Prelims,Skips
+22150,Sub Contract,Subcontract - Other
+22180,Materials,Power Supplies
+22300,Prelims,Discounts Received
+22730,Prelims,Cleaning Supplies Other
+23100,Prelims,Carriage
+23110,Materials,Materials
+23220,Prelims,Protective Clothing
+23281,Materials,Support Systems
+23282,Materials,Bracketary
+23283,Materials,CableTray & ladder
+23284,Materials,Cable Trunking
+23285,Materials,Channel & Acc's
+23286,Materials,Structural & General steels
+23287,Materials,Cable & accessories
+23288,Materials,Power
+23289,Sub Contract,Specialist Data
+23290,Sub Contract,CCTV Materials
+23291,Materials,Fire Detection Materials
+23292,Sub Contract,Access Control System 
+23293,Sub Contract,Intruder Detection System 
+23294,Materials,BMS Materials
+23295,Materials,Structured cabling Materials
+23296,Materials,Fibre Optic Materials
+23297,Materials,Standard cable& accessories
+23298,Materials,Mineral/Firetuf
+23299,Materials,Mains
+23300,Materials,Wiring Accessories
+23301,Plant,Switchgear(loose)
+23302,Materials,Earthing Materials
+23303,Materials,Conduit & Fittings
+23304,Materials,PVC Conduit & Fittings
+23305,Sub Contract,Gas installation
+23306,Prelims,"Engineering tools, Fixings, etc"
+23307,Prelims,Welding
+23308,Materials,Fixing & fasteners
+23309,Plant,Luminaries& lamps
+23310,Plant,Light Fittings
+23311,Plant,Lighting Control
+23312,Materials,Tube& fittings & Valves
+23313,Materials,Cast Iron
+23314,Materials,Galvanised
+23315,Materials,Steel
+23316,Materials,PVC
+23317,Materials,Copper
+23318,Materials,Victaulics
+23319,Materials,Valves
+23320,Materials,Fabrications
+23321,Materials,Miscellaneous
+23322,Materials,Gauges & measuring equipment
+23323,Materials,Labels & Identification product
+23324,Sub Contract,Service Engineers
+23325,Materials,Control Equipment
+23326,Materials,Building Materials
+23327,Materials,Water Coolers
+23328,Prelims,Industrial gases
+23329,Prelims,General Prelim Cost
+23330,Prelims,Temporary Works
+23338,Prelims,Rebates
+23341,Plant,Wind catchers
+23342,Plant,Air Handling Units [AHU]
+23343,Plant,Fans
+23344,Plant,"Grille, louvers & diffusers/Floor Gullies"
+23345,Materials,Antivibration
+23346,Materials,Flexibles
+23347,Plant,Attenuators
+23348,Materials,Ducting and other ancillaries
+23349,Plant,Sanitary
+23350,Plant,Brassware
+23351,Plant,Busbars
+23352,Plant,Calorifiers& Heat Exchange
+23353,Plant,Heating & Cooling Coils
+23354,Plant,Chillers& Air Conditioning
+23355,Plant,Air Conditioning Equipment
+23356,Plant,Cooling Towers
+23357,Plant,Distribution boards/switchgear
+23358,Plant,Fire Protection
+23359,Plant,Dry riser equipment
+23360,Plant,Hose Reels
+23361,Plant,Fire Detection Equipment
+23362,Plant,Heating Equipment
+23363,Plant,Boilers + [Biomass]
+23364,Plant,Radiators
+23365,Plant,Water Heaters/Showers
+23366,Plant,Flues(Supply only)
+23367,Plant,H T Equipment
+23368,Plant,Generators
+23369,Plant,U.P.S
+23370,Plant,Transformers
+23371,Plant,Pumps
+23372,Plant,Booster
+23373,Plant,Pressurisation Unit
+23374,Plant,Tanks
+23375,Plant,Water Conditioners
+23410,Prelims,Road Travel
+23415,Prelims,Car Parking & Tolls
+23420,Prelims,Rail Travel
+23430,Prelims,Air Travel - UK
+23450,Prelims,Taxi Travel
+23455,Prelims,Taxi Travel - Late Working
+23730,Prelims,Insurance recharge @ 1% of GMP
+23800,Prelims,Training External Costs
+23810,Prelims,Training Internal Costs
+23900,Prelims,Entertainment Client
+23910,Prelims,Entertainment Staff
+24020,Prelims,IT Consultancy
+24040,Prelims,IT Line Charges
+24050,Prelims,IT Hardware Maintenance
+24060,Prelims,IT Software Maintenance
+24110,Prelims,Software Purchase
+24120,Prelims,Hardware Lease and Rental
+24130,Prelims,Hardware Purchases
+24160,Prelims,Telephone Rental / Maintenance
+24170,Prelims,Telephone Call Charges
+24180,Prelims,Mobile Phone Costs
+24500,Prelims,Rents
+24540,Prelims,Rates
+24550,Sub Contract,Hydrant Main
+24560,Prelims,Refuse Collection
+24570,Prelims,Accommodation Recharge
+24580,Prelims,Maintenance Major Works >£5000
+24590,Prelims,Maintenance Minor Works <£5000
+24620,Prelims,Storage
+24640,Prelims,Removals
+24650,Prelims,Electricity
+24660,Prelims,Gas
+24670,Prelims,Oil
+24690,Prelims,Accommodation - Other
+24710,Prelims,Service Charges - Accommodation
+24711,Prelims,Site Setup Costs
+24800,Prelims,Vehicle Hire/Lease
+24810,Prelims,Vehicle Fuel & Oil
+24820,Prelims,Vehicle Maintenance & Repairs
+24830,Prelims,Vehicle Tax & Insurance
+24840,Prelims,Vehicle Hire
+24850,Prelims,Vehicle Congestion Charges
+24860,Prelims,Vehicle Motoring Fines
+24870,Prelims,Vehicle - Other Costs
+24900,Prelims,Plant & Machinery Purchases
+24910,Prelims,Plant & Machinery Maintenance
+24920,Prelims,Plant & Machinery Hire Charges
+25000,Prelims,Goodwill Amortisation
+25020,Prelims,Depreciation Freehold Buildings
+25030,Prelims,Depreciation Leasehold Land & Buildings
+25050,Prelims,Depreciation Plant & Machinery
+25070,Prelims,Depreciation Computer Equipment
+25080,Prelims,Depreciation Vehicles
+25110,Prelims,Depreciation Fixtures & Fittings
+25140,Prelims,Depreciation Websites
+25200,Prelims,Office Equipment & Fittings
+25210,Prelims,Equipment & Fittings Maintenance
+25220,Prelims,Postage
+25230,Prelims,Couriers
+25240,Prelims,Printing
+25250,Prelims,Stationery
+25260,Prelims,Periodicals & Journals
+25270,Prelims,Photocopying
+25280,Prelims,Other Office Costs
+25320,Prelims,Legal Advice
+25340,Prelims,Management Consultancy
+25350,Prelims,Charitable Donations
+25360,Prelims,Subscription Fees
+25370,Sub Contract,Local Authority Fees - Gas and water
+25380,Prelims,Patents
+25390,Prelims,Royalties
+25420,Prelims,Bank Charges
+25440,Prelims,Penny Differences
+25450,Prelims,Management Fee
+25470,Prelims,Quality Costs
+25510,Prelims,Discounts Allowed
+25520,Prelims,"Prizes, Gifts & Vouchers"
+25521,Prelims,Bonds/Warranties
+25700,Prelims,Bad Debt
+25900,Prelims,Marketing Promotions
+25920,Prelims,Publicity PR and Advertising
+26000,Prelims,Divisional Recharge

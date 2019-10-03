@@ -14,3 +14,4 @@ class Project(SqlAlchemyBase):
         sa.DateTime, default=datetime.datetime.now, index=True
     )
     project_name: str = sa.Column(sa.String, nullable=False)
+    project_category: str = sa.Column(sa.String)
