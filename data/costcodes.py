@@ -17,5 +17,5 @@ class Costcodes(SqlAlchemyBase):
         sa.String, sa.ForeignKey("projects.project_id"), nullable=False, index=True
     )
     costcode: str = sa.Column(sa.String, nullable=False)
-    costcost_category: str = sa.Column(sa.string)
-    cost_code_description: str = sa.Column(sa.String, nullable=False)
+    costcode_category: str = sa.Column(sa.String)
+    costcode_description: str = sa.Column(sa.String, nullable=False)

@@ -1,4 +1,4 @@
-costcode_id,costcode_category,cost_code_description
+costcode,costcode_category,costcode_description
 0, Unallocated, Unallocated
 20000,Labour,Basic Salaries
 20010,Labour,Overtime
