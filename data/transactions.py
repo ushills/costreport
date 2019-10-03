@@ -13,11 +13,11 @@ class Transaction(SqlAlchemyBase):
     created_date: datetime.datetime = sa.Column(
         sa.DateTime, default=datetime.datetime.now, index=True
     )
-    project_id: int = sa.Column(
+    project_id: str = sa.Column(
         sa.Integer, sa.ForeignKey("projects.project_id"), nullable=False, index=True
     )
     cost_code_id: int = sa.Column(
-        sa.Integer, sa.ForeignKey("costcodes.costcode_id", nullable=False, index=True)
+        sa.Integer, sa.ForeignKey("costcodes.costcode_id"), nullable=False, index=True
     )
     value = sa.Column(sa.Numeric(asdecimal=True), nullable=False)
     note: str = sa.Column(sa.String)

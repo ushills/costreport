@@ -5,33 +5,20 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 import costreport.data.db_session as db_session
-from costreport.data.projects import Project
 from costreport.data.costcodes import Costcodes
 
 
 def main():
     init_db()
-    # while True:
-    #     insert_a_project()
     while True:
         insert_a_costcode()
-
-
-def insert_a_project():
-    p = Project()
-    p.project_id = input("Project id:").strip().lower()
-    p.project_name = input("Project name:").strip()
-
-    session = db_session.create_session()
-    session.add(p)
-    session.commit()
 
 
 def insert_a_costcode():
     c = Costcodes()
     c.project_id = input("Project id:").strip().lower()
     c.costcode = input("Costcode ref:").strip().lower()
-    c.cost_code_description = input("Costcode Description").strip()
+    c.cost_code_description = input("Costcode Description:").strip()
 
     session = db_session.create_session()
     session.add(c)

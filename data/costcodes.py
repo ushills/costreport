@@ -18,4 +18,3 @@ class Costcodes(SqlAlchemyBase):
     )
     costcode: str = sa.Column(sa.String, nullable=False)
     cost_code_description: str = sa.Column(sa.String, nullable=False)
-
