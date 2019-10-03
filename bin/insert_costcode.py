@@ -17,8 +17,14 @@ def main():
 def insert_a_costcode():
     c = Costcodes()
     c.project_id = input("Project id:").strip().lower()
+    if len(c.project_id) < 1:
+        raise ValueError("Value cannot be NULL")
     c.costcode = input("Costcode ref:").strip().lower()
+    if len(c.costcode) < 1:
+        raise ValueError("Value cannot be NULL")
     c.cost_code_description = input("Costcode Description:").strip()
+    if len(c.cost_code_description) < 1:
+        raise ValueError("Value cannot be NULL")
 
     session = db_session.create_session()
     session.add(c)

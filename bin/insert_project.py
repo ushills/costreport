@@ -18,7 +18,11 @@ def main():
 def insert_a_project():
     p = Project()
     p.project_id = input("Project id:").strip().lower()
+    if len(p.project_id) < 1:
+        raise ValueError("Value must not be NULL")
     p.project_name = input("Project name:").strip()
+    if len(p.project_name) < 1:
+        raise ValueError("Value must not be NULL")
 
     session = db_session.create_session()
     session.add(p)

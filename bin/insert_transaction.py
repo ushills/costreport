@@ -8,7 +8,6 @@ import costreport.data.db_session as db_session
 from costreport.data.transactions import Transaction
 
 
-
 def main():
     init_db()
     while True:
@@ -18,8 +17,14 @@ def main():
 def insert_a_transaction():
     t = Transaction()
     t.project_id = input("Project id:").strip().lower()
+    if len(t.project_id) < 1:
+        raise ValueError("Value cannot be NULL")
     t.cost_code_id = input("Costcode:").strip()
+    if len(t.cost_code_id) < 1:
+        raise ValueError("Value cannot be NULL")
     t.value = input("Value").strip()
+    if len(t.value) < 1:
+        raise ValueError("Value cannot be NULL")
     t.note = input("Note").strip()
 
     session = db_session.create_session()
