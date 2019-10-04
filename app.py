@@ -13,8 +13,8 @@ app = flask.Flask(__name__)
 def main():
     register_blueprints()
     setup_db()
-    # app.run(host="0.0.0.0", debug=True)
-    app.run(debug=True)
+    app.run(host="0.0.0.0", debug=True)
+    # app.run(debug=True)
 
 
 def setup_db():
