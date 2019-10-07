@@ -1,5 +1,14 @@
 import datetime
-from app import db
+import os
+import sys
+
+
+# Make it run more easily outside of VSCode
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
+
+
+from costreport.app import db
+from costreport.data.projects import Project
 
 
 class Transaction(db.Model):
