@@ -1,21 +1,20 @@
 import datetime
-from typing import List
-
-import sqlalchemy as sa
-import sqlalchemy.orm as orm
-from costreport.data.modelbase import SqlAlchemyBase
+from app import db
 
 
-class Costcodes(SqlAlchemyBase):
+print("From costcodes.py, db= ", db)
+
+
+class Costcodes(db.Model):
     __tablename__ = "costcodes"
 
-    costcode_id: int = sa.Column(sa.Integer, primary_key=True, autoincrement=True)
-    created_date: datetime.datetime = sa.Column(
-        sa.DateTime, default=datetime.datetime.now, index=True
+    costcode_id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    created_date: datetime.datetime = db.Column(
+        db.DateTime, default=datetime.datetime.now, index=True
     )
-    project_id: str = sa.Column(
-        sa.String, sa.ForeignKey("projects.project_id"), nullable=False, index=True
+    project_id: str = db.Column(
+        db.String, db.ForeignKey("projects.project_id"), nullable=False, index=True
     )
-    costcode: str = sa.Column(sa.String, nullable=False)
-    costcode_category = sa.Column(sa.String, nullable=True)
-    costcode_description: str = sa.Column(sa.String, nullable=False)
+    costcode: str = db.Column(db.String, nullable=False)
+    costcode_category = db.Column(db.String, nullable=True)
+    costcode_description: str = db.Column(db.String, nullable=False)

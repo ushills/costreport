@@ -1,17 +1,16 @@
 import datetime
-from typing import List
-
-import sqlalchemy as sa
-import sqlalchemy.orm as orm
-from costreport.data.modelbase import SqlAlchemyBase
+from app import db
 
 
-class Project(SqlAlchemyBase):
+print("From projects.py, db= ", db)
+
+
+class Project(db.Model):
     __tablename__ = "projects"
 
-    project_id: str = sa.Column(sa.String, primary_key=True, nullable=False)
-    created_date: datetime.datetime = sa.Column(
-        sa.DateTime, default=datetime.datetime.now, index=True
+    project_id: str = db.Column(db.String, primary_key=True, nullable=False)
+    created_date: datetime.datetime = db.Column(
+        db.DateTime, default=datetime.datetime.now, index=True
     )
-    project_name: str = sa.Column(sa.String, nullable=False)
-    project_category: str = sa.Column(sa.String)
+    project_name: str = db.Column(db.String, nullable=False)
+    project_category: str = db.Column(db.String)

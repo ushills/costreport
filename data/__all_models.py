@@ -4,6 +4,6 @@
 # are all loaded.
 
 
-import costreport.data.projects
-import costreport.data.costcodes
-import costreport.data.transactions
+from costreport.data.costcodes import db
+from costreport.data.projects import db
+from costreport.data.transactions import db

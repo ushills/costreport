@@ -10,7 +10,7 @@ from costreport.data.costcodes import Costcodes
 
 
 def main():
-    init_db()
+    db.init_db()
     while True:
         insert_a_project()
 

@@ -1,3 +1,3 @@
-import sqlalchemy.ext.declarative as dec
+# from flask_sqlalchemy import SQLAlchemy
 
-SqlAlchemyBase = dec.declarative_base()
+# db = SQLAlchemy(app)
