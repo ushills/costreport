@@ -33,11 +33,6 @@ def main():
     # app.run(debug=True)
 
 
-def setup_db(app):
-    db_file = os.path.join(os.path.dirname(__file__), "db", "costreport.sqlite")
-    db_session.global_init(db_file)
-
-
 def register_blueprints():
     from costreport.views import projects_views
     from costreport.views import project_forecast_views

@@ -1,5 +1,11 @@
 import datetime
-from app import db
+import os
+import sys
+
+from costreport.app import db
+
+# Make it run more easily outside of VSCode
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 
 print("From projects.py, db= ", db)
