@@ -2,9 +2,6 @@ import datetime
 from app import db
 
 
-print("From transactions.py, db= ", db)
-
-
 class Transaction(db.Model):
     __tablename__ = "transactions"
 

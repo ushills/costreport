@@ -9,9 +9,6 @@ from costreport.data.projects import Project
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 
-print("From costcodes.py, db= ", db)
-
-
 class Costcodes(db.Model):
     __tablename__ = "costcodes"
 
