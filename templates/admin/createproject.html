@@ -7,16 +7,15 @@
     <form action="" method="POST">
         {{ form.csrf_token }}
         <div class="form-group">
-            <label for="form.project_reference">Project Reference</label>
+            {{ form.project_reference.label }}
             {{ form.project_reference(class="form-control", placeholder="Enter project reference") }}
-
         </div>
         <div class="form-group">
-            <label for="form.project_name">Project Name</label>
+            {{ form.project_name.label }}
             {{ form.project_name(class="form-control", placeholder="Enter project name")}}
         </div>
         <button type="submit" class="btn btn-success">Submit</button>
-        <button type="reset" class="btn btn-default pull-right">Cancel</button>
+        <a class="btn btn-danger pull-right" href="/projects" role="button">Cancel</a>
     </form>
 
 </div>

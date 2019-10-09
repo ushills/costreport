@@ -9,8 +9,8 @@ blueprint = flask.Blueprint("createproject", __name__, template_folder="template
 
 
 class CreateProjectForm(FlaskForm):
-    project_reference = StringField(validators=[DataRequired()])
-    project_name = StringField(validators=[DataRequired()])
+    project_reference = StringField("Project Reference", validators=[DataRequired()])
+    project_name = StringField("Project Name", validators=[DataRequired()])
 
 
 @blueprint.route("/admin/createproject", methods=["GET"])
@@ -26,4 +26,11 @@ def createproject_post():
     # print(project_reference, project_name)
     form = CreateProjectForm()
     print(form.project_reference.data, form.project_name.data)
+    if form.validate_on_submit():
+        return flask.redirect("createproject/success")
     return flask.render_template("admin/createproject.html", form=form)
+
+
+@blueprint.route("/admin/createproject/success")
+def formcreated():
+    return "Form Created"
