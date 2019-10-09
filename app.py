@@ -14,6 +14,7 @@ app = flask.Flask(__name__)
 # )
 
 db_file = "sqlite:///db/costreport.sqlite"
+app.config["SECRET_KEY"] = "password"
 app.config["SQLALCHEMY_DATABASE_URI"] = db_file
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
@@ -38,11 +39,13 @@ def register_blueprints():
     from costreport.views import project_forecast_views
     from costreport.views import project_dashboard_views
     from costreport.views import project_costdetail_views
+    from costreport.views import createproject_views
 
     app.register_blueprint(projects_views.blueprint)
     app.register_blueprint(project_forecast_views.blueprint)
     app.register_blueprint(project_dashboard_views.blueprint)
     app.register_blueprint(project_costdetail_views.blueprint)
+    app.register_blueprint(createproject_views.blueprint)
 
 
 if __name__ == "__main__":

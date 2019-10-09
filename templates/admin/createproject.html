@@ -1,0 +1,16 @@
+{% extends "shared/_layout.html" %}
+{% block main_content %}
+
+<h2>Create Project</h2>
+
+<div class="container-fluid create_project">
+    <form action="" method="POST">
+        {{ form.project_number.label }} {{ form.project_number(size=10) }}
+        {{ form.project_name.label }} {{ form.project_name(size=50) }}
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+</div>
+
+{% endblock %}
