@@ -1,4 +1,5 @@
 import flask
+from flask import request
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
@@ -19,9 +20,7 @@ def createproject_get():
 
 @blueprint.route("/admin/createproject", methods=["POST"])
 def createproject_post():
-    request = flask.request
-    project_reference = request.project_reference
-    project_name = request.project_name
-    print(project_reference)
-    print(project_name)
-    return flask.render_template("admin/createproject.html", form=form)
+    project_reference = request.form.get("project_reference")
+    project_name = request.form.get("project_name")
+    print(project_reference, project_name)
+    return flask.render_template("admin/createproject.html")
