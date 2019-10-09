@@ -5,17 +5,18 @@
 
 <div class="container-fluid create_project">
     <form action="" method="POST">
+        {{ form.csrf_token }}
         <div class="form-group">
             <label for="form.project_reference">Project Reference</label>
-            <input type="text" class="form-control" name="project_reference" id="project_reference"
-                aria-describedby="Project Reference" placeholder="Enter project reference">
+            {{ form.project_reference(class="form-control", placeholder="Enter project reference") }}
+
         </div>
         <div class="form-group">
             <label for="form.project_name">Project Name</label>
-            <input type="text" class="form-control" name="project_name" id="project_name"
-                aria-describedby="Project Name" placeholder="Enter project Name">
+            {{ form.project_name(class="form-control", placeholder="Enter project name")}}
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <button type="reset" class="btn btn-default pull-right">Cancel</button>
     </form>
 
 </div>
