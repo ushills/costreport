@@ -5,10 +5,18 @@
 
 <div class="container-fluid create_project">
     <form action="" method="POST">
-        {{ form.project_number.label }} {{ form.project_number(size=10) }}
-        {{ form.project_name.label }} {{ form.project_name(size=50) }}
-        <br>
-        <input type="submit" value="Submit">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            <label for="form.project_reference">Project Reference</label>
+            <input type="text" class="form-control" id="form.project_reference" aria-describedby="Project Number"
+                placeholder="Enter project reference">
+        </div>
+        <div class="form-group">
+            <label for="form.project_name">Project Name</label>
+            <input type="text" class="form-control" id="form.project_name" aria-describedby="Project Name"
+                placeholder="Enter project Name">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
 
 </div>

@@ -1,6 +1,6 @@
 import flask
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 
 
@@ -8,13 +8,20 @@ blueprint = flask.Blueprint("createproject", __name__, template_folder="template
 
 
 class CreateProjectForm(FlaskForm):
-    project_number = StringField("project_number", validators=[DataRequired()])
-    project_name = StringField("project_name", validators=[DataRequired()])
+    project_reference = StringField(validators=[DataRequired()])
+    project_name = StringField(validators=[DataRequired()])
+    submit = SubmitField()
 
 
-@blueprint.route("/admin/createproject", methods=["POST", "GET"])
-def createproject():
+@blueprint.route("/admin/createproject", methods=["GET"])
+def createproject_get():
     form = CreateProjectForm()
-    print(form.project_number.data, form.project_name.data)
+    print(form.project_reference.data, form.project_name.data)
     return flask.render_template("admin/createproject.html", form=form)
 
+
+@blueprint.route("/admin/createproject", methods=["POST"])
+def createproject_post():
+    form = CreateProjectForm()
+    print(form.project_reference.data, form.project_name.data)
+    return flask.render_template("admin/createproject.html", form=form)
