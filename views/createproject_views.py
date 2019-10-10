@@ -29,18 +29,16 @@ def createproject_post():
     if form.validate_on_submit():
         # check if the project code already exists
         if check_if_project_exists(data):
+            flask.flash(form.project_code.data + " already exists", "alert-danger")
             flask.redirect("admin/createproject.html")
         # commit the data to the database
         else:
             create_project(data)
-            return flask.redirect(
-                flask.url_for(
-                    "project_dashboard.dashboard", project=form.project_code.data
-                )
-            )
+            flask.flash(form.project_code.data + " created", "alert-success")
+            flask.redirect("admin/createproject.html")
     return flask.render_template("admin/createproject.html", form=form)
 
 
-@blueprint.route("/admin/createproject/success")
-def formcreated():
-    return flask.render_template("admin/projectcreated.html")
+@blueprint.route("/admin/projectcreated")
+def formcreated(p):
+    return flask.render_template("admin/projectcreated.html", p=p)
