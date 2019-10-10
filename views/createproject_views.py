@@ -3,7 +3,7 @@ from flask import request
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
-from costreport.services.admin_services import create_project
+from costreport.services.admin_services import create_project, check_if_project_exists
 
 
 blueprint = flask.Blueprint("createproject", __name__, template_folder="templates")
@@ -28,8 +28,13 @@ def createproject_post():
         "project_name": form.project_name.data,
     }
     if form.validate_on_submit():
-        create_project(data)
-        return flask.redirect("createproject/success")
+        # check if the project code already exists
+        if check_if_project_exists(data):
+            flask.redirect("admin/createproject.html")
+        # commit the data to the database
+        else:
+            create_project(data)
+            return flask.redirect("createproject/success")
     return flask.render_template("admin/createproject.html", form=form)
 
 
