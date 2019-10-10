@@ -1,4 +1,3 @@
-from sqlalchemy import literal
 from costreport.app import db
 from costreport.data.projects import Project
 

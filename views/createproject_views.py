@@ -1,7 +1,6 @@
 import flask
-from flask import request
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField
 from wtforms.validators import DataRequired
 from costreport.services.admin_services import create_project, check_if_project_exists
 
@@ -34,10 +33,14 @@ def createproject_post():
         # commit the data to the database
         else:
             create_project(data)
-            return flask.redirect("createproject/success")
+            return flask.redirect(
+                flask.url_for(
+                    "project_dashboard.dashboard", project=form.project_code.data
+                )
+            )
     return flask.render_template("admin/createproject.html", form=form)
 
 
 @blueprint.route("/admin/createproject/success")
 def formcreated():
-    return "Form Created"
+    return flask.render_template("admin/projectcreated.html")
