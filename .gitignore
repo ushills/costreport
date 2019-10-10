@@ -104,5 +104,3 @@ ENV/
 .vscode/
 costreport.code-workspace
 
-#sqlite files
-*.sqlite

@@ -3,6 +3,7 @@ import sys
 
 import flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 
 folder = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, folder)
@@ -19,6 +20,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = db_file
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 
 def main():
