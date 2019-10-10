@@ -19,10 +19,10 @@ class Transaction(db.Model):
         db.DateTime, default=datetime.datetime.now, index=True
     )
     project_id: str = db.Column(
-        db.Integer, db.ForeignKey("projects.project_id"), nullable=False, index=True
+        db.Integer, db.ForeignKey("projects.id"), nullable=False, index=True
     )
     cost_code_id: int = db.Column(
-        db.Integer, db.ForeignKey("costcodes.costcode_id"), nullable=False, index=True
+        db.Integer, db.ForeignKey("costcodes.id"), nullable=False, index=True
     )
     value = db.Column(db.Numeric(asdecimal=True), nullable=False)
     note: str = db.Column(db.String)

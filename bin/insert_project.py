@@ -15,8 +15,8 @@ def main():
 
 def insert_a_project():
     p = Project()
-    p.project_id = input("Project id:").strip().lower()
-    if len(p.project_id) < 1:
+    p.project_code = input("Project code:").strip().lower()
+    if len(p.project_code) < 1:
         raise ValueError("Value must not be NULL")
     p.project_name = input("Project name:").strip()
     if len(p.project_name) < 1:
