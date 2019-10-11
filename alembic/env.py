@@ -3,6 +3,7 @@ from logging.config import fileConfig
 
 from sqlalchemy import engine_from_config
 from sqlalchemy import pool
+from flask_sqlalchemy import SQLAlchemy
 
 from alembic import context
 
@@ -20,13 +21,15 @@ fileConfig(config.config_file_name)
 # target_metadata = mymodel.Base.metadata
 import sys
 
-folder = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+folder = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 sys.path.insert(0, folder)
 
-from costreport.app import db
-import costreport.data.__all_models
+from costreport.app import app
 
-target_metadata = SqlAlchemyBase.metadata
+db = SQLAlchemy(app)
+from costreport.data.__all_models import db
+
+target_metadata = db.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

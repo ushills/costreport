@@ -18,3 +18,4 @@ class Project(db.Model):
     project_code: str = db.Column(db.String, unique=True, nullable=False)
     project_name: str = db.Column(db.String, nullable=False)
     project_category: str = db.Column(db.String)
+    # project_active = db.Column(db.Boolean)
