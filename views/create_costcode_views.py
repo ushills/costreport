@@ -55,12 +55,16 @@ def create_costcode_post(project):
             flask.flash(
                 "Costcode " + form.costcode.data + " already exists", "alert-danger"
             )
-            flask.redirect(flask.url_for(create_costcode_get))
+            flask.redirect(
+                flask.url_for("create_costcode.create_costcode_get", project=project)
+            )
         # commit the data to the database
         else:
             create_costcode(data)
             flask.flash("Costcode " + form.costcode.data + " created", "alert-success")
-            flask.redirect(flask.url_for(create_costcode_get))
+            flask.redirect(
+                flask.url_for("create_costcode.create_costcode_get", project=project)
+            )
     return flask.render_template(
         "admin/create_costcode.html",
         form=form,
