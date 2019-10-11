@@ -29,6 +29,8 @@ def create_costcode_get(project):
     form = CreateCostcodeForm()
     # get list of costcode data
     current_costcodes = get_costcodes(project)
+    for costcode in current_costcodes:
+        print(project, costcode.project_id, costcode.costcode)
     # print(flask.request.query_string)
     return flask.render_template(
         "admin/create_costcode.html",

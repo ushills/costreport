@@ -33,7 +33,7 @@ def check_if_costcode_exists(data):
 def create_costcode(data):
     c = Costcodes()
     project_code = data["project_code"]
-    project = Project.query.filter(project_code == project_code).first()
+    project = Project.query.filter(Project.project_code == project_code).first()
     c.project_id = project.id
     c.costcode = data["costcode"]
     c.costcode_description = data["costcode_description"]
