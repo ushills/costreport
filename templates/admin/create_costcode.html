@@ -1,0 +1,32 @@
+{% extends "shared/_layout.html" %}
+{% block main_content %}
+
+<h2>Create Costcode - {{ project }}</h2>
+
+<div class="container-fluid create_costcode">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for category, message in messages %}
+        <div class="alert {{ category }}">{{ message }}</div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+    <form action="" method="POST">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            {{ form.costcode.label }}
+            {{ form.costcode(class="form-control", placeholder="Enter costcode reference") }}
+        </div>
+        <div class="form-group">
+            {{ form.costcode_description.label }}
+            {{ form.costcode_description(class="form-control", placeholder="Enter costcode description")}}
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a class="btn btn-danger pull-right" href="/projects" role="button">Cancel</a>
+    </form>
+
+</div>
+
+{% endblock %}

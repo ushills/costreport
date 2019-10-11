@@ -37,12 +37,8 @@ def createproject_post():
         else:
             create_project(data)
             flask.flash(
-                "Project" + form.project_code.data + " created", "alert-success"
+                "Project " + form.project_code.data + " created", "alert-success"
             )
             flask.redirect("admin/createproject.html")
     return flask.render_template("admin/createproject.html", form=form)
 
-
-@blueprint.route("/admin/projectcreated")
-def formcreated(p):
-    return flask.render_template("admin/projectcreated.html", p=p)

@@ -36,12 +36,14 @@ def register_blueprints():
     from costreport.views import project_dashboard_views
     from costreport.views import project_costdetail_views
     from costreport.views import createproject_views
+    from costreport.views import create_costcode_views
 
     app.register_blueprint(projects_views.blueprint)
     app.register_blueprint(project_forecast_views.blueprint)
     app.register_blueprint(project_dashboard_views.blueprint)
     app.register_blueprint(project_costdetail_views.blueprint)
     app.register_blueprint(createproject_views.blueprint)
+    app.register_blueprint(create_costcode_views.blueprint)
 
 
 if __name__ == "__main__":
