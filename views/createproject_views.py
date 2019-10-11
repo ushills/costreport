@@ -28,7 +28,7 @@ def createproject_post():
     }
     if form.validate_on_submit():
         # check if the project code already exists
-        if check_if_project_exists(data):
+        if check_if_project_exists(form.project_code.data):
             flask.flash(
                 "Project " + form.project_code.data + " already exists", "alert-danger"
             )

@@ -2,10 +2,12 @@ from costreport.app import db
 from costreport.data.projects import Project
 from costreport.data.costcodes import Costcodes
 
+
 # CREATE PROJECT FUNCTIONS #
-def check_if_project_exists(data):
-    if Project.query.filter(Project.project_code == data["project_code"]).first():
+def check_if_project_exists(project_code):
+    if Project.query.filter(Project.project_code == project_code).first():
         return True
+    return False
 
 
 def create_project(data):

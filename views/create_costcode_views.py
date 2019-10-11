@@ -2,7 +2,11 @@ import flask
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
-from costreport.services.admin_services import create_costcode, check_if_costcode_exists
+from costreport.services.admin_services import (
+    create_costcode,
+    check_if_costcode_exists,
+    check_if_project_exists,
+)
 
 
 blueprint = flask.Blueprint("create_costcode", __name__, template_folder="templates")
@@ -18,9 +22,12 @@ class CreateCostcodeForm(FlaskForm):
 
 @blueprint.route("/admin/<project>/create_costcode", methods=["GET"])
 def create_costcode_get(project):
+    # check if project exists
+    if check_if_project_exists(project) is False:
+        print("Project does not exist")
+        flask.abort(404)
     form = CreateCostcodeForm()
     # print(flask.request.query_string)
-    print(project)
     return flask.render_template(
         "admin/create_costcode.html", form=form, project=project
     )
