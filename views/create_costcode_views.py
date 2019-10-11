@@ -24,7 +24,6 @@ class CreateCostcodeForm(FlaskForm):
 def create_costcode_get(project):
     # check if project exists
     if check_if_project_exists(project) is False:
-        print("Project does not exist")
         flask.abort(404)
     form = CreateCostcodeForm()
     # print(flask.request.query_string)
