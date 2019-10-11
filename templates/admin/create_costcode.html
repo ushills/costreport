@@ -26,6 +26,19 @@
         <button type="submit" class="btn btn-success">Submit</button>
         <a class="btn btn-danger pull-right" href="/projects" role="button">Cancel</a>
     </form>
+    <div class="current_costcodes">
+        {% for costcode in current_costcodes %}
+        <div class="row border-bottom">
+            <div class="col-2">
+                {{ costcode.costcode }}
+            </div>
+            <div class="col-4">
+                {{ costcode.costcode_description}}
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
 
 </div>
 

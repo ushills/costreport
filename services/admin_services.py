@@ -40,3 +40,12 @@ def create_costcode(data):
     c.costcode_category = data["costcode_category"]
     db.session.add(c)
     db.session.commit()
+
+
+def get_costcodes(project_code):
+    costcodes = (
+        Costcodes.query.filter(Project.project_code == project_code)
+        .order_by(Costcodes.costcode.asc())
+        .all()
+    )
+    return costcodes

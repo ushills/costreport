@@ -6,6 +6,7 @@ from costreport.services.admin_services import (
     create_costcode,
     check_if_costcode_exists,
     check_if_project_exists,
+    get_costcodes,
 )
 
 
@@ -26,14 +27,21 @@ def create_costcode_get(project):
     if check_if_project_exists(project) is False:
         flask.abort(404)
     form = CreateCostcodeForm()
+    # get list of costcode data
+    current_costcodes = get_costcodes(project)
     # print(flask.request.query_string)
     return flask.render_template(
-        "admin/create_costcode.html", form=form, project=project
+        "admin/create_costcode.html",
+        form=form,
+        project=project,
+        current_costcodes=current_costcodes,
     )
 
 
 @blueprint.route("/admin/<project>/create_costcode", methods=["POST"])
 def create_costcode_post(project):
+    # get list of costcode data
+    current_costcodes = get_costcodes(project)
     form = CreateCostcodeForm()
     data = {
         "project_code": project,
@@ -54,5 +62,8 @@ def create_costcode_post(project):
             flask.flash("Costcode " + form.costcode.data + " created", "alert-success")
             flask.redirect("/admin/<project>/create_costcode")
     return flask.render_template(
-        "admin/create_costcode.html", form=form, project=project
+        "admin/create_costcode.html",
+        form=form,
+        project=project,
+        current_costcodes=current_costcodes,
     )
