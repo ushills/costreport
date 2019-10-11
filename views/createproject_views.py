@@ -29,12 +29,16 @@ def createproject_post():
     if form.validate_on_submit():
         # check if the project code already exists
         if check_if_project_exists(data):
-            flask.flash(form.project_code.data + " already exists", "alert-danger")
+            flask.flash(
+                "Project " + form.project_code.data + " already exists", "alert-danger"
+            )
             flask.redirect("admin/createproject.html")
         # commit the data to the database
         else:
             create_project(data)
-            flask.flash(form.project_code.data + " created", "alert-success")
+            flask.flash(
+                "Project" + form.project_code.data + " created", "alert-success"
+            )
             flask.redirect("admin/createproject.html")
     return flask.render_template("admin/createproject.html", form=form)
 

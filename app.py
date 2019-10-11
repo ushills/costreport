@@ -3,16 +3,11 @@ import sys
 
 import flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
 
 folder = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, folder)
 
 app = flask.Flask(__name__)
-
-# db_file = "sqlite:///" + os.path.join(
-#     os.path.dirname(__file__), "db", "costreport.sqlite"
-# )
 
 db_file = "sqlite:///db/costreport.sqlite"
 app.config["SECRET_KEY"] = "password"
@@ -20,7 +15,6 @@ app.config["SQLALCHEMY_DATABASE_URI"] = db_file
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
 db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 
 
 def main():
