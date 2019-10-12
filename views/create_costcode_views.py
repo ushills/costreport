@@ -2,7 +2,6 @@ import flask
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
-from costreport.views.projects_views import projects
 from costreport.services.admin_services import (
     create_costcode,
     check_if_costcode_exists,

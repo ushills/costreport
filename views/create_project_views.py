@@ -39,4 +39,3 @@ def create_project_post():
             flask.flash("Project " + form.project_code.data + " created", "alert-success")
             return flask.redirect(flask.url_for("create_project.create_project_get"))
     return flask.render_template("admin/create_project.html", form=form)
-
