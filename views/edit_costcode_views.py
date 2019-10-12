@@ -7,6 +7,7 @@ from costreport.services.admin_services import (
     check_if_costcode_exists,
     check_if_project_exists,
     get_costcodes,
+    get_costcode_data,
 )
 
 
@@ -25,29 +26,34 @@ class CreateCostcodeForm(FlaskForm):
 
 @blueprint.route("/edit_costcode", methods=["GET"])
 def edit_costcode_get():
-    project = flask.request.args.get("project")
+    project_code = flask.request.args.get("project")
     costcode = flask.request.args.get("costcode")
     # check if project exists
-    if check_if_project_exists(project) is False:
+    if check_if_project_exists(project_code) is False:
         flask.abort(404)
     # check if costcode exists
-    if check_if_costcode_exists(project_code=project, costcode=costcode) is False:
+    if check_if_costcode_exists(project_code=project_code, costcode=costcode) is False:
         flask.abort(404)
     form = CreateCostcodeForm()
     # get costcode data
+    costcode_data = get_costcode_data(project_code=project_code, costcode=costcode)
     return flask.render_template(
-        "admin/edit_costcode.html", form=form, project=project, costcode=costcode
+        "admin/edit_costcode.html",
+        form=form,
+        project=project_code,
+        costcode=costcode,
+        costcode_data=costcode_data,
     )
 
 
 @blueprint.route("/edit_costcode", methods=["POST"])
 def edit_costcode_post():
-    project = flask.request.args.get("project")
+    project_code = flask.request.args.get("project")
     costcode = flask.request.args.get("costcode")
     # get costcode data
     form = CreateCostcodeForm()
     data = {
-        "project_code": project,
+        "project_code": project_code,
         "costcode": form.costcode.data,
         "costcode_description": form.costcode_description.data,
         "costcode_category": form.costcode_category.data,
@@ -59,18 +65,19 @@ def edit_costcode_post():
                 "Costcode " + form.costcode.data + " already exists", "alert-danger"
             )
             return flask.redirect(
-                flask.url_for("edit_costcode.edit_costcode_get", project=project)
+                flask.url_for("edit_costcode.edit_costcode_get", project=project_code)
             )
         # commit the data to the database
         else:
             edit_costcode(data)
             flask.flash("Costcode " + form.costcode.data + " created", "alert-success")
             return flask.redirect(
-                flask.url_for("edit_costcode.edit_costcode_get", project=project)
+                flask.url_for("edit_costcode.edit_costcode_get", project=project_code)
             )
     return flask.render_template(
         "admin/edit_costcode.html",
         form=form,
-        project=project,
-        current_costcodes=current_costcodes,
+        project=project_code,
+        costcodes=costcode,
+        costcode_data=costcode_data,
     )

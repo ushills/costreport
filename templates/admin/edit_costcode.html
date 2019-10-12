@@ -1,1 +1,26 @@
-Edit Costcode for {{ project }} - {{ costcode }}
+{% extends "shared/_layout.html" %}
+{% block main_content %}
+
+<h2>Edit Costcode - {{ project }} - {{ costcode }}</h2>
+
+<div class="container-fluid edit_costcode">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for category, message in messages %}
+        <div class="alert {{ category }}">{{ message }}</div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+    <div class="costcode_data">
+        {% for data in costcode_data %}
+        <div class="row border-bottom">
+            {{ data.costcode}} {{ data.costcode_description }} {{ data.costcode_category }}
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
