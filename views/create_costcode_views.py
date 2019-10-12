@@ -55,7 +55,7 @@ def create_costcode_post():
     }
     if form.validate_on_submit():
         # check if the costcode already exists for the project_code
-        if check_if_costcode_exists(data):
+        if check_if_costcode_exists(project_code=project, costcode=form.costcode.data):
             flask.flash(
                 "Costcode " + form.costcode.data + " already exists", "alert-danger"
             )

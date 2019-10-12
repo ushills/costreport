@@ -26,26 +26,25 @@ class CreateCostcodeForm(FlaskForm):
 @blueprint.route("/edit_costcode", methods=["GET"])
 def edit_costcode_get():
     project = flask.request.args.get("project")
-    print("GET Method")
+    costcode = flask.request.args.get("costcode")
     # check if project exists
     if check_if_project_exists(project) is False:
         flask.abort(404)
+    # check if costcode exists
+    if check_if_costcode_exists(project_code=project, costcode=costcode) is False:
+        flask.abort(404)
     form = CreateCostcodeForm()
-    # get list of costcode data
-    current_costcodes = get_costcodes(project)
+    # get costcode data
     return flask.render_template(
-        "admin/edit_costcode.html",
-        form=form,
-        project=project,
-        current_costcodes=current_costcodes,
+        "admin/edit_costcode.html", form=form, project=project, costcode=costcode
     )
 
 
 @blueprint.route("/edit_costcode", methods=["POST"])
 def edit_costcode_post():
     project = flask.request.args.get("project")
-    # get list of costcode data
-    current_costcodes = get_costcodes(project)
+    costcode = flask.request.args.get("costcode")
+    # get costcode data
     form = CreateCostcodeForm()
     data = {
         "project_code": project,

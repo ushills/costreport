@@ -19,9 +19,7 @@ def create_project(data):
 
 
 # CREATE COSTCODE FUNCTIONS #
-def check_if_costcode_exists(data):
-    project_code = data["project_code"]
-    costcode = data["costcode"]
+def check_if_costcode_exists(project_code, costcode):
     if (
         Costcodes.query.filter(Project.id == Costcodes.project_id)
         .filter(Project.project_code == project_code)
@@ -29,6 +27,7 @@ def check_if_costcode_exists(data):
         .first()
     ):
         return True
+    return False
 
 
 def create_costcode(data):
