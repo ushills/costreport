@@ -26,7 +26,6 @@ class CreateCostcodeForm(FlaskForm):
 @blueprint.route("/create_costcode", methods=["GET"])
 def create_costcode_get():
     project = flask.request.args.get("project")
-    print("GET Method")
     # check if project exists
     if check_if_project_exists(project) is False:
         flask.abort(404)
