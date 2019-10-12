@@ -1,7 +1,9 @@
 import flask
+from flask import redirect
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
+from costreport.views.projects_views import projects
 from costreport.services.admin_services import (
     create_costcode,
     check_if_costcode_exists,
@@ -23,15 +25,13 @@ class CreateCostcodeForm(FlaskForm):
 
 @blueprint.route("/admin/<project>/create_costcode", methods=["GET"])
 def create_costcode_get(project):
+    print("GET Method")
     # check if project exists
     if check_if_project_exists(project) is False:
         flask.abort(404)
     form = CreateCostcodeForm()
     # get list of costcode data
     current_costcodes = get_costcodes(project)
-    for costcode in current_costcodes:
-        print(project, costcode.project_id, costcode.costcode)
-    # print(flask.request.query_string)
     return flask.render_template(
         "admin/create_costcode.html",
         form=form,
@@ -42,6 +42,7 @@ def create_costcode_get(project):
 
 @blueprint.route("/admin/<project>/create_costcode", methods=["POST"])
 def create_costcode_post(project):
+    print("POST method")
     # get list of costcode data
     current_costcodes = get_costcodes(project)
     form = CreateCostcodeForm()
@@ -52,19 +53,22 @@ def create_costcode_post(project):
         "costcode_category": form.costcode_category.data,
     }
     if form.validate_on_submit():
+        print("Valid Form")
         # check if the costcode already exists for the project_code
         if check_if_costcode_exists(data):
             flask.flash(
                 "Costcode " + form.costcode.data + " already exists", "alert-danger"
             )
-            flask.redirect(
+            print("Correctly redirecting")
+            return redirect(
                 flask.url_for("create_costcode.create_costcode_get", project=project)
             )
         # commit the data to the database
         else:
             create_costcode(data)
             flask.flash("Costcode " + form.costcode.data + " created", "alert-success")
-            flask.redirect(
+            print("Correctly redirecting")
+            return redirect(
                 flask.url_for("create_costcode.create_costcode_get", project=project)
             )
     return flask.render_template(

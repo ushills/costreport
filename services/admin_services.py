@@ -23,7 +23,8 @@ def check_if_costcode_exists(data):
     project_code = data["project_code"]
     costcode = data["costcode"]
     if (
-        Costcodes.query.filter(Project.project_code == project_code)
+        Costcodes.query.filter(Project.id == Costcodes.project_id)
+        .filter(Project.project_code == project_code)
         .filter(Costcodes.costcode == costcode)
         .first()
     ):
@@ -43,18 +44,10 @@ def create_costcode(data):
 
 
 def get_costcodes(project_code):
-    # print(project_code)
-    # print(Project.project_code.)
-    # costcodes = (
-    #     Costcodes.query.filter(Project.project_code == project_code)
-    #     .order_by(Costcodes.costcode.asc())
-    #     .all()
-    # )
     costcodes = (
         Costcodes.query.filter(Project.id == Costcodes.project_id)
         .filter(Project.project_code == project_code)
         .order_by(Costcodes.costcode.asc())
         .all()
     )
-    print(costcodes)
     return costcodes
