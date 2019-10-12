@@ -1,5 +1,4 @@
 import flask
-from flask import redirect
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
@@ -23,8 +22,9 @@ class CreateCostcodeForm(FlaskForm):
     costcode_category = StringField("Costcode category")
 
 
-@blueprint.route("/admin/<project>/create_costcode", methods=["GET"])
-def create_costcode_get(project):
+@blueprint.route("/admin/create_costcode", methods=["GET"])
+def create_costcode_get():
+    project = flask.request.args.get("project")
     print("GET Method")
     # check if project exists
     if check_if_project_exists(project) is False:
@@ -40,9 +40,9 @@ def create_costcode_get(project):
     )
 
 
-@blueprint.route("/admin/<project>/create_costcode", methods=["POST"])
-def create_costcode_post(project):
-    print("POST method")
+@blueprint.route("/admin/create_costcode", methods=["POST"])
+def create_costcode_post():
+    project = flask.request.args.get("project")
     # get list of costcode data
     current_costcodes = get_costcodes(project)
     form = CreateCostcodeForm()
@@ -53,22 +53,19 @@ def create_costcode_post(project):
         "costcode_category": form.costcode_category.data,
     }
     if form.validate_on_submit():
-        print("Valid Form")
         # check if the costcode already exists for the project_code
         if check_if_costcode_exists(data):
             flask.flash(
                 "Costcode " + form.costcode.data + " already exists", "alert-danger"
             )
-            print("Correctly redirecting")
-            return redirect(
+            return flask.redirect(
                 flask.url_for("create_costcode.create_costcode_get", project=project)
             )
         # commit the data to the database
         else:
             create_costcode(data)
             flask.flash("Costcode " + form.costcode.data + " created", "alert-success")
-            print("Correctly redirecting")
-            return redirect(
+            return flask.redirect(
                 flask.url_for("create_costcode.create_costcode_get", project=project)
             )
     return flask.render_template(
