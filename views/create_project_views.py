@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired
 from costreport.services.admin_services import create_project, check_if_project_exists
 
 
-blueprint = flask.Blueprint("createproject", __name__, template_folder="templates")
+blueprint = flask.Blueprint("create_project", __name__, template_folder="templates")
 
 
 class CreateProjectForm(FlaskForm):
@@ -13,14 +13,14 @@ class CreateProjectForm(FlaskForm):
     project_name = StringField("Project Name", validators=[DataRequired()])
 
 
-@blueprint.route("/admin/createproject", methods=["GET"])
-def createproject_get():
+@blueprint.route("/admin/create_project", methods=["GET"])
+def create_project_get():
     form = CreateProjectForm()
-    return flask.render_template("admin/createproject.html", form=form)
+    return flask.render_template("admin/create_project.html", form=form)
 
 
-@blueprint.route("/admin/createproject", methods=["POST"])
-def createproject_post():
+@blueprint.route("/admin/create_project", methods=["POST"])
+def create_project_post():
     form = CreateProjectForm()
     data = {
         "project_code": form.project_code.data,
@@ -32,13 +32,11 @@ def createproject_post():
             flask.flash(
                 "Project " + form.project_code.data + " already exists", "alert-danger"
             )
-            flask.redirect("admin/createproject.html")
+            return flask.redirect(flask.url_for("create_project.create_project_get"))
         # commit the data to the database
         else:
             create_project(data)
-            flask.flash(
-                "Project " + form.project_code.data + " created", "alert-success"
-            )
-            flask.redirect("admin/createproject.html")
-    return flask.render_template("admin/createproject.html", form=form)
+            flask.flash("Project " + form.project_code.data + " created", "alert-success")
+            return flask.redirect(flask.url_for("create_project.create_project_get"))
+    return flask.render_template("admin/create_project.html", form=form)
 
