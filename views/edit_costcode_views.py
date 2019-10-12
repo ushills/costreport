@@ -10,7 +10,9 @@ from costreport.services.admin_services import (
 )
 
 
-blueprint = flask.Blueprint("edit_costcode", __name__, template_folder="templates")
+blueprint = flask.Blueprint(
+    "edit_costcode", __name__, template_folder="templates", url_prefix="/admin"
+)
 
 
 class CreateCostcodeForm(FlaskForm):
@@ -21,7 +23,7 @@ class CreateCostcodeForm(FlaskForm):
     costcode_category = StringField("Costcode category")
 
 
-@blueprint.route("/admin/edit_costcode", methods=["GET"])
+@blueprint.route("/edit_costcode", methods=["GET"])
 def edit_costcode_get():
     project = flask.request.args.get("project")
     print("GET Method")
@@ -39,7 +41,7 @@ def edit_costcode_get():
     )
 
 
-@blueprint.route("/admin/edit_costcode", methods=["POST"])
+@blueprint.route("/edit_costcode", methods=["POST"])
 def edit_costcode_post():
     project = flask.request.args.get("project")
     # get list of costcode data

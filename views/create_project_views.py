@@ -5,7 +5,9 @@ from wtforms.validators import DataRequired
 from costreport.services.admin_services import create_project, check_if_project_exists
 
 
-blueprint = flask.Blueprint("create_project", __name__, template_folder="templates")
+blueprint = flask.Blueprint(
+    "create_project", __name__, template_folder="templates", url_prefix="/admin"
+)
 
 
 class CreateProjectForm(FlaskForm):
@@ -13,13 +15,13 @@ class CreateProjectForm(FlaskForm):
     project_name = StringField("Project Name", validators=[DataRequired()])
 
 
-@blueprint.route("/admin/create_project", methods=["GET"])
+@blueprint.route("create_project", methods=["GET"])
 def create_project_get():
     form = CreateProjectForm()
     return flask.render_template("admin/create_project.html", form=form)
 
 
-@blueprint.route("/admin/create_project", methods=["POST"])
+@blueprint.route("create_project", methods=["POST"])
 def create_project_post():
     form = CreateProjectForm()
     data = {
@@ -32,9 +34,8 @@ def create_project_post():
             flask.flash(
                 "Project " + form.project_code.data + " already exists", "alert-danger"
             )
-            return flask.redirect(flask.url_for("create_project.create_project_get"))
-        # commit the data to the database
         else:
+            # commit the data to the database
             create_project(data)
             flask.flash("Project " + form.project_code.data + " created", "alert-success")
             return flask.redirect(flask.url_for("create_project.create_project_get"))

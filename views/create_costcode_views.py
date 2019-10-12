@@ -10,7 +10,9 @@ from costreport.services.admin_services import (
 )
 
 
-blueprint = flask.Blueprint("create_costcode", __name__, template_folder="templates")
+blueprint = flask.Blueprint(
+    "create_costcode", __name__, template_folder="templates", url_prefix="/admin"
+)
 
 
 class CreateCostcodeForm(FlaskForm):
@@ -21,7 +23,7 @@ class CreateCostcodeForm(FlaskForm):
     costcode_category = StringField("Costcode category")
 
 
-@blueprint.route("/admin/create_costcode", methods=["GET"])
+@blueprint.route("/create_costcode", methods=["GET"])
 def create_costcode_get():
     project = flask.request.args.get("project")
     print("GET Method")
@@ -39,7 +41,7 @@ def create_costcode_get():
     )
 
 
-@blueprint.route("/admin/create_costcode", methods=["POST"])
+@blueprint.route("/create_costcode", methods=["POST"])
 def create_costcode_post():
     project = flask.request.args.get("project")
     # get list of costcode data
@@ -57,11 +59,8 @@ def create_costcode_post():
             flask.flash(
                 "Costcode " + form.costcode.data + " already exists", "alert-danger"
             )
-            return flask.redirect(
-                flask.url_for("create_costcode.create_costcode_get", project=project)
-            )
-        # commit the data to the database
         else:
+            # commit the data to the database
             create_costcode(data)
             flask.flash("Costcode " + form.costcode.data + " created", "alert-success")
             return flask.redirect(
