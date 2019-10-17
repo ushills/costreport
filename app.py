@@ -14,20 +14,23 @@ app.config["SECRET_KEY"] = "password"
 app.config["SQLALCHEMY_DATABASE_URI"] = db_file
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 
+
 db = SQLAlchemy(app)
 
 
 def main():
-    # from costreport.data.projects import db
+    register_blueprints()
+    setup_db()
+
+    # app.run(host="0.0.0.0", debug=True)
+    app.run(debug=True)
+
+
+def setup_db():
     from costreport.data.__all_models import db
 
     db.init_app(app)
     db.create_all()
-
-    register_blueprints()
-
-    # app.run(host="0.0.0.0", debug=True)
-    app.run(debug=True)
 
 
 def register_blueprints():
