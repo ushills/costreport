@@ -1,9 +1,10 @@
 from costreport.app import db
 from costreport.data.projects import Project
 from costreport.data.costcodes import Costcodes
+from costreport.data.transactions import Transaction
 
 
-# CREATE PROJECT FUNCTIONS #
+# PROJECT FUNCTIONS #
 def check_if_project_exists(project_code):
     if Project.query.filter(Project.project_code == project_code).first():
         return True
@@ -18,7 +19,7 @@ def create_project(data):
     db.session.commit()
 
 
-# CREATE COSTCODE FUNCTIONS #
+# COSTCODE FUNCTIONS #
 def check_if_costcode_exists(project_code, costcode):
     if (
         Costcodes.query.filter(Project.id == Costcodes.project_id)
@@ -42,7 +43,6 @@ def create_costcode(data):
     db.session.commit()
 
 
-# GET COSTCODE FUNCTIONS
 def get_costcodes(project_code):
     costcodes = (
         Costcodes.query.filter(Project.id == Costcodes.project_id)
@@ -63,16 +63,34 @@ def get_costcode_data(project_code, costcode):
     return costcode_data
 
 
-# UPDATE COSTCODE FUNCTIONS
 def update_costcode(data):
-    # get the costcode id
+    # get the costcode
     costcode = (
         Costcodes.query.filter(Project.id == Costcodes.project_id)
         .filter(Project.project_code == data["project_code"])
         .filter(Costcodes.costcode == data["costcode"])
         .first()
     )
+    # update the category or description
     costcode.costcode_category = data["costcode_category"]
     costcode.costcode_description = data["costcode_description"]
     db.session.commit()
 
+
+# TRANSACTION FUNCTIONS
+def insert_transaction(data):
+    t = Transaction()
+    # get & set the project_id
+    project_code = data["project_code"]
+    project = Project.query.filter(Project.project_code == project_code).first()
+    t.project_id = project.id
+    # get & set the costcode_id
+    costcode = data["costcode"]
+    costcode = Costcodes.query.filter(Costcodes.costcode == costcode)
+
+    # c.costcode = data["costcode"]
+    # c.costcode_description = data["costcode_description"]
+    # c.costcode_category = data["costcode_category"]
+    # db.session.add(c)
+    # db.session.commit()
+    pass
