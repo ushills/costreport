@@ -3,12 +3,12 @@ import sys
 
 import pytest
 
-container_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+container_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, container_folder)
 
 import costreport.app
 from costreport.app import app as flask_app
-from costreport.tests.client import client
+from tests.client import client
 
 import costreport.services.admin_services as admin_services
 

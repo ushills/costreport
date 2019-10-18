@@ -2,7 +2,7 @@ import os
 import sys
 import pytest
 
-container_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+container_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, container_folder)
 
 import costreport.app

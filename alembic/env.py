@@ -21,7 +21,7 @@ fileConfig(config.config_file_name)
 # target_metadata = mymodel.Base.metadata
 import sys
 
-folder = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+folder = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, folder)
 
 from costreport.app import app
