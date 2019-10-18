@@ -42,6 +42,7 @@ def create_costcode(data):
     db.session.commit()
 
 
+# GET COSTCODE FUNCTIONS
 def get_costcodes(project_code):
     costcodes = (
         Costcodes.query.filter(Project.id == Costcodes.project_id)
@@ -57,6 +58,21 @@ def get_costcode_data(project_code, costcode):
         Costcodes.query.filter(Project.id == Costcodes.project_id)
         .filter(Project.project_code == project_code)
         .filter(Costcodes.costcode == costcode)
-        .all()
+        .first()
     )
     return costcode_data
+
+
+# UPDATE COSTCODE FUNCTIONS
+def update_costcode(data):
+    # get the costcode id
+    costcode = (
+        Costcodes.query.filter(Project.id == Costcodes.project_id)
+        .filter(Project.project_code == data["project_code"])
+        .filter(Costcodes.costcode == data["costcode"])
+        .first()
+    )
+    costcode.costcode_category = data["costcode_category"]
+    costcode.costcode_description = data["costcode_description"]
+    db.session.commit()
+
