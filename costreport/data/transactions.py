@@ -14,7 +14,7 @@ from costreport.data.projects import Project
 class Transaction(db.Model):
     __tablename__ = "transactions"
 
-    id: int = db.Column(db.BigInteger, primary_key=True, autoincrement=True)
+    id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)
     created_date: datetime.datetime = db.Column(
         db.DateTime, default=datetime.datetime.now, index=True
     )

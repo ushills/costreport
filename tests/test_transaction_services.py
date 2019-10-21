@@ -22,19 +22,37 @@ class TestTransactionServices:
             admin_services.create_project(project)
 
     def test_add_a_costcode(self):
+        costcode_list = [
+            {
+                "project_code": "12345",
+                "costcode": "C1000",
+                "costcode_description": "Costcode A",
+                "costcode_category": "Category A",
+            },
+            {
+                "project_code": "12345",
+                "costcode": "C2000",
+                "costcode_description": "Costcode B",
+                "costcode_category": "Category B",
+            },
+        ]
+        for data in costcode_list:
+            admin_services.create_costcode(data)
+
+    def test_add_a_transaction(self):
         data = {
             "project_code": "12345",
             "costcode": "C1000",
-            "costcode_description": "Costcode A",
-            "costcode_category": "Category A",
+            "value": 9999,
+            "note": "first transaction",
         }
-        admin_services.create_costcode(data)
+        admin_services.insert_transaction(data)
 
-    def test_get_costcode_id(self):
-        assert (
-            admin_services.insert_transaction(
-                {"project_code": "12345", "costcode": "C1000"}
-            )
-            == 1
-        )
-
+    def test_add_2nd_transaction(self):
+        data = {
+            "project_code": "12345",
+            "costcode": "C2000",
+            "value": 1000,
+            "note": "first transaction",
+        }
+        admin_services.insert_transaction(data)
