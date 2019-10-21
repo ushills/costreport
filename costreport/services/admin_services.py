@@ -80,17 +80,14 @@ def update_costcode(data):
 # TRANSACTION FUNCTIONS
 def insert_transaction(data):
     t = Transaction()
-    # get & set the project_id
-    project_code = data["project_code"]
-    project = Project.query.filter(Project.project_code == project_code).first()
-    t.project_id = project.id
-    # get & set the costcode_id
-    costcode = data["costcode"]
-    costcode = Costcodes.query.filter(Costcodes.costcode == costcode)
+    # get the correct costcode
+    costcode_id = (
+        Costcodes.query.filter(Project.id == Costcodes.project_id)
+        .filter(Project.project_code == data["project_code"])
+        .filter(Costcodes.costcode == data["costcode"])
+        .first()
+        .id
+    )
+    # costcode_id = costcode.id
+    return costcode_id
 
-    # c.costcode = data["costcode"]
-    # c.costcode_description = data["costcode_description"]
-    # c.costcode_category = data["costcode_category"]
-    # db.session.add(c)
-    # db.session.commit()
-    pass
