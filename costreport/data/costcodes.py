@@ -16,8 +16,8 @@ class Costcodes(db.Model):
     created_date: datetime.datetime = db.Column(
         db.DateTime, default=datetime.datetime.now, index=True
     )
-    project_id: str = db.Column(
-        db.String, db.ForeignKey("projects.id"), nullable=False, index=True
+    project_id: int = db.Column(
+        db.Integer, db.ForeignKey("projects.id"), nullable=False, index=True
     )
     costcode: str = db.Column(db.String, nullable=False)
     costcode_category: str = db.Column(db.String, nullable=True)

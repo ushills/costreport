@@ -18,7 +18,7 @@ class Transaction(db.Model):
     created_date: datetime.datetime = db.Column(
         db.DateTime, default=datetime.datetime.now, index=True
     )
-    project_id: str = db.Column(
+    project_id: int = db.Column(
         db.Integer, db.ForeignKey("projects.id"), nullable=False, index=True
     )
     cost_code_id: int = db.Column(

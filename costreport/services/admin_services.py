@@ -88,7 +88,7 @@ def insert_transaction(data):
         .first()
     )
     print("Costcode.id=", costcode.id, "Project_id=", costcode.project_id)
-    t.cost_code_id = int(costcode.id)
+    t.cost_code_id = costcode.id
     t.project_id = costcode.project_id
     t.value = data["value"]
     t.note = data["note"]
