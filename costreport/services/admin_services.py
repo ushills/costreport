@@ -94,3 +94,7 @@ def insert_transaction(data):
     t.note = data["note"]
     db.session.add(t)
     db.session.commit()
+
+
+def list_transactions():
+    pass
