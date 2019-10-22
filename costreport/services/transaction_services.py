@@ -8,7 +8,7 @@ def insert_transaction(data):
     t = Transaction()
     # get the correct costcode
     costcode = (
-        Costcodes.query.filter(Project.id == Costcodes.project_id)
+        Costcodes.query.join(Project)
         .filter(Project.project_code == data["project_code"])
         .filter(Costcodes.costcode == data["costcode"])
         .first()
@@ -24,11 +24,10 @@ def insert_transaction(data):
 
 def list_transactions(project_code, costcode):
     transactions = (
-        Transaction.query.filter(Project.id == Transaction.project_id)
+        Transaction.query.join(Project, Costcodes)
         .filter(Costcodes.id == Transaction.cost_code_id)
         .filter(Project.project_code == project_code)
         .filter(Costcodes.costcode == costcode)
         .all()
     )
-    print(transactions)
     return transactions

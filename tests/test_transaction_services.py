@@ -65,4 +65,7 @@ class TestTransactionServices:
         assert len(transactions) == 1
         assert transactions[0].value == 1000
         assert transactions[0].note == "first transaction"
+        assert transactions[0].project.project_code == "12345"
+        assert transactions[0].project.project_name == "Project A"
+        assert transactions[0].costcode.costcode_description == "Costcode B"
 

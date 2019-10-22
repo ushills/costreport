@@ -38,6 +38,7 @@ class TestCostcodeServices:
         costcode_data = costcode_services.get_costcode_data(
             project_code="12345", costcode="C1000"
         )
+        assert costcode_data.project.project_name == "Project A"
         assert costcode_data.costcode_description == "Costcode A"
         assert costcode_data.costcode_category == "Category A"
 
@@ -65,7 +66,7 @@ class TestCostcodeServices:
             is False
         )
 
-    def test_update_costcode(self):
+    def test_admin_update_costcode(self):
         data = {
             "project_code": "12345",
             "costcode": "C1000",
@@ -76,6 +77,7 @@ class TestCostcodeServices:
         costcode_data = costcode_services.get_costcode_data(
             project_code="12345", costcode="C1000"
         )
+        assert costcode_data.project.project_name == "Project A"
         assert costcode_data.costcode_description == "Updated description"
         assert costcode_data.costcode_category == "Updated category"
 
