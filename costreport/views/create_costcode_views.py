@@ -2,12 +2,12 @@ import flask
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
-from costreport.services.admin_services import (
-    create_costcode,
+from costreport.services.admin_services import create_costcode
+from costreport.services.costcode_services import (
     check_if_costcode_exists,
-    check_if_project_exists,
     get_costcodes,
 )
+from costreport.services.projects_service import check_if_project_exists
 
 
 blueprint = flask.Blueprint(

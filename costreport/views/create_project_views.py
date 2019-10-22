@@ -2,7 +2,8 @@ import flask
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
-from costreport.services.admin_services import create_project, check_if_project_exists
+from costreport.services.admin_services import create_project
+from costreport.services.projects_service import check_if_project_exists
 
 
 blueprint = flask.Blueprint(
@@ -37,6 +38,8 @@ def create_project_post():
         else:
             # commit the data to the database
             create_project(data)
-            flask.flash("Project " + form.project_code.data + " created", "alert-success")
+            flask.flash(
+                "Project " + form.project_code.data + " created", "alert-success"
+            )
             return flask.redirect(flask.url_for("create_project.create_project_get"))
     return flask.render_template("admin/create_project.html", form=form)

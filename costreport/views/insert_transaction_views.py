@@ -9,9 +9,7 @@ from costreport.services.admin_services import (
 )
 
 
-blueprint = flask.Blueprint(
-    "insert_transaction", __name__, template_folder="templates", url_prefix="/admin"
-)
+blueprint = flask.Blueprint("insert_transaction", __name__, template_folder="templates")
 
 
 class InsertTransactionForm(FlaskForm):
@@ -32,7 +30,10 @@ def insert_transaction_get():
     form = InsertTransactionForm()
     # TODO add list of transactions for costcode
     return flask.render_template(
-        "admin/insert_tarnsaction.html", form=form, project=project, costcode=costcode
+        "transaction/insert_transaction.html",
+        form=form,
+        project=project,
+        costcode=costcode,
     )
 
 
