@@ -2,7 +2,7 @@
 {% block main_content %}
 
 <h2>Create Transaction - {{ project }}</h2>
-<h3>{{ costcode }}</h3>
+<h3>{{ costcode.costcode }} - {{ costcode.costcode_description }}</h3>
 
 <div class="container-fluid create_transaction">
     {% with messages = get_flashed_messages(with_categories=true) %}

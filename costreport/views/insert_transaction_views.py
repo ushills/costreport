@@ -4,7 +4,10 @@ from wtforms import StringField
 from wtforms.validators import DataRequired
 from costreport.services.transaction_services import insert_transaction
 from costreport.services.projects_service import check_if_project_exists
-from costreport.services.costcode_services import check_if_costcode_exists
+from costreport.services.costcode_services import (
+    check_if_costcode_exists,
+    get_costcode_data,
+)
 
 blueprint = flask.Blueprint("insert_transaction", __name__, template_folder="templates")
 
@@ -26,6 +29,7 @@ def insert_transaction_get():
         flask.abort(404)
     form = InsertTransactionForm()
     # TODO add list of transactions for costcode
+    costcode = get_costcode_data(project, costcode)
     return flask.render_template(
         "transaction/insert_transaction.html",
         form=form,
