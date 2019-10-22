@@ -22,5 +22,13 @@ def insert_transaction(data):
     db.session.commit()
 
 
-def list_transactions():
-    pass
+def list_transactions(project_code, costcode):
+    transactions = (
+        Transaction.query.filter(Project.id == Transaction.project_id)
+        .filter(Costcodes.id == Transaction.cost_code_id)
+        .filter(Project.project_code == project_code)
+        .filter(Costcodes.costcode == costcode)
+        .all()
+    )
+    print(transactions)
+    return transactions

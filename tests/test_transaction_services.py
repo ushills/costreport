@@ -57,3 +57,12 @@ class TestTransactionServices:
             "note": "first transaction",
         }
         transaction_services.insert_transaction(data)
+
+    def test_list_transactions(self):
+        project_code = "12345"
+        costcode = "C2000"
+        transactions = transaction_services.list_transactions(project_code, costcode)
+        assert len(transactions) == 1
+        assert transactions[0].value == 1000
+        assert transactions[0].note == "first transaction"
+
