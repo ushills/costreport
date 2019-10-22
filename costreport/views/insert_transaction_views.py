@@ -2,12 +2,9 @@ import flask
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
-from costreport.services.admin_services import (
-    insert_transaction,
-    check_if_project_exists,
-    check_if_costcode_exists,
-)
-
+from costreport.services.transaction_services import insert_transaction
+from costreport.services.projects_service import check_if_project_exists
+from costreport.services.costcode_services import check_if_costcode_exists
 
 blueprint = flask.Blueprint("insert_transaction", __name__, template_folder="templates")
 
@@ -25,7 +22,7 @@ def insert_transaction_get():
     if check_if_project_exists(project) is False:
         flask.abort(404)
     # check if costcode exists
-    if check_if_costcode_exists(costcode) is False:
+    if check_if_costcode_exists(project, costcode) is False:
         flask.abort(404)
     form = InsertTransactionForm()
     # TODO add list of transactions for costcode
