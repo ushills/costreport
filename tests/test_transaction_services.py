@@ -12,6 +12,7 @@ from tests.client import client
 
 import costreport.services.admin_services as admin_services
 import costreport.services.projects_service as projects_service
+import costreport.services.transaction_services as transaction_services
 
 
 class TestTransactionServices:
@@ -39,20 +40,20 @@ class TestTransactionServices:
         for data in costcode_list:
             admin_services.create_costcode(data)
 
-    def test_add_a_transaction(self):
+    def test_insert_a_transaction(self):
         data = {
             "project_code": "12345",
             "costcode": "C1000",
             "value": 9999,
             "note": "first transaction",
         }
-        admin_services.insert_transaction(data)
+        transaction_services.insert_transaction(data)
 
-    def test_add_2nd_transaction(self):
+    def test_insert_2nd_transaction(self):
         data = {
             "project_code": "12345",
             "costcode": "C2000",
             "value": 1000,
             "note": "first transaction",
         }
-        admin_services.insert_transaction(data)
+        transaction_services.insert_transaction(data)
