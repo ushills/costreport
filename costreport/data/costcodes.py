@@ -22,3 +22,4 @@ class Costcodes(db.Model):
     costcode: str = db.Column(db.String, nullable=False)
     costcode_category: str = db.Column(db.String, nullable=True)
     costcode_description: str = db.Column(db.String, nullable=False)
+    project = db.relationship("Project")

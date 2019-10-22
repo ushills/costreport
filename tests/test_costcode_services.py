@@ -31,6 +31,7 @@ class TestCostcodeServices:
         admin_services.create_costcode(data)
 
     def test_get_all_costcodes(self):
+        assert len(costcode_services.get_costcodes("12345")) == 1
         assert costcode_services.get_costcodes("12345")[0].costcode == "C1000"
 
     def test_get_costcode_data(self):

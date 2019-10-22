@@ -4,7 +4,7 @@ from costreport.data.costcodes import Costcodes
 from costreport.data.transactions import Transaction
 
 
-# PROJECT FUNCTIONS #
+# PROJECT ADMIN FUNCTIONS #
 def create_project(data):
     p = Project()
     p.project_code = data["project_code"]
@@ -13,7 +13,7 @@ def create_project(data):
     db.session.commit()
 
 
-# COSTCODE FUNCTIONS #
+# COSTCODE ADMIN FUNCTIONS #
 def create_costcode(data):
     c = Costcodes()
     project_code = data["project_code"]
