@@ -36,7 +36,7 @@ class TestProjectServices:
         assert db_project_list[3].project_code == "12345"
 
     def test_project_exists(self):
-        assert admin_services.check_if_project_exists("12345") is True
+        assert projects_service.check_if_project_exists("12345") is True
 
     def test_project_does_not_exist(self):
-        assert admin_services.check_if_project_exists("76543") is False
+        assert projects_service.check_if_project_exists("76543") is False

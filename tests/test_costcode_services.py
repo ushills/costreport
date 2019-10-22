@@ -11,6 +11,7 @@ from costreport.app import app as flask_app
 from tests.client import client
 
 import costreport.services.admin_services as admin_services
+import costreport.services.costcode_services as costcode_services
 
 
 class TestCostcodeServices:
@@ -30,10 +31,10 @@ class TestCostcodeServices:
         admin_services.create_costcode(data)
 
     def test_get_all_costcodes(self):
-        assert admin_services.get_costcodes("12345")[0].costcode == "C1000"
+        assert costcode_services.get_costcodes("12345")[0].costcode == "C1000"
 
     def test_get_costcode_data(self):
-        costcode_data = admin_services.get_costcode_data(
+        costcode_data = costcode_services.get_costcode_data(
             project_code="12345", costcode="C1000"
         )
         assert costcode_data.costcode_description == "Costcode A"
@@ -41,7 +42,7 @@ class TestCostcodeServices:
 
     def test_check_if_costcode_exists(self):
         assert (
-            admin_services.check_if_costcode_exists(
+            costcode_services.check_if_costcode_exists(
                 project_code="12345", costcode="C1000"
             )
             is True
@@ -49,7 +50,7 @@ class TestCostcodeServices:
 
     def test_check_if_project_does_not_exist(self):
         assert (
-            admin_services.check_if_costcode_exists(
+            costcode_services.check_if_costcode_exists(
                 project_code="76543", costcode="C1000"
             )
             is False
@@ -57,7 +58,7 @@ class TestCostcodeServices:
 
     def test_check_if_costcode_does_not_exist(self):
         assert (
-            admin_services.check_if_costcode_exists(
+            costcode_services.check_if_costcode_exists(
                 project_code="12345", costcode="not exist"
             )
             is False
@@ -71,7 +72,7 @@ class TestCostcodeServices:
             "costcode_category": "Updated category",
         }
         admin_services.update_costcode(data)
-        costcode_data = admin_services.get_costcode_data(
+        costcode_data = costcode_services.get_costcode_data(
             project_code="12345", costcode="C1000"
         )
         assert costcode_data.costcode_description == "Updated description"
