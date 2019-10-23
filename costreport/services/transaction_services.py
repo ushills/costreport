@@ -22,7 +22,7 @@ def insert_transaction(data):
     db.session.commit()
 
 
-def list_transactions(project_code, costcode):
+def get_current_transactions(project_code, costcode):
     transactions = (
         Transaction.query.join(Project, Costcodes)
         .filter(Costcodes.id == Transaction.cost_code_id)

@@ -44,8 +44,8 @@ class TestTransactionServices:
         data = {
             "project_code": "12345",
             "costcode": "C1000",
-            "value": 9999,
-            "note": "first transaction",
+            "transaction_value": 9999,
+            "transaction_note": "first transaction",
         }
         transaction_services.insert_transaction(data)
 
@@ -53,15 +53,17 @@ class TestTransactionServices:
         data = {
             "project_code": "12345",
             "costcode": "C2000",
-            "value": 1000,
-            "note": "first transaction",
+            "transaction_value": 1000,
+            "transaction_note": "first transaction",
         }
         transaction_services.insert_transaction(data)
 
-    def test_list_transactions(self):
+    def test_get_current_transactions(self):
         project_code = "12345"
         costcode = "C2000"
-        transactions = transaction_services.list_transactions(project_code, costcode)
+        transactions = transaction_services.get_current_transactions(
+            project_code, costcode
+        )
         assert len(transactions) == 1
         assert transactions[0].value == 1000
         assert transactions[0].note == "first transaction"
