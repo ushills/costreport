@@ -37,6 +37,7 @@ def insert_transaction_get():
         "transaction/insert_transaction.html",
         form=form,
         project=project,
+        costcode=costcode,
         costcode_data=costcode_data,
         transactions=transactions,
     )
@@ -46,6 +47,8 @@ def insert_transaction_get():
 def insert_transaction_post():
     project = flask.request.args.get("project")
     costcode = flask.request.args.get("costcode")
+    costcode_data = get_costcode_data(project, costcode)
+    transactions = get_current_transactions(project, costcode)
     form = InsertTransactionForm()
     data = {
         "project_code": project,
@@ -55,19 +58,26 @@ def insert_transaction_post():
     }
     if form.validate_on_submit():
         # TODO check that the value string can be converted to a number
-        # commit the data to the database
-        insert_transaction(data)
-        flask.flash("Transaction created", "alert-success")
-        return flask.redirect(
-            flask.url_for(
-                "insert_transaction.insert_transaction_get",
-                project=project,
-                costcode=costcode,
+        try:
+            float(form.transaction_value.data)
+        except ValueError:
+            flask.flash("Value must be a number", "alert-danger")
+        else:
+            # commit the data to the database
+            insert_transaction(data)
+            flask.flash("Transaction created", "alert-success")
+            return flask.redirect(
+                flask.url_for(
+                    "insert_transaction.insert_transaction_get",
+                    project=project,
+                    costcode_data=costcode_data,
+                )
             )
-        )
     return flask.render_template(
         "transaction/insert_transaction.html",
         form=form,
-        # project=project,
-        # current_costcodes=current_costcodes,
+        project=project,
+        costcode=costcode,
+        costcode_data=costcode_data,
+        transactions=transactions,
     )
