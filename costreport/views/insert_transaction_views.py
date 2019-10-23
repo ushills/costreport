@@ -2,7 +2,10 @@ import flask
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
-from costreport.services.transaction_services import insert_transaction
+from costreport.services.transaction_services import (
+    insert_transaction,
+    get_current_transactions,
+)
 from costreport.services.projects_service import check_if_project_exists
 from costreport.services.costcode_services import (
     check_if_costcode_exists,
@@ -28,13 +31,14 @@ def insert_transaction_get():
     if check_if_costcode_exists(project, costcode) is False:
         flask.abort(404)
     form = InsertTransactionForm()
-    # TODO add list of transactions for costcode
-    costcode = get_costcode_data(project, costcode)
+    costcode_data = get_costcode_data(project, costcode)
+    transactions = get_current_transactions(project, costcode)
     return flask.render_template(
         "transaction/insert_transaction.html",
         form=form,
         project=project,
-        costcode=costcode,
+        costcode_data=costcode_data,
+        transactions=transactions,
     )
 
 
@@ -42,8 +46,6 @@ def insert_transaction_get():
 def insert_transaction_post():
     project = flask.request.args.get("project")
     costcode = flask.request.args.get("costcode")
-    # get list of costcode data
-    # current_costcodes = get_costcodes(project)
     form = InsertTransactionForm()
     data = {
         "project_code": project,
@@ -65,6 +67,6 @@ def insert_transaction_post():
     return flask.render_template(
         "transaction/insert_transaction.html",
         form=form,
-        project=project,
-        current_costcodes=current_costcodes,
+        # project=project,
+        # current_costcodes=current_costcodes,
     )

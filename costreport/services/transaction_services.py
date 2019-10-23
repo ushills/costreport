@@ -28,6 +28,7 @@ def get_current_transactions(project_code, costcode):
         .filter(Costcodes.id == Transaction.cost_code_id)
         .filter(Project.project_code == project_code)
         .filter(Costcodes.costcode == costcode)
+        .order_by(Transaction.created_date.desc())
         .all()
     )
     return transactions

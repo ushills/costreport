@@ -2,7 +2,7 @@
 {% block main_content %}
 
 <h2>Create Transaction - {{ project }}</h2>
-<h3>{{ costcode.costcode }} - {{ costcode.costcode_description }}</h3>
+<h3>{{ costcode_data.costcode }} - {{ costcode_data.costcode_description }}</h3>
 
 <div class="container-fluid create_transaction">
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -28,26 +28,18 @@
         <a class="btn btn-danger pull-right" href="/projects" role="button">Cancel</a>
     </form>
     <hr>
-    <!-- <div class="current_costcodes">
-        {% for costcode in current_costcodes %}
+    <div class="current_transactions">
+        {% for transaction in transactions %}
         <div class="row border-bottom">
             <div class="col-2">
-                <a href="{{ url_for("edit_costcode.edit_costcode_get"
-                    ,project=project        
-                    ,costcode=costcode.costcode
-                        ) }}">
-                    {{ costcode.costcode }}</a>
+                {{ transaction.value }}</a>
             </div>
             <div class=" col-4">
-                <a href="{{ url_for("edit_costcode.edit_costcode_get"
-                    ,project=project        
-                    ,costcode=costcode.costcode
-                        ) }}">
-                    {{ costcode.costcode_description}}</a>
+                {{ transaction.note}}</a>
             </div>
         </div>
         {% endfor %}
-    </div> -->
+    </div>
 </div>
 
 {% endblock %}
