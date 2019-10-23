@@ -28,13 +28,21 @@
         <a class="btn btn-danger pull-right" href="/projects" role="button">Cancel</a>
     </form>
     <hr>
+    <div class="row transaction_total border-bottom">
+        <div class="col-2 total">
+            {{ '{:+,.2f}'.format(transactions|sum(attribute="value")) }}
+        </div>
+        <div class="col-4">
+            Total
+        </div>
+    </div>
     <div class="current_transactions">
         {% for transaction in transactions %}
         <div class="row border-bottom">
-            <div class="col-2">
-                {{ transaction.value }}</a>
+            <div class="col-2 value">
+                {{ '{:+,.2f}'.format(transaction.value) }}</a>
             </div>
-            <div class=" col-4">
+            <div class="col-4">
                 {{ transaction.note}}</a>
             </div>
         </div>

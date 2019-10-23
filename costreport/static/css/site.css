@@ -117,3 +117,8 @@ a:hover{
     text-align: right;
 }
 
+/* Insert Transaction template formatting */
+
+.current_transactions {
+    font-size: 16px;
+}

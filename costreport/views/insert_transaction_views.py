@@ -54,6 +54,7 @@ def insert_transaction_post():
         "transaction_note": form.transaction_note.data,
     }
     if form.validate_on_submit():
+        # TODO check that the value string can be converted to a number
         # commit the data to the database
         insert_transaction(data)
         flask.flash("Transaction created", "alert-success")
