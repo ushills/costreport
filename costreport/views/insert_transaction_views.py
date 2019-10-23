@@ -38,35 +38,33 @@ def insert_transaction_get():
     )
 
 
-# TODO
-# @blueprint.route("/create_costcode", methods=["POST"])
-# def create_costcode_post():
-#     project = flask.request.args.get("project")
-#     # get list of costcode data
-#     current_costcodes = get_costcodes(project)
-#     form = CreateCostcodeForm()
-#     data = {
-#         "project_code": project,
-#         "costcode": form.costcode.data,
-#         "costcode_description": form.costcode_description.data,
-#         "costcode_category": form.costcode_category.data,
-#     }
-#     if form.validate_on_submit():
-#         # check if the costcode already exists for the project_code
-#         if check_if_costcode_exists(project_code=project, costcode=form.costcode.data):
-#             flask.flash(
-#                 "Costcode " + form.costcode.data + " already exists", "alert-danger"
-#             )
-#         else:
-#             # commit the data to the database
-#             create_costcode(data)
-#             flask.flash("Costcode " + form.costcode.data + " created", "alert-success")
-#             return flask.redirect(
-#                 flask.url_for("create_costcode.create_costcode_get", project=project)
-#             )
-#     return flask.render_template(
-#         "admin/create_costcode.html",
-#         form=form,
-#         project=project,
-#         current_costcodes=current_costcodes,
-#     )
+@blueprint.route("/insert_transaction", methods=["POST"])
+def insert_transaction_post():
+    project = flask.request.args.get("project")
+    costcode = flask.request.args.get("costcode")
+    # get list of costcode data
+    # current_costcodes = get_costcodes(project)
+    form = InsertTransactionForm()
+    data = {
+        "project_code": project,
+        "costcode": costcode,
+        "transaction_value": form.transaction_value.data,
+        "transaction_note": form.transaction_note.data,
+    }
+    if form.validate_on_submit():
+        # commit the data to the database
+        insert_transaction(data)
+        flask.flash("Transaction created", "alert-success")
+        return flask.redirect(
+            flask.url_for(
+                "insert_transaction.insert_transaction_get",
+                project=project,
+                costcode=costcode,
+            )
+        )
+    return flask.render_template(
+        "transaction/insert_transaction.html",
+        form=form,
+        project=project,
+        current_costcodes=current_costcodes,
+    )

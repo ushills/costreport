@@ -16,8 +16,8 @@ def insert_transaction(data):
     print("Costcode.id=", costcode.id, "Project_id=", costcode.project_id)
     t.cost_code_id = costcode.id
     t.project_id = costcode.project_id
-    t.value = data["value"]
-    t.note = data["note"]
+    t.value = data["transaction_value"]
+    t.note = data["transaction_note"]
     db.session.add(t)
     db.session.commit()
 
