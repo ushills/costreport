@@ -13,7 +13,7 @@ def insert_transaction(data):
         .filter(Costcodes.costcode == data["costcode"])
         .first()
     )
-    print("Costcode.id=", costcode.id, "Project_id=", costcode.project_id)
+    # print("Costcode.id=", costcode.id, "Project_id=", costcode.project_id)
     t.cost_code_id = costcode.id
     t.project_id = costcode.project_id
     t.value = data["transaction_value"]
@@ -29,6 +29,8 @@ def get_current_transactions(project_code, costcode):
         .filter(Project.project_code == project_code)
         .filter(Costcodes.costcode == costcode)
         .order_by(Transaction.created_date.desc())
-        .all()
     )
+    transactions_sum = transactions.with_entities(db.func.sum(Transaction.value)).scalar()
+    print(transactions_sum)
+    transactions = transactions.all()
     return transactions
