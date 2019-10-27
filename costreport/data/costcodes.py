@@ -23,3 +23,4 @@ class Costcodes(db.Model):
     costcode_category: str = db.Column(db.String, nullable=True)
     costcode_description: str = db.Column(db.String, nullable=False)
     project = db.relationship("Project")
+    transactions = db.relationship("Transaction", back_populates="costcode")

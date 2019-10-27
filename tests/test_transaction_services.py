@@ -17,7 +17,10 @@ import costreport.services.transaction_services as transaction_services
 
 class TestTransactionServices:
     def test_setup_project(self, client):
-        project_list = [{"project_code": "12345", "project_name": "Project A"}]
+        project_list = [
+            {"project_code": "12345", "project_name": "Project A"},
+            {"project_code": "54321", "project_name": "Project B"},
+        ]
 
         for project in project_list:
             admin_services.create_project(project)
@@ -32,6 +35,12 @@ class TestTransactionServices:
             },
             {
                 "project_code": "12345",
+                "costcode": "C2000",
+                "costcode_description": "Costcode B",
+                "costcode_category": "Category B",
+            },
+            {
+                "project_code": "54321",
                 "costcode": "C2000",
                 "costcode_description": "Costcode B",
                 "costcode_category": "Category B",
@@ -58,6 +67,15 @@ class TestTransactionServices:
         }
         transaction_services.insert_transaction(data)
 
+    def test_insert_transaction_for_another_project(self):
+        data = {
+            "project_code": "54321",
+            "costcode": "C2000",
+            "transaction_value": 1000,
+            "transaction_note": "first transaction",
+        }
+        transaction_services.insert_transaction(data)
+
     def test_get_current_transactions(self):
         project_code = "12345"
         costcode = "C2000"
@@ -71,4 +89,11 @@ class TestTransactionServices:
         assert transactions[0].project.project_name == "Project A"
         assert transactions[0].costcode.costcode_description == "Costcode B"
         assert transactions_sum == 1000
+
+    def test_get_all_transactions_by_costcode(self):
+        project_code = "12345"
+        transactions_by_costcode = transaction_services.get_all_transactions_by_costcode(
+            project_code
+        )
+        assert len(transactions_by_costcode) == 2
 
