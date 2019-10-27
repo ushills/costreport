@@ -71,7 +71,7 @@ def insert_transaction_post():
                 flask.url_for(
                     "insert_transaction.insert_transaction_get",
                     project=project,
-                    costcode_data=costcode_data,
+                    costcode=costcode,
                 )
             )
     return flask.render_template(
