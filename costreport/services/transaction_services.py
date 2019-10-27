@@ -31,6 +31,5 @@ def get_current_transactions(project_code, costcode):
         .order_by(Transaction.created_date.desc())
     )
     transactions_sum = transactions.with_entities(db.func.sum(Transaction.value)).scalar()
-    print(transactions_sum)
     transactions = transactions.all()
-    return transactions
+    return transactions, transactions_sum

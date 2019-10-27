@@ -30,7 +30,7 @@
     <hr>
     <div class="row transaction_total border-bottom">
         <div class="col-2 total">
-            {{ '{:+,.2f}'.format(transactions|sum(attribute="value")) }}
+            {{ '{:+,.2f}'.format(transactions_sum) }}
         </div>
         <div class="col-4">
             Total

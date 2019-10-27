@@ -32,7 +32,7 @@ def insert_transaction_get():
         flask.abort(404)
     form = InsertTransactionForm()
     costcode_data = get_costcode_data(project, costcode)
-    transactions = get_current_transactions(project, costcode)
+    transactions, transactions_sum = get_current_transactions(project, costcode)
     return flask.render_template(
         "transaction/insert_transaction.html",
         form=form,
@@ -40,6 +40,7 @@ def insert_transaction_get():
         costcode=costcode,
         costcode_data=costcode_data,
         transactions=transactions,
+        transactions_sum=transactions_sum,
     )
 
 
@@ -48,7 +49,7 @@ def insert_transaction_post():
     project = flask.request.args.get("project")
     costcode = flask.request.args.get("costcode")
     costcode_data = get_costcode_data(project, costcode)
-    transactions = get_current_transactions(project, costcode)
+    transactions, transactions_sum = get_current_transactions(project, costcode)
     form = InsertTransactionForm()
     data = {
         "project_code": project,
@@ -80,4 +81,5 @@ def insert_transaction_post():
         costcode=costcode,
         costcode_data=costcode_data,
         transactions=transactions,
+        transactions_sum=transactions_sum,
     )

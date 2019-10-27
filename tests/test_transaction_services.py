@@ -61,7 +61,7 @@ class TestTransactionServices:
     def test_get_current_transactions(self):
         project_code = "12345"
         costcode = "C2000"
-        transactions = transaction_services.get_current_transactions(
+        transactions, transactions_sum = transaction_services.get_current_transactions(
             project_code, costcode
         )
         assert len(transactions) == 1
@@ -70,4 +70,5 @@ class TestTransactionServices:
         assert transactions[0].project.project_code == "12345"
         assert transactions[0].project.project_name == "Project A"
         assert transactions[0].costcode.costcode_description == "Costcode B"
+        assert transactions_sum == 1000
 
