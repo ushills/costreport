@@ -98,6 +98,6 @@ class TestTransactionServices:
         assert len(transactions_by_costcode) == 2
         assert transactions_by_costcode[0].costcode == "C1000"
         assert transactions_by_costcode[1].costcode == "C2000"
-        assert transactions_by_costcode[0].total == 9999
-        assert transactions_by_costcode[1].total == 1000
+        assert transactions_by_costcode[0].forecast_cost_total == 9999
+        assert transactions_by_costcode[1].forecast_cost_total == 1000
 
