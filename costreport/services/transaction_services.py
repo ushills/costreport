@@ -3,6 +3,7 @@ from costreport.data.projects import Project
 from costreport.data.costcodes import Costcodes
 from costreport.data.transactions import Transaction
 import costreport.services.costcode_services as costcode_services
+from sqlalchemy.sql import func
 
 
 # TRANSACTION FUNCTIONS
@@ -33,17 +34,26 @@ def get_current_transactions(project_code, costcode):
         .order_by(Transaction.created_date.desc())
     )
     transactions_sum = transactions.with_entities(db.func.sum(Transaction.value)).scalar()
-    if transactions_sum == None:
+    if transactions_sum is None:
         transactions_sum = 0
     transactions = transactions.all()
     return transactions, transactions_sum
 
 
-def get_all_transactions_by_costcode(project_code):
-    transactions = (
-        Transaction.query.join(Project, Costcodes)
+def get_costcodes_and_transaction_sum(project_code):
+    costcodes_transaction_sum = (
+        Transaction.query.with_entities(
+            Costcodes.costcode,
+            Costcodes.costcode_description,
+            func.sum(Transaction.value).label("total"),
+        )
+        .filter(Transaction.cost_code_id == Costcodes.id)
+        .filter(Project.id == Transaction.project_id)
         .filter(Project.project_code == project_code)
-        .order_by(Transaction.costcode)
+        .group_by(Costcodes.costcode)
+        .order_by(Costcodes.costcode)
+        .all()
     )
-    return transactions.all()
-    print(transactions.all())
+
+    return costcodes_transaction_sum
+

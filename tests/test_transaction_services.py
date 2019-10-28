@@ -41,7 +41,7 @@ class TestTransactionServices:
             },
             {
                 "project_code": "54321",
-                "costcode": "C2000",
+                "costcode": "C3000",
                 "costcode_description": "Costcode B",
                 "costcode_category": "Category B",
             },
@@ -70,7 +70,7 @@ class TestTransactionServices:
     def test_insert_transaction_for_another_project(self):
         data = {
             "project_code": "54321",
-            "costcode": "C2000",
+            "costcode": "C3000",
             "transaction_value": 1000,
             "transaction_note": "first transaction",
         }
@@ -90,10 +90,14 @@ class TestTransactionServices:
         assert transactions[0].costcode.costcode_description == "Costcode B"
         assert transactions_sum == 1000
 
-    def test_get_all_transactions_by_costcode(self):
+    def test_get_costcodes_and_transaction_sum(self):
         project_code = "12345"
-        transactions_by_costcode = transaction_services.get_all_transactions_by_costcode(
+        transactions_by_costcode = transaction_services.get_costcodes_and_transaction_sum(
             project_code
         )
         assert len(transactions_by_costcode) == 2
+        assert transactions_by_costcode[0].costcode == "C1000"
+        assert transactions_by_costcode[1].costcode == "C2000"
+        assert transactions_by_costcode[0].total == 9999
+        assert transactions_by_costcode[1].total == 1000
 
