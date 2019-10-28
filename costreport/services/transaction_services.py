@@ -11,7 +11,8 @@ def insert_transaction(data):
     t = Transaction()
     # get the correct costcode
     costcode = (
-        Costcodes.query.join(Project)
+        Costcodes.query.filter(Project.id == Costcodes.project_id)
+        # .join(Project)
         .filter(Project.project_code == data["project_code"])
         .filter(Costcodes.costcode == data["costcode"])
         .first()
@@ -27,7 +28,8 @@ def insert_transaction(data):
 
 def get_current_transactions(project_code, costcode):
     transactions = (
-        Transaction.query.join(Project, Costcodes)
+        Transaction.query.filter(Project.id == Transaction.project_id)
+        .filter(Costcodes.id == Transaction.cost_code_id)
         .filter(Costcodes.id == Transaction.cost_code_id)
         .filter(Project.project_code == project_code)
         .filter(Costcodes.costcode == costcode)
@@ -54,6 +56,5 @@ def get_costcodes_and_transaction_sum(project_code):
         .order_by(Costcodes.costcode)
         .all()
     )
-
     return costcodes_transaction_sum
 
