@@ -47,7 +47,7 @@ def get_costcodes_and_transaction_sum(project_code):
         Transaction.query.with_entities(
             Costcodes.costcode,
             Costcodes.costcode_description,
-            func.sum(Transaction.value).label("total"),
+            func.sum(Transaction.value).label("forecast_cost_total"),
         )
         .filter(Transaction.cost_code_id == Costcodes.id)
         .filter(Project.id == Transaction.project_id)

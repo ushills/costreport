@@ -24,40 +24,19 @@
             <div class="col-2 values">{{ '{0:.2%}'.format(forecast_summary.forecast_profit_percentage) }}</div>
         </div>
     </div>
-
     {% for f in forecast_detail %}
     <div class="cost_code_row row">
-        <div class="col-1"><a
-                href="{{ url_for('project_costdetail.costdetail', project=project, cost_code=f.cost_code)}}">{{ f.cost_code }}</a>
+        <div class="col-1">
+            <a href="{{ url_for('project_costdetail.costdetail', project=project, cost_code=f.cost_code)}}">
+                {{ f.costcode }}
+            </a>
         </div>
-        <div class="col-3">{{ f.cost_code_description }}</div>
-        <div class="values col-2">{{ '{:,}'.format(f.cost_forecast)}}</div>
-    </div>
-    <div class="row border-bottom">
-        {% if f.cost_forecast > f.cost_allowance %}
-        <!-- Negative Progress Bar -->
-        <div class="progress col-4">
-            <!-- Grey element of progress bar -->
-            <div class="progress-bar-striped progress-bar-animated" role="progressbar"
-                style="width: {{ (100 + ((f.cost_allowance - f.cost_forecast) / f.cost_forecast) * 100) }}% ;  background-color: #dc3545;">
-            </div>
-            <!-- Red element of progress bar -->
-            <div class="progress-bar bg-danger" role="progressbar"
-                style="width: {{ -((f.cost_allowance - f.cost_forecast) / f.cost_forecast) * 100 }}%">
-                {{ '{:,}'.format(f.cost_allowance - f.cost_forecast) }}
-            </div>
+        <div class="col-3">
+            {{ f.costcode_description }}
         </div>
-        {% else %}
-        <!-- Positive Progress Bar -->
-        <div class="progress col-4">
-            <div class="progress-bar bg-success" role="progressbar" aria-valuemin="0"
-                aria-valuemax="{{ f.cost_allowance }}" aria-valuenow="{{ f.cost_forecast }}"
-                style="width: {{ (f.cost_forecast / f.cost_allowance) * 100 }}%; ">
-                {{ '{:,}'.format(f.cost_allowance - f.cost_forecast) }}
-            </div>
+        <div class="values col-2">
+            {{ '{:+,.2f}'.format(f.forecast_cost_total) }}
         </div>
-        {% endif %}
-        <div class="second_row values col-2">{{ '{:,}'.format(f.cost_allowance) }}</div>
     </div>
     {% endfor %}
 </div>

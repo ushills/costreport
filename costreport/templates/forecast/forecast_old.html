@@ -1,0 +1,64 @@
+{% extends "shared/_layout.html" %}
+{% block main_content %}
+
+<h2>Forecast - {{ project }}</h2>
+
+
+
+<div class="container-fluid forecast">
+    <div class="forecast_summary">
+        <div class="row">
+            <div class="col-4">Forecast Income:</div>
+            <div class="col-2 values">{{ '{:,}'.format(forecast_summary.forecast_income) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-4">Forecast Cost:</div>
+            <div class="col-2 values">{{ '{:,}'.format(forecast_summary.forecast_cost) }}</div>
+        </div>
+        <div class="row">
+            <div class="col-4">Forecast Profit:</div>
+            <div class="col-2 values">{{ '{:,}'.format(forecast_summary.forecast_profit) }}</div>
+        </div>
+        <div class="row border-bottom">
+            <div class="col-4">Forecast Profit Percentage:</div>
+            <div class="col-2 values">{{ '{0:.2%}'.format(forecast_summary.forecast_profit_percentage) }}</div>
+        </div>
+    </div>
+
+    {% for f in forecast_detail %}
+    <div class="cost_code_row row">
+        <div class="col-1"><a
+                href="{{ url_for('project_costdetail.costdetail', project=project, cost_code=f.cost_code)}}">{{ f.cost_code }}</a>
+        </div>
+        <div class="col-3">{{ f.cost_code_description }}</div>
+        <div class="values col-2">{{ '{:,}'.format(f.cost_forecast)}}</div>
+    </div>
+    <div class="row border-bottom">
+        {% if f.cost_forecast > f.cost_allowance %}
+        <!-- Negative Progress Bar -->
+        <div class="progress col-4">
+            <!-- Grey element of progress bar -->
+            <div class="progress-bar-striped progress-bar-animated" role="progressbar"
+                style="width: {{ (100 + ((f.cost_allowance - f.cost_forecast) / f.cost_forecast) * 100) }}% ;  background-color: #dc3545;">
+            </div>
+            <!-- Red element of progress bar -->
+            <div class="progress-bar bg-danger" role="progressbar"
+                style="width: {{ -((f.cost_allowance - f.cost_forecast) / f.cost_forecast) * 100 }}%">
+                {{ '{:,}'.format(f.cost_allowance - f.cost_forecast) }}
+            </div>
+        </div>
+        {% else %}
+        <!-- Positive Progress Bar -->
+        <div class="progress col-4">
+            <div class="progress-bar bg-success" role="progressbar" aria-valuemin="0"
+                aria-valuemax="{{ f.cost_allowance }}" aria-valuenow="{{ f.cost_forecast }}"
+                style="width: {{ (f.cost_forecast / f.cost_allowance) * 100 }}%; ">
+                {{ '{:,}'.format(f.cost_allowance - f.cost_forecast) }}
+            </div>
+        </div>
+        {% endif %}
+        <div class="second_row values col-2">{{ '{:,}'.format(f.cost_allowance) }}</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
