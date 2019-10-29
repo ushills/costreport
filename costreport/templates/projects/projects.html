@@ -4,12 +4,37 @@
 <h2>Projects</h2>
 
 <div class="container-fluid projects">
-    {% for p in projects %}
-    <div class="row border-bottom">
-        <a href={{ url_for('project_dashboard.dashboard', project=p.project_code)}}
-            class="col-1">{{ p.project_code }}</a>
-        <a href={{ url_for('project_dashboard.dashboard', project=p.project_code)}}
-            class="col-5">{{ p.project_name.title() }}</a>
+    <input type="text" id="projectSearch" onkeyup="filterProjects()" placeholder="Search for names.."
+        title="Type in a name">
+    <div id="projectList">
+        {% for p in projects %}
+        <div class="individualProject">
+            <div class="row border-bottom">
+                <a href={{ url_for('project_dashboard.dashboard', project=p.project_code)}}
+                    class="col-1 project">{{ p.project_code }}</a>
+                <a href={{ url_for('project_dashboard.dashboard', project=p.project_code)}}
+                    class="col-5">{{ p.project_name.title() }}</a>
+            </div>
+        </div>{% endfor %}
     </div>
-    {% endfor %}
-</div> {% endblock %}
+</div>
+
+<script>
+    function filterProjects() {
+        var input, filter, projectList, individualProject, a, i, txtValue;
+        input = document.getElementById("projectSearch");
+        filter = input.value.toUpperCase();
+        projectList = document.getElementById("projectList");
+        individualProject = projectList.getElementsByClassName("individualProject");
+        for (i = 0; i < individualProject.length; i++) {
+            a = individualProject[i].getElementsByClassName("row")[0];
+            txtValue = a.textContent || a.innerText;
+            if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                individualProject[i].style.display = "";
+            } else {
+                individualProject[i].style.display = "none";
+            }
+        }
+    }
+</script>
+{% endblock %}
