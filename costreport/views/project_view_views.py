@@ -32,8 +32,22 @@ def costcodes_view(project):
         project
     )
     return flask.render_template(
-        "project/costcode.html",
+        "project/costcodes.html",
         project_details=project_details,
         project_costcode_detail=project_costcode_detail,
         project_financial_summary=project_financial_summary,
+    )
+
+
+@blueprint.route("/<project>/<costcode>")
+def single_costcode_view(project, costcode):
+    project_details = project_view_services.get_project_details(project)
+    transactions, transactions_sum = transaction_services.get_current_transactions(
+        project, costcode
+    )
+    return flask.render_template(
+        "costcode/single_costcode.html",
+        project_details=project_details,
+        transactions=transactions,
+        transactions_sum=transactions_sum,
     )

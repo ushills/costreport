@@ -1,0 +1,18 @@
+{% extends "shared/_layout.html" %}
+{% block main_content %}
+
+
+<div class="current_transactions">
+    {% for transaction in transactions %}
+    <div class="row border-bottom">
+        <div class="col-2 value">
+            {{ '{:+,.2f}'.format(transaction.value) }}</a>
+        </div>
+        <div class="col-4">
+            {{ transaction.note}}</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

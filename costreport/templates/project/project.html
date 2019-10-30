@@ -10,7 +10,7 @@
     {% include "shared/project_financial_summary.html" %}
 
     {% for costcode in project_costcode_detail %}
-    <div class="cost_code_row row">
+    <div class="cost_code_row row border-bottom">
         <div class="col-1">
             <a href="{{ url_for('project_costdetail.costdetail', project=project, cost_code=costcode.cost_code)}}">
                 {{ costcode.costcode }}
