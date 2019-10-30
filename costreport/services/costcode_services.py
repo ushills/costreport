@@ -1,3 +1,5 @@
+from sqlalchemy.sql import func
+
 from costreport.data.costcodes import Costcodes
 from costreport.data.projects import Project
 

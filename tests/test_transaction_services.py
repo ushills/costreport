@@ -13,6 +13,7 @@ from tests.client import client
 import costreport.services.admin_services as admin_services
 import costreport.services.projects_service as projects_service
 import costreport.services.transaction_services as transaction_services
+import costreport.services.costcode_services as costcode_services
 
 
 class TestTransactionServices:
