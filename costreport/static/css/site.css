@@ -38,22 +38,22 @@ a:hover{
 }
 
 /* forecast template formatting */
-.forecast .forecast_summary{
+.project .project_summary{
     padding-bottom: 20px;
 }
 
-.forecast .cost_code_row{
+.project .cost_code_row{
     font-size: 14px;
 }
 
-.forecast .second_row{
+.project .second_row{
     font-size: 10px;
     font-style: italic;
     color: #666;
     padding-bottom: 5px;
 }
 
-.forecast .progress{
+.project .progress{
     margin-left: 15px;
     margin-right: -15px;
     padding-left: 0px;
@@ -63,7 +63,7 @@ a:hover{
     text-align: right;
 }
 
-.forecast .row .values {
+.project .row .values {
     text-align: right;
 }
 

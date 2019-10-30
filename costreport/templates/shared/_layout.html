@@ -19,10 +19,8 @@
 
     <nav>
         <a href={{ url_for('projects.projects') }}>Projects</a>
-        {% if project|length %}
-        <a href={{ url_for('project_forecast.forecast', project=project) }}>Forecast</a>
-        <a href={{ url_for('project_view.project_view', project=project) }}>Dashboard</a>
-        {% endif %}
+        <a href={{ url_for('project_view.costcodes_view', project=project) }}>Costcodes</a>
+        <a href="#">test</a>
     </nav>
 
     <div class="main_content">

@@ -20,9 +20,9 @@ class InsertTransactionForm(FlaskForm):
     transaction_note = StringField("Note", validators=[DataRequired()])
 
 
-@blueprint.route("/insert_transaction", methods=["GET"])
-def insert_transaction_get():
-    project = flask.request.args.get("project")
+@blueprint.route("/<project>/insert_transaction", methods=["GET"])
+def insert_transaction_get(project):
+    # project = flask.request.args.get("project")
     costcode = flask.request.args.get("costcode")
     # check if project exists
     if check_if_project_exists(project) is False:
@@ -44,9 +44,9 @@ def insert_transaction_get():
     )
 
 
-@blueprint.route("/insert_transaction", methods=["POST"])
-def insert_transaction_post():
-    project = flask.request.args.get("project")
+@blueprint.route("/<project>/insert_transaction", methods=["POST"])
+def insert_transaction_post(project):
+    # project = flask.request.args.get("project")
     costcode = flask.request.args.get("costcode")
     costcode_data = get_costcode_data(project, costcode)
     transactions, transactions_sum = get_current_transactions(project, costcode)

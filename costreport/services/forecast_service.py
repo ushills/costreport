@@ -17,11 +17,3 @@ def get_forecast_detail():
 #     print(cost_code_detail)
 #     return cost_code_detail
 
-
-def get_summary_detail():
-    return {
-        "forecast_income": 2636636,
-        "forecast_cost": 2343224,
-        "forecast_profit": 324231,
-        "forecast_profit_percentage": 0.085,
-    }
