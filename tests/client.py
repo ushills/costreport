@@ -9,7 +9,7 @@ import costreport.app
 from costreport.app import app as flask_app
 
 
-@pytest.fixture(scope="class")
+@pytest.fixture(scope="module")
 def client():
     # create temporary database for testing
     flask_app.config["TESTING"] = True

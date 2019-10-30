@@ -12,6 +12,7 @@ from tests.client import client
 
 import costreport.services.admin_services as admin_services
 import costreport.services.projects_service as projects_service
+import costreport.services.project_view_services as project_view_services
 
 
 class TestProjectServices:
@@ -40,3 +41,12 @@ class TestProjectServices:
 
     def test_project_does_not_exist(self):
         assert projects_service.check_if_project_exists("76543") is False
+
+
+class TestProjectViewServices:
+    def test_get_project_details(self):
+        project_code = "12345"
+        project_details = project_view_services.get_project_details(project_code)
+        assert project_details.project_code == "12345"
+        assert project_details.project_name == "Project A"
+        assert project_details.project_category is None

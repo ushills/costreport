@@ -36,7 +36,7 @@ def setup_db():
 def register_blueprints():
     from costreport.views import projects_views
     from costreport.views import project_forecast_views
-    from costreport.views import project_dashboard_views
+    from costreport.views import project_view_views
     from costreport.views import project_costdetail_views
     from costreport.views import create_project_views
     from costreport.views import create_costcode_views
@@ -45,7 +45,7 @@ def register_blueprints():
 
     app.register_blueprint(projects_views.blueprint)
     app.register_blueprint(project_forecast_views.blueprint)
-    app.register_blueprint(project_dashboard_views.blueprint)
+    app.register_blueprint(project_view_views.blueprint)
     app.register_blueprint(project_costdetail_views.blueprint)
     app.register_blueprint(create_project_views.blueprint)
     app.register_blueprint(create_costcode_views.blueprint)

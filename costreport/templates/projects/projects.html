@@ -10,9 +10,9 @@
         {% for p in projects %}
         <div class="individualProject">
             <div class="row border-bottom">
-                <a href={{ url_for('project_dashboard.dashboard', project=p.project_code)}}
+                <a href={{ url_for('project_view.project_view', project=p.project_code)}}
                     class="col-1 project">{{ p.project_code }}</a>
-                <a href={{ url_for('project_dashboard.dashboard', project=p.project_code)}}
+                <a href={{ url_for('project_view.project_view', project=p.project_code)}}
                     class="col-5">{{ p.project_name.title() }}</a>
             </div>
         </div>{% endfor %}
