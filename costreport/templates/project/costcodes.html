@@ -1,23 +1,28 @@
 {% extends "shared/_layout.html" %}
 {% block main_content %}
 
-<h2>{{ project_details.project_code }} - {{ project_details.project_name }} </h2>
+<h2><a href="{{ url_for('project_view.project_view', project=project_details.project_code) }}">{{ project_details.project_code }}
+        - {{ project_details.project_name }}</a></h2>
 
 
 
-<div class="container-fluid project">
+<div class="container project">
 
     {% include "shared/project_financial_summary.html" %}
 
     {% for costcode in project_costcode_detail %}
     <div class="cost_code_row row border-bottom">
         <div class="col-1">
-            <a href="{{ url_for('project_costdetail.costdetail', project=project, cost_code=costcode.cost_code)}}">
+            <a
+                href="{{ url_for('project_view.single_costcode_view', project=project_details.project_code, costcode=costcode.costcode)}}">
                 {{ costcode.costcode }}
             </a>
         </div>
         <div class="col-3">
-            {{ costcode.costcode_description }}
+            <a
+                href="{{ url_for('project_view.single_costcode_view', project=project_details.project_code, costcode=costcode.costcode)}}">
+                {{ costcode.costcode_description }}
+            </a>
         </div>
     </div>
     {% endfor %}
