@@ -45,9 +45,13 @@ def single_costcode_view(project, costcode):
     transactions, transactions_sum = transaction_services.get_current_transactions(
         project, costcode
     )
+    project_financial_summary = project_view_services.get_project_financial_summary(
+        project
+    )
     return flask.render_template(
         "costcode/single_costcode.html",
         project_details=project_details,
         transactions=transactions,
         transactions_sum=transactions_sum,
+        project_financial_summary=project_financial_summary,
     )

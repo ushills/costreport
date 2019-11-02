@@ -12,7 +12,8 @@
     {% for costcode in project_costcode_detail %}
     <div class="cost_code_row row border-bottom">
         <div class="col-1">
-            <a href="{{ url_for('project_costdetail.costdetail', project=project, cost_code=costcode.cost_code)}}">
+            <a
+                href="{{ url_for('project_view.single_costcode_view', project=project_details.project_code, costcode=costcode.costcode)}}">
                 {{ costcode.costcode }}
             </a>
         </div>
