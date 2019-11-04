@@ -19,8 +19,8 @@ def insert_a_transaction():
     t.project_id = input("Project id:").strip().lower()
     if len(t.project_id) < 1:
         raise ValueError("Value cannot be NULL")
-    t.cost_code_id = input("Costcode:").strip()
-    if len(t.cost_code_id) < 1:
+    t.costcode_id = input("Costcode:").strip()
+    if len(t.costcode_id) < 1:
         raise ValueError("Value cannot be NULL")
     t.value = input("Value").strip()
     if len(t.value) < 1:

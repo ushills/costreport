@@ -18,7 +18,7 @@ def insert_transaction(data):
         .first()
     )
     # print("Costcode.id=", costcode.id, "Project_id=", costcode.project_id)
-    t.cost_code_id = str(costcode.id)
+    t.costcode_id = str(costcode.id)
     t.project_id = str(costcode.project_id)
     t.value = data["transaction_value"]
     t.note = data["transaction_note"]
@@ -29,8 +29,8 @@ def insert_transaction(data):
 def get_current_transactions(project_code, costcode):
     transactions = (
         Transaction.query.filter(Project.id == Transaction.project_id)
-        .filter(Costcodes.id == Transaction.cost_code_id)
-        .filter(Costcodes.id == Transaction.cost_code_id)
+        .filter(Costcodes.id == Transaction.costcode_id)
+        .filter(Costcodes.id == Transaction.costcode_id)
         .filter(Project.project_code == project_code)
         .filter(Costcodes.costcode == costcode)
         .order_by(Transaction.created_date.desc())
@@ -49,7 +49,7 @@ def get_costcodes_and_transaction_sum(project_code):
             Costcodes.costcode_description,
             func.sum(Transaction.value).label("forecast_cost_total"),
         )
-        .filter(Transaction.cost_code_id == Costcodes.id)
+        .filter(Transaction.costcode_id == Costcodes.id)
         .filter(Project.id == Transaction.project_id)
         .filter(Project.project_code == project_code)
         .group_by(Costcodes.costcode)

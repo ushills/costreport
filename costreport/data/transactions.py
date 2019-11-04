@@ -21,7 +21,7 @@ class Transaction(db.Model):
     project_id: int = db.Column(
         db.Integer, db.ForeignKey("projects.id"), nullable=False, index=True
     )
-    cost_code_id: int = db.Column(
+    costcode_id: int = db.Column(
         db.Integer, db.ForeignKey("costcodes.id"), nullable=False, index=True
     )
     value = db.Column(db.Numeric(asdecimal=True), nullable=False)

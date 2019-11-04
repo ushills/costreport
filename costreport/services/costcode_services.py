@@ -45,7 +45,7 @@ def get_costcodes_and_transaction_values(project_code):
             func.coalesce(func.sum(Transaction.value), 0).label("transaction_sum"),
         )
         .join(Project, Project.id == Costcodes.project_id)
-        .outerjoin(Transaction, Transaction.cost_code_id == Costcodes.id)
+        .outerjoin(Transaction, Transaction.costcode_id == Costcodes.id)
         .filter(Project.project_code == project_code)
         .group_by(Costcodes.costcode)
         .all()
