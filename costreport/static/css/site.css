@@ -32,6 +32,24 @@ a:hover{
     color: #666;
 }
 
+/* project financial summary formatting */
+
+.project_financial_summary{
+    background: #adbcbe;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+/* Page details formatting */
+.project_costcodes {
+    border: grey;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    margin-top:15px;
+    padding: 15px;
+}
+
 /* projects template formatting */
 .projects .row{
     padding-left: 5px;

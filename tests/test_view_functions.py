@@ -111,6 +111,7 @@ class TestCostcodeServices:
         assert costcode_data.project.project_name == "Project A"
         assert costcode_data.costcode_description == "Costcode A"
         assert costcode_data.costcode_category == "Category A"
+        assert costcode_data.costcode == "C1000"
 
     def test_get_costcodes_and_transaction_values(self):
         data = costcode_services.get_costcodes_and_transaction_values("12345")

@@ -1,4 +1,4 @@
-<div class="project_financial_summary">
+<div class="project_financial_summary col-6">
     <div class="row">
         <div class="col-4">Forecast Income:</div>
         <div class="col-2 values">{{ '{:,}'.format(project_financial_summary.forecast_income) }}</div>
@@ -11,7 +11,7 @@
         <div class="col-4">Forecast Profit:</div>
         <div class="col-2 values">{{ '{:,}'.format(project_financial_summary.forecast_profit) }}</div>
     </div>
-    <div class="row border-bottom">
+    <div class="row">
         <div class="col-4">Forecast Profit Percentage:</div>
         <div class="col-2 values">{{ '{0:.2%}'.format(project_financial_summary.forecast_profit_percentage) }}</div>
     </div>

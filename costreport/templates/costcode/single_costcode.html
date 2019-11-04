@@ -7,8 +7,13 @@
 
     {% include "shared/project_financial_summary.html" %}
 
-    <h3>Costcode View</h3>
+    <h3>{{ costcode_details.costcode }} - {{ costcode_details.costcode_description }}</h3>
 
+    <!-- Insert Transaction Button -->
+    <!-- <button type="button" class="btn btn-primary">Add</button> -->
+    <a href="{{ url_for('insert_transaction.insert_transaction_get', project=project_details.project_code, costcode=costcode_details.costcode) }}"
+        class="btn btn-primary" role="button">+</a>
+    <hr>
     {% for transaction in transactions %}
     <div class="row border-bottom">
         <div class="col-2 value">
