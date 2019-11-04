@@ -1,13 +1,9 @@
 import os
 import sys
 
-import pytest
-
 container_folder = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, container_folder)
 
-import costreport.app
-from costreport.app import app as flask_app
 from tests.client import client
 
 import costreport.services.admin_services as admin_services
@@ -59,7 +55,7 @@ class TestPopulateDatabase:
         for data in costcode_list:
             admin_services.create_costcode(data)
 
-    def test_insert_a_transaction(self):
+    def test_add_transactions(self):
         transaction_list = [
             {
                 "project_code": "12345",

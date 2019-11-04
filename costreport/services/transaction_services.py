@@ -1,9 +1,9 @@
-from costreport.app import db
-from costreport.data.projects import Project
-from costreport.data.costcodes import Costcodes
-from costreport.data.transactions import Transaction
-import costreport.services.costcode_services as costcode_services
 from sqlalchemy.sql import func
+
+from costreport.app import db
+from costreport.data.costcodes import Costcodes
+from costreport.data.projects import Project
+from costreport.data.transactions import Transaction
 
 
 # TRANSACTION FUNCTIONS
@@ -57,4 +57,3 @@ def get_costcodes_and_transaction_sum(project_code):
         .all()
     )
     return costcodes_transaction_sum
-
