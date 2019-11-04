@@ -10,7 +10,7 @@ blueprint = flask.Blueprint("project_view", __name__, template_folder="templates
 @blueprint.route("/<project>")
 def project_view(project):
     project_details = project_view_services.get_project_details(project)
-    project_costcode_detail = transaction_services.get_costcodes_and_transaction_sum(
+    project_costcode_detail = costcode_services.get_costcodes_and_transaction_values(
         project
     )
     project_financial_summary = project_view_services.get_project_financial_summary(
