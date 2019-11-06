@@ -57,8 +57,18 @@ nav a:hover{
     border-radius: 5px;
 }
 
-/* Page details formatting */
+/* project costcodes formatting */
 .project_costcodes {
+    border: grey;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    margin-top:15px;
+    padding: 15px;
+}
+
+/* costcode transactions formatting */
+.costcode_transactions {
     border: grey;
     border-style: solid;
     border-radius: 5px;

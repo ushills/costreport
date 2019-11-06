@@ -10,20 +10,24 @@
     <h3>{{ costcode_details.costcode }} - {{ costcode_details.costcode_description }}</h3>
 
     <!-- Insert Transaction Button -->
-    <!-- <button type="button" class="btn btn-primary">Add</button> -->
     <a href="{{ url_for('insert_transaction.insert_transaction_get', project=project_details.project_code, costcode=costcode_details.costcode) }}"
-        class="btn btn-primary" role="button">+</a>
-    <hr>
-    {% for transaction in transactions %}
-    <div class="row border-bottom">
-        <div class="col-2 value">
-            {{ '{:+,.2f}'.format(transaction.value) }}</a>
-        </div>
-        <div class="col-4">
-            {{ transaction.note}}</a>
+        class="btn btn-success right" role="button">New</a>
+    <div class="costcode_transactions col-6">
+        <div id="searchPageData">
+            {% for transaction in transactions %}
+            <div class="searchData">
+                <div class="row border-bottom">
+                    <div class="col-2 value">
+                        {{ '{:+,.2f}'.format(transaction.value) }}</a>
+                    </div>
+                    <div class="col-4">
+                        {{ transaction.note}}</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
         </div>
     </div>
-    {% endfor %}
 </div>
 
 {% endblock %}
