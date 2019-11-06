@@ -9,27 +9,30 @@
 <div class="container project">
 
     {% include "shared/project_financial_summary.html" %}
-
-    <div class="project_costcodes col-6">
-        {% for costcode in project_costcode_detail %}
-        <div class="cost_code_row row border-bottom">
-            <div class="col-1">
-                <a
-                    href="{{ url_for('project_view.single_costcode_view', project=project_details.project_code, costcode=costcode.costcode)}}">
-                    {{ costcode.costcode }}
-                </a>
+    <div id="searchPageData">
+        <div class="project_costcodes col-6">
+            {% for costcode in project_costcode_detail %}
+            <div class="searchData">
+                <div class="cost_code_row row border-bottom">
+                    <div class="col-2">
+                        <a
+                            href="{{ url_for('project_view.single_costcode_view', project=project_details.project_code, costcode=costcode.costcode)}}">
+                            {{ costcode.costcode }}
+                        </a>
+                    </div>
+                    <div class="col-3">
+                        <a
+                            href="{{ url_for('project_view.single_costcode_view', project=project_details.project_code, costcode=costcode.costcode)}}">
+                            {{ costcode.costcode_description }}
+                        </a>
+                    </div>
+                    <div class="values col-2">
+                        {{ '{:+,.2f}'.format(costcode.transaction_sum) }}
+                    </div>
+                </div>
             </div>
-            <div class="col-3">
-                <a
-                    href="{{ url_for('project_view.single_costcode_view', project=project_details.project_code, costcode=costcode.costcode)}}">
-                    {{ costcode.costcode_description }}
-                </a>
-            </div>
-            <div class="values col-2">
-                {{ '{:+,.2f}'.format(costcode.transaction_sum) }}
-            </div>
+            {% endfor %}
         </div>
-        {% endfor %}
     </div>
 </div>
 {% endblock %}

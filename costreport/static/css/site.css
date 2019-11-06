@@ -7,7 +7,6 @@ body {
 }
 
 .main_content {
-    background: #fff;
     margin: 0px;
     /* padding: 0px 0px 50px; */
 }
@@ -17,6 +16,10 @@ footer {
     padding: 30px;
     text-align: center;
     color: white;
+}
+
+h2 {
+    padding: 10px;
 }
 
 a:link{
@@ -30,6 +33,20 @@ a:visited{
 a:hover{
     text-decoration: none;
     color: #666;
+}
+
+/* Navigation links */
+nav a:link{
+    color: whitesmoke;
+}
+
+nav a:visited{
+    color: whitesmoke;
+}
+
+nav a:hover{
+    text-decoration: none;
+    color: whitesmoke;
 }
 
 /* project financial summary formatting */

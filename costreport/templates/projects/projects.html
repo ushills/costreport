@@ -4,11 +4,9 @@
 <h2>Projects</h2>
 
 <div class="container projects">
-    <input type="text" id="projectSearch" onkeyup="filterProjects()" placeholder="Search for names.."
-        title="Type in a name">
-    <div id="projectList">
+    <div id="searchPageData">
         {% for p in projects %}
-        <div class="individualProject">
+        <div class="searchData">
             <div class="row border-bottom">
                 <a href={{ url_for('project_view.project_view', project=p.project_code)}}
                     class="col-1 project">{{ p.project_code }}</a>
@@ -18,23 +16,4 @@
         </div>{% endfor %}
     </div>
 </div>
-
-<script>
-    function filterProjects() {
-        var input, filter, projectList, individualProject, a, i, txtValue;
-        input = document.getElementById("projectSearch");
-        filter = input.value.toUpperCase();
-        projectList = document.getElementById("projectList");
-        individualProject = projectList.getElementsByClassName("individualProject");
-        for (i = 0; i < individualProject.length; i++) {
-            a = individualProject[i].getElementsByClassName("row")[0];
-            txtValue = a.textContent || a.innerText;
-            if (txtValue.toUpperCase().indexOf(filter) > -1) {
-                individualProject[i].style.display = "";
-            } else {
-                individualProject[i].style.display = "none";
-            }
-        }
-    }
-</script>
 {% endblock %}
