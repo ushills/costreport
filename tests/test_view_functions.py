@@ -195,3 +195,21 @@ class TestTransactionServices:
         assert transactions_by_costcode[1].costcode == "C2000"
         assert transactions_by_costcode[0].forecast_cost_total == 9999
         assert transactions_by_costcode[1].forecast_cost_total == 1000
+
+
+class TestAdminServices:
+    def test_insert_default_costcodes_from_csv_valid(self):
+        project_code = "65432"
+        csvfilename = "tests/costcodes_test_csv_file.csv"
+        assert (
+            admin_services.insert_default_costcodes_from_csv(project_code, csvfilename)
+            is True
+        )
+        costcode_data = costcode_services.get_costcodes(project_code)
+        assert costcode_data[0].costcode == "0"
+        assert costcode_data[0].costcode_category == "Unallocated"
+        assert costcode_data[0].costcode_description == "Unallocated"
+        assert costcode_data[1].costcode == "20000"
+        assert costcode_data[1].costcode_category == "Labour"
+        assert costcode_data[1].costcode_description == "Basic Salaries"
+
