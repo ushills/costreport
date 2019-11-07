@@ -198,13 +198,26 @@ class TestTransactionServices:
 
 
 class TestAdminServices:
-    def test_insert_default_costcodes_from_csv_valid(self):
-        project_code = "65432"
+    def test_read_costcodes_from_csv(self):
         csvfilename = "tests/costcodes_test_csv_file.csv"
-        assert (
-            admin_services.insert_default_costcodes_from_csv(project_code, csvfilename)
-            is True
-        )
+        csvdata = admin_services.read_costcodes_from_csv(csvfilename)
+        assert csvdata == [
+            ["0", "Unallocated", "Unallocated"],
+            ["20000", "Labour", "Basic Salaries"],
+            ["20390", "Staff", "Staff Recharges"],
+            ["21700", "Sub Contract", "Sub Contractor Costs"],
+            ["22180", "Materials", "Power Supplies"],
+            ["23310", "Plant", "Light Fittings"],
+            ["23400", "Prelims", "Hotel & Subsistence"],
+        ]
+
+    def test_insert_default_costcodes_from_csvdata(self):
+        project_code = "65432"
+        csvdata = [
+            ["0", "Unallocated", "Unallocated"],
+            ["20000", "Labour", "Basic Salaries"],
+        ]
+        admin_services.insert_default_costcodes_from_csvdata(project_code, csvdata)
         costcode_data = costcode_services.get_costcodes(project_code)
         assert costcode_data[0].costcode == "0"
         assert costcode_data[0].costcode_category == "Unallocated"

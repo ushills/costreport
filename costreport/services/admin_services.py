@@ -42,18 +42,37 @@ def update_costcode(data):
     db.session.commit()
 
 
-def insert_default_costcodes_from_csv(project_code, csvfilename):
+def insert_default_costcodes_from_csvdata(project_code, csvdata):
     project_id = Project.query.filter(Project.project_code == project_code).first().id
+    # read the csvdata and commit to the database
+    for data in csvdata:
+        c = Costcodes()
+        c.project_id = project_id
+        c.costcode = data[0]
+        c.costcode_category = data[1]
+        c.costcode_description = data[2]
+        db.session.add(c)
+    db.session.commit()
+    return True
+
+
+def read_costcodes_from_csv(csvfilename):
     csvfile = pathlib.Path(csvfilename)
+    csvdata = []
     # read the csv file and commit to the database
     with open(csvfile, newline="") as csvfile:
         default_costcodes = csv.DictReader(csvfile, delimiter=",", quotechar='"')
         for row in default_costcodes:
-            c = Costcodes()
-            c.project_id = project_id
-            c.costcode = row["costcode"].strip()
-            c.costcode_category = row["costcode_category"].strip()
-            c.costcode_description = row["costcode_description"].strip()
-            db.session.add(c)
-    db.session.commit()
-    return True
+            # check if costcode already exists in csvdata
+            if not any(row["costcode"].strip() in data for data in csvdata):
+                csvdata.append(
+                    [
+                        row["costcode"].strip(),
+                        row["costcode_category"].strip(),
+                        row["costcode_description"].strip(),
+                    ]
+                )
+    # sort the csvdata by costcode
+    csvdata.sort()
+    return csvdata
+
