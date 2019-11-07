@@ -7,3 +7,4 @@
 from costreport.data.costcodes import db
 from costreport.data.projects import db
 from costreport.data.transactions import db
+from costreport.data.default_costcodes import db

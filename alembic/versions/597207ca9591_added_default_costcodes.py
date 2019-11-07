@@ -1,8 +1,8 @@
-"""First Revision
+"""added default_costcodes
 
-Revision ID: fcea7e476126
-Revises: 
-Create Date: 2019-11-04 14:19:46.790030
+Revision ID: 597207ca9591
+Revises: 06ab6dea9b4a
+Create Date: 2019-11-07 14:26:02.592845
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'fcea7e476126'
-down_revision = None
+revision = '597207ca9591'
+down_revision = '06ab6dea9b4a'
 branch_labels = None
 depends_on = None
 
