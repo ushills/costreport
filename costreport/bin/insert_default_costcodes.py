@@ -7,7 +7,7 @@ import csv
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 from costreport.app import db
-from costreport.data.costcodes import Costcodes
+from costreport.data.costcodes import Costcode
 
 
 def main():
@@ -25,7 +25,7 @@ def insert_default_costcodes():
     with open(csvfilename, newline="") as csvfile:
         default_costcodes = csv.DictReader(csvfile, delimiter=",", quotechar='"')
         for row in default_costcodes:
-            c = Costcodes()
+            c = Costcode()
             c.project_id = project_id
             c.costcode = row["costcode"]
             c.costcode_category = row["costcode_category"]

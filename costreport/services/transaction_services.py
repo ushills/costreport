@@ -1,7 +1,7 @@
 from sqlalchemy.sql import func
 
 from costreport.app import db
-from costreport.data.costcodes import Costcodes
+from costreport.data.costcodes import Costcode
 from costreport.data.projects import Project
 from costreport.data.transactions import Transaction
 
@@ -11,10 +11,10 @@ def insert_transaction(data):
     t = Transaction()
     # get the correct costcode
     costcode = (
-        Costcodes.query.filter(Project.id == Costcodes.project_id)
+        Costcode.query.filter(Project.id == Costcode.project_id)
         # .join(Project)
         .filter(Project.project_code == data["project_code"])
-        .filter(Costcodes.costcode == data["costcode"])
+        .filter(Costcode.costcode == data["costcode"])
         .first()
     )
     # print("Costcode.id=", costcode.id, "Project_id=", costcode.project_id)
@@ -29,10 +29,10 @@ def insert_transaction(data):
 def get_current_transactions(project_code, costcode):
     transactions = (
         Transaction.query.filter(Project.id == Transaction.project_id)
-        .filter(Costcodes.id == Transaction.costcode_id)
-        .filter(Costcodes.id == Transaction.costcode_id)
+        .filter(Costcode.id == Transaction.costcode_id)
+        .filter(Costcode.id == Transaction.costcode_id)
         .filter(Project.project_code == project_code)
-        .filter(Costcodes.costcode == costcode)
+        .filter(Costcode.costcode == costcode)
         .order_by(Transaction.created_date.desc())
     )
     transactions_sum = transactions.with_entities(db.func.sum(Transaction.value)).scalar()
@@ -45,15 +45,15 @@ def get_current_transactions(project_code, costcode):
 def get_costcodes_and_transaction_sum(project_code):
     costcodes_transaction_sum = (
         Transaction.query.with_entities(
-            Costcodes.costcode,
-            Costcodes.costcode_description,
+            Costcode.costcode,
+            Costcode.costcode_description,
             func.sum(Transaction.value).label("forecast_cost_total"),
         )
-        .filter(Transaction.costcode_id == Costcodes.id)
+        .filter(Transaction.costcode_id == Costcode.id)
         .filter(Project.id == Transaction.project_id)
         .filter(Project.project_code == project_code)
-        .group_by(Costcodes.costcode)
-        .order_by(Costcodes.costcode)
+        .group_by(Costcode.costcode)
+        .order_by(Costcode.costcode)
         .all()
     )
     return costcodes_transaction_sum

@@ -24,4 +24,4 @@ class Transaction(db.Model):
     value = db.Column(db.Numeric(asdecimal=True), nullable=False)
     note: str = db.Column(db.String)
     project = db.relationship("Project", uselist=False)
-    costcode = db.relationship("Costcodes", back_populates="transactions", uselist=False)
+    costcode = db.relationship("Costcode", back_populates="transactions", uselist=False)

@@ -9,7 +9,7 @@ from costreport.app import db
 from costreport.data.projects import Project
 
 
-class Costcodes(db.Model):
+class Costcode(db.Model):
     __tablename__ = "costcodes"
 
     id: int = db.Column(db.Integer, primary_key=True, autoincrement=True)

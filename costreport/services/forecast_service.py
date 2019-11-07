@@ -9,11 +9,11 @@ def get_forecast_detail():
     ]
 
 
-# from costreport.data.costcodes import Costcodes
+# from costreport.data.costcodes import Costcode
 
 
 # def get_forecast_detail():
-#     cost_code_detail = Costcodes.query.order_by(Costcodes.costcode.asc()).all()
+#     cost_code_detail = Costcode.query.order_by(Costcode.costcode.asc()).all()
 #     print(cost_code_detail)
 #     return cost_code_detail
 

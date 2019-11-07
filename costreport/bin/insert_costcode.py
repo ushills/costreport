@@ -5,7 +5,7 @@ import sys
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
 
 import costreport.data.db_session as db_session
-from costreport.data.costcodes import Costcodes
+from costreport.data.costcodes import Costcode
 
 
 def main():
@@ -15,7 +15,7 @@ def main():
 
 
 def insert_a_costcode():
-    c = Costcodes()
+    c = Costcode()
     c.project_id = input("Project id:").strip().lower()
     if len(c.project_id) < 1:
         raise ValueError("Value cannot be NULL")
