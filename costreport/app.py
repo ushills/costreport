@@ -41,6 +41,7 @@ def register_blueprints():
     from costreport.views import create_costcode_views
     from costreport.views import edit_costcode_views
     from costreport.views import insert_transaction_views
+    from costreport.views import import_default_costcodes_view
 
     app.register_blueprint(projects_views.blueprint)
     app.register_blueprint(project_view_views.blueprint)
@@ -49,6 +50,7 @@ def register_blueprints():
     app.register_blueprint(create_costcode_views.blueprint)
     app.register_blueprint(edit_costcode_views.blueprint)
     app.register_blueprint(insert_transaction_views.blueprint)
+    app.register_blueprint(import_default_costcodes_view.blueprint)
 
 
 @app.errorhandler(404)

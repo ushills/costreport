@@ -1,0 +1,16 @@
+{% extends "shared/_layout.html" %}
+{% block main_content %}
+
+<h2>Upload Default Costcodes</h2>
+
+<div class="container-fluid upload_costcode">
+    <form action="" method="POST" enctype="multipart/form-data">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            {{ form.csvfile }}
+        </div>
+        <button type="submit" class="btn btn-success">Submit</button>
+        <a class="btn btn-danger pull-right" href="/projects" role="button">Cancel</a>
+    </form>
+</div>
+{% endblock %}

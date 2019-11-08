@@ -1,13 +1,18 @@
+import pdb
+import pathlib
+import os
+from costreport.app import app
+
 import flask
+from flask import request
 from flask_wtf import FlaskForm
-from flask_wtf import FileField, FileRequired, FileAllowed
+from flask_wtf.file import FileField, FileRequired, FileAllowed
 from werkzeug.utils import secure_filename
+from werkzeug.datastructures import CombinedMultiDict
 from wtforms import StringField
 from wtforms.validators import DataRequired
-from costreport.services.admin_services import (
-    read_costcodes_from_csv,
-    insert_default_costcodes_from_csvdata,
-)
+import costreport.services.admin_services as admin_services
+
 from costreport.services.projects_service import check_if_project_exists
 
 
@@ -20,28 +25,27 @@ blueprint = flask.Blueprint(
 
 
 class ImportDefaultCostcodesForm(FlaskForm):
-    csvfile = FileField(validators=[FileRequired()], FileAllowed(["csv"], "csv files only!"))
+    csvfile = FileField(
+        validators=[FileRequired(), FileAllowed(["csv"], "csv files only!")]
+    )
 
 
 @blueprint.route("/upload_costcodes", methods=["GET", "POST"])
 def upload_default_costcodes():
-    project = flask.request.args.get("project")
-    # check if project exists
-    if check_if_project_exists(project) is False:
-        flask.abort(404)
-    form = ImportDefaultCostcodesForm()
+    form = ImportDefaultCostcodesForm(CombinedMultiDict((request.files, request.form)))
     if form.validate_on_submit():
         f = form.csvfile.data
-        csvfilename = secure_filename(f.filename)
-        csvdata = admin_services.read_costcodes_from_csv(csvfilename)
-        return redirect(
-            flask.url_for("import_default_costcodes_view.view_costcodes", project=project, csvdata=csvdata)
+        filename = secure_filename(f.filename)
+        filepath = os.path.join(app.instance_path, "csv_uploads", filename)
+        f.save(filepath)
+        csvdata = admin_services.read_costcodes_from_csv(filepath)
+        os.remove(filepath)
+        return flask.redirect(
+            flask.url_for(
+                "import_default_costcodes.view_default_costcodes", csvdata=csvdata
+            )
         )
-    return flask.render_template(
-        "admin/upload_costcodes",
-        form=form,
-        project=project,        
-    )
+    return flask.render_template("admin/upload_default_costcodes.html", form=form)
 
 
 @blueprint.route("/view_uploaded_costcodes", methods=["GET", "POST"])
@@ -49,8 +53,4 @@ def view_default_costcodes():
     # check if csvdata exists
     if csvdata is None:
         flask.abort(404)
-    return flask.render_template(
-        "admin/view_uploaded_costcodes",
-        csvdata = csvdata
-    )
-    
+    return flask.render_template("admin/view_uploaded_costcodes", csvdata=csvdata)
