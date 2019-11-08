@@ -38,11 +38,16 @@ def upload_default_costcodes():
         filename = secure_filename(f.filename)
         filepath = os.path.join(app.instance_path, "csv_uploads", filename)
         f.save(filepath)
-        csvdata = admin_services.read_costcodes_from_csv(filepath)
-        os.remove(filepath)
+        try:
+            csvdata = admin_services.read_costcodes_from_csv(filepath)
+            # breakpoint()
+            # os.remove(filepath)
+        except:
+            os.remove(filepath)
         return flask.redirect(
             flask.url_for(
-                "import_default_costcodes.view_default_costcodes", csvdata=csvdata
+                "import_default_costcodes.upload_default_costcodes",
+                # csvdata=csvdata,
             )
         )
     return flask.render_template("admin/upload_default_costcodes.html", form=form)
