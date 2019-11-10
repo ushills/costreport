@@ -41,7 +41,6 @@ def upload_default_costcodes():
             costcodes = json.dumps(csvdata)
             # breakpoint()
             # os.remove(filepath)
-            return res
         except:
             os.remove(filepath)
         return flask.redirect(

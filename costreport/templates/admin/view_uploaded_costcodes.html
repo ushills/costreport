@@ -5,7 +5,7 @@
 
 <div class="container-fluid upload_costcode">
     {% for costcode in costcodes %}
-    {{ costcode }}<br>
+    {{ costcode[0] }} - {{ costcode [1] }} - {{ costcode[2] }} <br>
     {% endfor %}
 </div>
 {% endblock %}
