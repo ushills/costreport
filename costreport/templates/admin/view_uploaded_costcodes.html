@@ -1,0 +1,11 @@
+{% extends "shared/_layout.html" %}
+{% block main_content %}
+
+<h2>View Uploaded Costcodes</h2>
+
+<div class="container-fluid upload_costcode">
+    {% for costcode in costcodes %}
+    {{ costcode }}<br>
+    {% endfor %}
+</div>
+{% endblock %}

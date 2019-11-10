@@ -1,5 +1,6 @@
 import pdb
 import pathlib
+import json
 import os
 from costreport.app import app
 
@@ -17,10 +18,7 @@ from costreport.services.projects_service import check_if_project_exists
 
 
 blueprint = flask.Blueprint(
-    "import_default_costcodes",
-    __name__,
-    template_folder="templates",
-    url_prefix="/admin",
+    "import_default_costcodes", __name__, template_folder="templates", url_prefix="/admin"
 )
 
 
@@ -40,14 +38,15 @@ def upload_default_costcodes():
         f.save(filepath)
         try:
             csvdata = admin_services.read_costcodes_from_csv(filepath)
+            costcodes = json.dumps(csvdata)
             # breakpoint()
             # os.remove(filepath)
+            return res
         except:
             os.remove(filepath)
         return flask.redirect(
             flask.url_for(
-                "import_default_costcodes.upload_default_costcodes",
-                # csvdata=csvdata,
+                "import_default_costcodes.view_default_costcodes", costcodes=costcodes
             )
         )
     return flask.render_template("admin/upload_default_costcodes.html", form=form)
@@ -55,7 +54,12 @@ def upload_default_costcodes():
 
 @blueprint.route("/view_uploaded_costcodes", methods=["GET", "POST"])
 def view_default_costcodes():
-    # check if csvdata exists
-    if csvdata is None:
+    costcodes = flask.request.args.get("costcodes")
+    costcodes = json.loads(costcodes)
+
+    if costcodes is None:
         flask.abort(404)
-    return flask.render_template("admin/view_uploaded_costcodes", csvdata=csvdata)
+
+    return flask.render_template(
+        "admin/view_uploaded_costcodes.html", costcodes=costcodes
+    )
