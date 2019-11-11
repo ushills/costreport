@@ -87,8 +87,12 @@ nav a:hover{
     padding-bottom: 20px;
 }
 
-.project .cost_code_row{
+.costcode_row{
     font-size: 14px;
+}
+
+.costcode_row .row_header{
+    font-weight: bold;
 }
 
 .project .second_row{

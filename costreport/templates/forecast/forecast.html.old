@@ -26,7 +26,7 @@
     </div>
 
     {% for f in forecast_detail %}
-    <div class="cost_code_row row">
+    <div class="costcode_row row">
         <div class="col-1"><a
                 href="{{ url_for('project_costdetail.costdetail', project=project, cost_code=f.cost_code)}}">{{ f.cost_code }}</a>
         </div>

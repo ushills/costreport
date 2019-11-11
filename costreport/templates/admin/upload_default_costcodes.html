@@ -3,14 +3,41 @@
 
 <h2>Upload Default Costcodes</h2>
 
-<div class="container-fluid upload_costcode">
+<div class="container upload_costcode">
+    {% if not costcodes %}
+    <!-- check if costcodes have already been uploaded, if not display form -->
     <form action="" method="POST" enctype="multipart/form-data">
         {{ form.csrf_token }}
         <div class="form-group">
             {{ form.csvfile }}
         </div>
-        <button type="submit" class="btn btn-success">Submit</button>
+        <!-- <button id="upload_button" type="submit" value="load" class="btn btn-success">Upload</button> -->
+        {{ form.upload_button(class="btn btn-success") }}
         <a class="btn btn-danger pull-right" href="/projects" role="button">Cancel</a>
     </form>
+    {% endif %}
+    {% if costcodes %}
+    <form action="" method="POST">
+        {{ form.csrf_token }}
+        <!-- <button type="submit" value="save" class="btn btn-success">Save</button> -->
+        {{ form.save_button(class="btn btn-success") }}
+        <a class="btn btn-danger pull-right" href="/projects" role="button">Cancel</a>
+    </form>
+    <div class="project_costcodes col-6">
+        <!-- if costcodes exist show costcodes and save button -->
+        <div class="costcode_row row border-bottom">
+            <div class="col-3 row_header">Costcode</div>
+            <div class="col-3 row_header">Category</div>
+            <div class="col-6 row_header">Description</div>
+        </div>
+        {% for costcode in costcodes %}
+        <div class="costcode_row row border-bottom">
+            <div class="col-3">{{ costcode[0] }}</div>
+            <div class="col-3">{{ costcode[1] }}</div>
+            <div class="col-6">{{ costcode[2] }}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
 </div>
 {% endblock %}

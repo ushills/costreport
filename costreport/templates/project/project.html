@@ -13,7 +13,7 @@
         <div class="project_costcodes col-6">
             {% for costcode in project_costcode_detail %}
             <div class="searchData">
-                <div class="cost_code_row row border-bottom">
+                <div class="costcode_row row border-bottom">
                     <div class="col-2">
                         <a
                             href="{{ url_for('project_view.single_costcode_view', project=project_details.project_code, costcode=costcode.costcode)}}">
