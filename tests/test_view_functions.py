@@ -200,7 +200,8 @@ class TestTransactionServices:
 class TestAdminServices:
     def test_read_costcodes_from_csv(self):
         csvfilename = "tests/costcodes_test_csv_file.csv"
-        csvdata = admin_services.read_costcodes_from_csv(csvfilename)
+        csvfile = open(csvfilename, mode="r+b")
+        csvdata = admin_services.read_costcodes_from_csv(csvfile)
         assert csvdata == [
             ["0", "Unallocated", "Unallocated"],
             ["20000", "Labour", "Basic Salaries"],
