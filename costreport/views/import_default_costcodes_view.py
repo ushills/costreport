@@ -2,6 +2,7 @@ import pdb
 import pathlib
 import json
 import os
+import csv
 from costreport.app import app
 
 import flask
@@ -19,7 +20,10 @@ from costreport.services.projects_service import check_if_project_exists
 
 
 blueprint = flask.Blueprint(
-    "import_default_costcodes", __name__, template_folder="templates", url_prefix="/admin"
+    "import_default_costcodes",
+    __name__,
+    template_folder="templates",
+    url_prefix="/admin",
 )
 
 
@@ -43,9 +47,9 @@ def upload_default_costcodes_get():
 def upload_default_costcodes_post():
     form = ImportDefaultCostcodesForm(CombinedMultiDict((request.files, request.form)))
     if form.validate_on_submit():
-        # breakpoint()
         if form.upload_button.data:
-            costcodes = import_csv(form.csvfile.data)
+            csv_file = form.csvfile.data
+            costcodes = admin_services.read_costcodes_from_csv(csv_file)
             print("upload button pressed")
             return flask.render_template(
                 "admin/upload_default_costcodes.html", form=form, costcodes=costcodes
@@ -59,15 +63,3 @@ def upload_default_costcodes_post():
 
     return flask.render_template("admin/upload_default_costcodes.html", form=form)
 
-
-def import_csv(csv_file):
-    filename = secure_filename(csv_file.filename)
-    filepath = os.path.join(app.instance_path, "csv_uploads", filename)
-    csv_file.save(filepath)
-    try:
-        csvdata = admin_services.read_costcodes_from_csv(filepath)
-        costcodes = csvdata
-        os.remove(filepath)
-        return costcodes
-    except:
-        os.remove(filepath)

@@ -56,23 +56,26 @@ def insert_default_costcodes_from_csvdata(project_code, csvdata):
     return True
 
 
-def read_costcodes_from_csv(csvfilename):
-    csvfile = pathlib.Path(csvfilename)
-    csvdata = []
-    # read the csv file and commit to the database
-    with open(csvfile, newline="") as csvfile:
-        default_costcodes = csv.DictReader(csvfile, delimiter=",", quotechar='"')
-        for row in default_costcodes:
-            # check if costcode already exists in csvdata
-            if not any(row["costcode"].strip() in data for data in csvdata):
-                csvdata.append(
-                    [
-                        row["costcode"].strip(),
-                        row["costcode_category"].strip(),
-                        row["costcode_description"].strip(),
-                    ]
-                )
+def read_costcodes_from_csv(csv_file):
+    csv_file_data = csv_file.read()
+    # decode csv_file_data binary to string
+    csv_file_data = csv_file_data.decode()
+    # create list of dictionaries keyed by header row
+    default_costcodes = [
+        {k: v for k, v in row.items()}
+        for row in csv.DictReader(csv_file_data.splitlines(), skipinitialspace=True)
+    ]
+    # process the default_costcodes to omit the header row if present
+    costcodes = []
+    for row in default_costcodes:
+        if not any(row["costcode"].strip() in data for data in costcodes):
+            costcodes.append(
+                [
+                    row["costcode"].strip(),
+                    row["costcode_category"].strip(),
+                    row["costcode_description"].strip(),
+                ]
+            )
     # sort the csvdata by costcode
-    csvdata.sort()
-    return csvdata
-
+    costcodes.sort()
+    return costcodes
