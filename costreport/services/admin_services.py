@@ -4,6 +4,7 @@ from costreport.app import db
 from costreport.data.projects import Project
 from costreport.data.costcodes import Costcode
 from costreport.data.transactions import Transaction
+from costreport.data.default_costcodes import DefaultCostcode
 
 
 # PROJECT ADMIN FUNCTIONS #
@@ -20,10 +21,10 @@ def create_costcode(data):
     c = Costcode()
     project_code = data["project_code"]
     project = Project.query.filter(Project.project_code == project_code).first()
-    c.project_id = project.id
-    c.costcode = data["costcode"]
-    c.costcode_description = data["costcode_description"]
-    c.costcode_category = data["costcode_category"]
+    d.project_id = project.id
+    d.costcode = data["costcode"]
+    d.costcode_description = data["costcode_description"]
+    d.costcode_category = data["costcode_category"]
     db.session.add(c)
     db.session.commit()
 
@@ -42,15 +43,14 @@ def update_costcode(data):
     db.session.commit()
 
 
-def insert_default_costcodes_from_csvdata(project_code, csvdata):
-    project_id = Project.query.filter(Project.project_code == project_code).first().id
+def save_default_costcodes_from_csvdata(costcodes_list):
     # read the csvdata and commit to the database
     for data in csvdata:
-        c = Costcode()
-        c.project_id = project_id
-        c.costcode = data[0]
-        c.costcode_category = data[1]
-        c.costcode_description = data[2]
+        d = DefaultCostcode
+        d.project_id = project_id
+        d.costcode = data[0]
+        d.costcode_category = data[1]
+        d.costcode_description = data[2]
         db.session.add(c)
     db.session.commit()
     return True

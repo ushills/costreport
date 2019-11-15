@@ -68,8 +68,9 @@ def upload_default_costcodes_post():
             )
     if save_form.validate_on_submit():
         if save_form.save_button.data:
+            # costcodes = admin_services.read_costcodes_from_csv(csv_file)
             print("save button pressed")
-            # TODO process to commit to the database
+            admin_services.save_default_costcodes_from_csvdata(costcodes)
             return flask.redirect(flask.url_for("projects.projects"))
         else:
             print("no button pressed")
