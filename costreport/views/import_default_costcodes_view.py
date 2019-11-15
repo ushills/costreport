@@ -27,39 +27,54 @@ blueprint = flask.Blueprint(
 )
 
 
-class ImportDefaultCostcodesForm(FlaskForm):
+class UploadDefaultCostcodesForm(FlaskForm):
     # Need to work around FileRequired not working with validate_on_submit
     # consider splitting into 2 forms
     csvfile = FileField(
         validators=[FileRequired(), FileAllowed(["csv"], "csv files only!")]
     )
     upload_button = SubmitField()
+
+
+class SaveDefaultCostcodesForm(FlaskForm):
     save_button = SubmitField()
 
 
 @blueprint.route("/upload_costcodes", methods=["GET"])
 def upload_default_costcodes_get():
-    form = ImportDefaultCostcodesForm(CombinedMultiDict((request.files, request.form)))
-    return flask.render_template("admin/upload_default_costcodes.html", form=form)
+    upload_form = UploadDefaultCostcodesForm(
+        CombinedMultiDict((request.files, request.form))
+    )
+    return flask.render_template(
+        "admin/upload_default_costcodes.html", upload_form=upload_form
+    )
 
 
 @blueprint.route("/upload_costcodes", methods=["POST"])
 def upload_default_costcodes_post():
-    form = ImportDefaultCostcodesForm(CombinedMultiDict((request.files, request.form)))
-    if form.validate_on_submit():
-        if form.upload_button.data:
-            csv_file = form.csvfile.data
+    upload_form = UploadDefaultCostcodesForm(
+        CombinedMultiDict((request.files, request.form))
+    )
+    save_form = SaveDefaultCostcodesForm()
+    if upload_form.validate_on_submit():
+        if upload_form.upload_button.data:
+            csv_file = upload_form.csvfile.data
             costcodes = admin_services.read_costcodes_from_csv(csv_file)
             print("upload button pressed")
             return flask.render_template(
-                "admin/upload_default_costcodes.html", form=form, costcodes=costcodes
+                "admin/upload_default_costcodes.html",
+                save_form=save_form,
+                costcodes=costcodes,
             )
-        elif form.save_button.data:
+    if save_form.validate_on_submit():
+        if save_form.save_button.data:
             print("save button pressed")
             # TODO process to commit to the database
             return flask.redirect(flask.url_for("projects.projects"))
         else:
             print("no button pressed")
 
-    return flask.render_template("admin/upload_default_costcodes.html", form=form)
+    return flask.render_template(
+        "admin/upload_default_costcodes.html", upload_form=upload_form
+    )
 
