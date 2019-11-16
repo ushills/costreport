@@ -21,10 +21,10 @@ def create_costcode(data):
     c = Costcode()
     project_code = data["project_code"]
     project = Project.query.filter(Project.project_code == project_code).first()
-    d.project_id = project.id
-    d.costcode = data["costcode"]
-    d.costcode_description = data["costcode_description"]
-    d.costcode_category = data["costcode_category"]
+    c.project_id = project.id
+    c.costcode = data["costcode"]
+    c.costcode_description = data["costcode_description"]
+    c.costcode_category = data["costcode_category"]
     db.session.add(c)
     db.session.commit()
 
@@ -45,13 +45,12 @@ def update_costcode(data):
 
 def save_default_costcodes_from_csvdata(costcodes_list):
     # read the csvdata and commit to the database
-    for data in csvdata:
-        d = DefaultCostcode
-        d.project_id = project_id
+    for data in costcodes_list:
+        d = DefaultCostcode()
         d.costcode = data[0]
         d.costcode_category = data[1]
         d.costcode_description = data[2]
-        db.session.add(c)
+        db.session.add(d)
     db.session.commit()
     return True
 

@@ -11,6 +11,7 @@ import costreport.services.projects_service as projects_service
 import costreport.services.project_view_services as project_view_services
 import costreport.services.costcode_services as costcode_services
 import costreport.services.transaction_services as transaction_services
+from costreport.data.default_costcodes import DefaultCostcode
 
 
 class TestPopulateDatabase:
@@ -212,18 +213,11 @@ class TestAdminServices:
             ["23400", "Prelims", "Hotel & Subsistence"],
         ]
 
-    def test_insert_default_costcodes_from_csvdata(self):
-        project_code = "65432"
+    def test_save_default_costcodes_from_csvdata(self):
         csvdata = [
             ["0", "Unallocated", "Unallocated"],
             ["20000", "Labour", "Basic Salaries"],
         ]
-        admin_services.insert_default_costcodes_from_csvdata(project_code, csvdata)
-        costcode_data = costcode_services.get_costcodes(project_code)
-        assert costcode_data[0].costcode == "0"
-        assert costcode_data[0].costcode_category == "Unallocated"
-        assert costcode_data[0].costcode_description == "Unallocated"
-        assert costcode_data[1].costcode == "20000"
-        assert costcode_data[1].costcode_category == "Labour"
-        assert costcode_data[1].costcode_description == "Basic Salaries"
+        admin_services.save_default_costcodes_from_csvdata(csvdata)
+
 
