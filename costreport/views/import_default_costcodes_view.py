@@ -38,9 +38,6 @@ class UploadDefaultCostcodesForm(FlaskForm):
 
 class SaveDefaultCostcodesForm(FlaskForm):
     save_button = SubmitField()
-
-
-class CostcodeDataForm(FlaskForm):
     costcodeData = HiddenField()
 
 
@@ -60,7 +57,6 @@ def upload_default_costcodes_post():
         CombinedMultiDict((request.files, request.form))
     )
     save_form = SaveDefaultCostcodesForm()
-    costcodedata_form = CostcodeDataForm()
     if upload_form.upload_button.data:
         csv_file = upload_form.csvfile.data
         costcodes = admin_services.read_costcodes_from_csv(csv_file)
@@ -69,13 +65,12 @@ def upload_default_costcodes_post():
             "admin/upload_default_costcodes.html",
             upload_form=upload_form,
             save_form=save_form,
-            costcodedata_form=costcodedata_form,
             costcodes=costcodes,
-            costcodes_json=costcodes_json
+            costcodes_json=costcodes_json,
         )
     elif save_form.save_button.data:
         print("save button pressed")
-        costcodes_json = costcodedata_form.costcodeData.data
+        costcodes_json = save_form.costcodeData.data
         costcodes = json.loads(costcodes_json)
         print(costcodes)
         admin_services.save_default_costcodes_from_csvdata(costcodes)

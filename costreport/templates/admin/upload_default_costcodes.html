@@ -16,7 +16,7 @@
     {% endif %}
     {% if costcodes %}
     <form action="" method="POST">
-        {{ costcodedata_form.costcodeData(value=costcodes_json) }}
+        {{ save_form.costcodeData(value=costcodes_json) }}
         {{ save_form.save_button(class="btn btn-success") }}
         <a class="btn btn-danger pull-right" href="/projects" role="button">Cancel</a>
     </form>
