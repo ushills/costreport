@@ -23,7 +23,7 @@ def main():
     setup_db()
 
     # app.run(host="0.0.0.0", debug=True)
-    app.run(use_debugger=True, use_reloader=False, passthrough_errors=True)
+    app.run(use_debugger=True, use_reloader=True, passthrough_errors=True)
 
 
 def setup_db():

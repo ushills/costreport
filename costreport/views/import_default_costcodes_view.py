@@ -8,7 +8,7 @@ from costreport.app import app
 import flask
 from flask import request
 from flask_wtf import FlaskForm
-from wtforms import SubmitField
+from wtforms import SubmitField, HiddenField, StringField
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import CombinedMultiDict
@@ -40,6 +40,10 @@ class SaveDefaultCostcodesForm(FlaskForm):
     save_button = SubmitField()
 
 
+class CostcodeDataForm(FlaskForm):
+    costcodeData = HiddenField()
+
+
 @blueprint.route("/upload_costcodes", methods=["GET"])
 def upload_default_costcodes_get():
     upload_form = UploadDefaultCostcodesForm(
@@ -56,26 +60,29 @@ def upload_default_costcodes_post():
         CombinedMultiDict((request.files, request.form))
     )
     save_form = SaveDefaultCostcodesForm()
-    if upload_form.validate_on_submit():
-        if upload_form.upload_button.data:
-            csv_file = upload_form.csvfile.data
-            costcodes = admin_services.read_costcodes_from_csv(csv_file)
-            print("upload button pressed")
-            return flask.render_template(
-                "admin/upload_default_costcodes.html",
-                save_form=save_form,
-                costcodes=costcodes,
-            )
-    if save_form.validate_on_submit():
-        if save_form.save_button.data:
-            # costcodes = admin_services.read_costcodes_from_csv(csv_file)
-            print("save button pressed")
-            admin_services.save_default_costcodes_from_csvdata(costcodes)
-            return flask.redirect(flask.url_for("projects.projects"))
-        else:
-            print("no button pressed")
+    costcodedata_form = CostcodeDataForm()
+    if upload_form.upload_button.data:
+        csv_file = upload_form.csvfile.data
+        costcodes = admin_services.read_costcodes_from_csv(csv_file)
+        print("upload button pressed")
+        return flask.render_template(
+            "admin/upload_default_costcodes.html",
+            upload_form=upload_form,
+            save_form=save_form,
+            costcodedata_form=costcodedata_form,
+            costcodes=costcodes,
+        )
+    elif save_form.save_button.data:
+        print("save button pressed")
+        costcodes = costcodedata_form.costcodeData.data
+        print(costcodes)
+        return flask.redirect(flask.url_for("projects.projects"))
+    else:
+        print("no button pressed")
 
     return flask.render_template(
-        "admin/upload_default_costcodes.html", upload_form=upload_form
+        "admin/upload_default_costcodes.html",
+        upload_form=upload_form,
+        save_form=save_form,
     )
 
