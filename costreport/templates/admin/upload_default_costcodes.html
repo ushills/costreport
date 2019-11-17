@@ -7,6 +7,7 @@
     {% if not costcodes %}
     <!-- check if costcodes have already been uploaded, if not display form -->
     <form action="" method="POST" enctype="multipart/form-data">
+        {{ upload_form.csrf_token }}
         <div class="form-group">
             {{ upload_form.csvfile }}
         </div>
@@ -16,6 +17,7 @@
     {% endif %}
     {% if costcodes %}
     <form action="" method="POST">
+        {{ save_form.csrf_token }}
         {{ save_form.costcodeData(value=costcodes_json) }}
         {{ save_form.save_button(class="btn btn-success") }}
         <a class="btn btn-danger pull-right" href="/projects" role="button">Cancel</a>

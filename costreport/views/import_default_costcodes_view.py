@@ -1,23 +1,14 @@
-import pdb
-import pathlib
 import json
-import os
-import csv
-from costreport.app import app
-
 import flask
 from flask import request
 from flask_wtf import FlaskForm
-from wtforms import SubmitField, HiddenField, StringField
-from flask_wtf.file import FileField, FileRequired, FileAllowed
-from werkzeug.utils import secure_filename
+from flask_wtf.file import FileAllowed, FileField, FileRequired
 from werkzeug.datastructures import CombinedMultiDict
-from wtforms import StringField
+from wtforms import HiddenField, SubmitField
 from wtforms.validators import DataRequired
+
 import costreport.services.admin_services as admin_services
-
-from costreport.services.projects_service import check_if_project_exists
-
+from costreport.app import app
 
 blueprint = flask.Blueprint(
     "import_default_costcodes",
@@ -57,7 +48,7 @@ def upload_default_costcodes_post():
         CombinedMultiDict((request.files, request.form))
     )
     save_form = SaveDefaultCostcodesForm()
-    if upload_form.upload_button.data:
+    if upload_form.upload_button.data and upload_form.validate():
         csv_file = upload_form.csvfile.data
         costcodes = admin_services.read_costcodes_from_csv(csv_file)
         costcodes_json = json.dumps(costcodes)
@@ -69,14 +60,10 @@ def upload_default_costcodes_post():
             costcodes_json=costcodes_json,
         )
     elif save_form.save_button.data:
-        print("save button pressed")
         costcodes_json = save_form.costcodeData.data
         costcodes = json.loads(costcodes_json)
-        print(costcodes)
         admin_services.save_default_costcodes_from_csvdata(costcodes)
         return flask.redirect(flask.url_for("projects.projects"))
-    else:
-        print("no button pressed")
 
     return flask.render_template(
         "admin/upload_default_costcodes.html",
