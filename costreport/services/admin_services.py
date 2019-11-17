@@ -44,6 +44,7 @@ def update_costcode(data):
 
 
 def save_default_costcodes_from_csvdata(costcodes_list):
+    # TODO increment the version of the costcodes and drop all but the last
     # read the csvdata and commit to the database
     for data in costcodes_list:
         d = DefaultCostcode()
