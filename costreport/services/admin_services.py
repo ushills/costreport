@@ -1,5 +1,6 @@
 import pathlib
 import csv
+from sqlalchemy.sql import func
 from costreport.app import db
 from costreport.data.projects import Project
 from costreport.data.costcodes import Costcode
@@ -44,15 +45,25 @@ def update_costcode(data):
 
 
 def save_default_costcodes_from_csvdata(costcodes_list):
-    # TODO increment the version of the costcodes and drop all but the last
     # read the csvdata and commit to the database
     for data in costcodes_list:
         d = DefaultCostcode()
         d.costcode = data[0]
         d.costcode_category = data[1]
         d.costcode_description = data[2]
+        d.active = False
         db.session.add(d)
     db.session.commit()
+    # delete the currently active default costcodes
+    old_costcodes = DefaultCostcode.query.filter(DefaultCostcode.active == True).delete()
+    db.session.commit()
+    print(old_costcodes, "costcodes deleted")
+    # make the new cost default costcodes active
+    new_costcodes = DefaultCostcode.query.filter(DefaultCostcode.active == False).update(
+        {DefaultCostcode.active: True}, synchronize_session=False
+    )
+    db.session.commit()
+    print(new_costcodes, "costcodes added")
     return True
 
 

@@ -18,3 +18,4 @@ class DefaultCostcode(db.Model):
     costcode: str = db.Column(db.String, nullable=False)
     costcode_category: str = db.Column(db.String, nullable=True)
     costcode_description: str = db.Column(db.String, nullable=False)
+    active: bool = db.Column(db.Boolean, nullable=False)
