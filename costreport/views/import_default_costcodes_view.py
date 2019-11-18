@@ -29,7 +29,7 @@ class UploadDefaultCostcodesForm(FlaskForm):
 
 class SaveDefaultCostcodesForm(FlaskForm):
     save_button = SubmitField()
-    costcodeData = HiddenField()
+    costcodeData = HiddenField(validators=[DataRequired()])
 
 
 @blueprint.route("/upload_costcodes", methods=["GET"])
@@ -59,7 +59,7 @@ def upload_default_costcodes_post():
             costcodes=costcodes,
             costcodes_json=costcodes_json,
         )
-    elif save_form.save_button.data:
+    elif save_form.save_button.data and save_form.validate():
         costcodes_json = save_form.costcodeData.data
         costcodes = json.loads(costcodes_json)
         admin_services.save_default_costcodes_from_csvdata(costcodes)

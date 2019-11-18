@@ -1,11 +1,9 @@
-import pathlib
 import csv
-from sqlalchemy.sql import func
+
 from costreport.app import db
-from costreport.data.projects import Project
 from costreport.data.costcodes import Costcode
-from costreport.data.transactions import Transaction
 from costreport.data.default_costcodes import DefaultCostcode
+from costreport.data.projects import Project
 
 
 # PROJECT ADMIN FUNCTIONS #
@@ -56,7 +54,7 @@ def save_default_costcodes_from_csvdata(costcodes_list):
     db.session.commit()
     # delete the currently active default costcodes
     old_costcodes = DefaultCostcode.query.filter(DefaultCostcode.active == True).delete()
-    db.session.commit()
+    # db.session.commit()
     print(old_costcodes, "costcodes deleted")
     # make the new cost default costcodes active
     new_costcodes = DefaultCostcode.query.filter(DefaultCostcode.active == False).update(
