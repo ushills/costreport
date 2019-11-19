@@ -53,13 +53,15 @@ def save_default_costcodes_from_csvdata(costcodes_list):
         db.session.add(d)
     db.session.commit()
     # delete the currently active default costcodes
-    old_costcodes = DefaultCostcode.query.filter(DefaultCostcode.active == True).delete()
+    old_costcodes = DefaultCostcode.query.filter(
+        DefaultCostcode.active == True
+    ).delete()
     # db.session.commit()
     print(old_costcodes, "costcodes deleted")
     # make the new cost default costcodes active
-    new_costcodes = DefaultCostcode.query.filter(DefaultCostcode.active == False).update(
-        {DefaultCostcode.active: True}, synchronize_session=False
-    )
+    new_costcodes = DefaultCostcode.query.filter(
+        DefaultCostcode.active == False
+    ).update({DefaultCostcode.active: True}, synchronize_session=False)
     db.session.commit()
     print(new_costcodes, "costcodes added")
     return True
@@ -88,3 +90,25 @@ def read_costcodes_from_csv(csv_file):
     # sort the csvdata by costcode
     costcodes.sort()
     return costcodes
+
+
+def add_default_costcodes_to_project(project_code):
+    # get the active default_costcodes from the database
+    default_costcodes = (
+        DefaultCostcode.query.filter(DefaultCostcode.active == True)
+        .order_by(DefaultCostcode.costcode)
+        .all()
+    )
+    print(default_costcodes[0])
+    # add the default costcodes to the project
+    project_id = Project.query.filter(Project.project_code == project_code).first().id
+    c = Costcode()
+    for default_costcode in default_costcodes:
+        c.project_id = project_id
+        c.costcode = default_costcode.costcode
+        c.costcode_description = default_costcode.costcode_description
+        c.costcode_category = default_costcode.costcode_description
+        db.session.add(c)
+    db.session.commit()
+    return True
+

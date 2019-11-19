@@ -220,4 +220,7 @@ class TestAdminServices:
         ]
         admin_services.save_default_costcodes_from_csvdata(csvdata)
 
+    def test_add_default_costcodes_to_project(self):
+        project_code = "65432"
+        assert admin_services.add_default_costcodes_to_project(project_code) is True
 
