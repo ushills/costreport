@@ -1,4 +1,5 @@
 import csv
+from sqlalchemy.sql import exists
 
 from costreport.app import db
 from costreport.data.costcodes import Costcode
@@ -111,4 +112,13 @@ def add_default_costcodes_to_project(project_code):
         db.session.add(c)
     db.session.commit()
     return True
+
+
+def check_if_project_has_costcodes(project_code):
+    costcodes_exists = (
+        Costcode.query.join(Project, Project.id == Costcode.project_id)
+        .filter(Project.project_code == project_code)
+        .first()
+    ) is not None
+    return costcodes_exists
 
