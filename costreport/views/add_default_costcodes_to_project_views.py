@@ -2,7 +2,10 @@ import flask
 from flask_wtf import FlaskForm
 from wtforms import BooleanField
 from wtforms.validators import DataRequired
-from costreport.services.admin_services import create_costcode
+from costreport.services.admin_services import (
+    create_costcode,
+    check_if_project_has_costcodes,
+)
 from costreport.services.costcode_services import (
     check_if_costcode_exists,
     get_costcodes,
@@ -23,25 +26,39 @@ class AddDefaultCostcodesForm(FlaskForm):
 
 @blueprint.route("/add_default_costcodes_to_project", methods=["GET"])
 def add_default_costcodes_to_project_get():
-    project = flask.request.args.get("project")
+    project_code = flask.request.args.get("project")
     # check if the project exists
-    if check_if_project_exists(project) is False:
+    if check_if_project_exists(project_code) is False:
         flask.abort(404)
     form = AddDefaultCostcodesForm()
     # check if there are existing costcodes
-    if len(get_costcodes(project)) > 0:
-        flask.flash("Costcodes already exist, defaults cannot be imported")
+    if check_if_project_has_costcodes(project_code):
+        flask.flash(
+            "Costcodes already exist, defaults cannot be imported", "alert-danger"
+        )
         costcodes_exists = True
     else:
         costcodes_exists = False
     return flask.render_template(
         "admin/add_default_costcodes_to_project.html",
         form=form,
-        project=project,
+        project=project_code,
         costcodes_exists=costcodes_exists,
     )
 
+
 @blueprint.route("/add_default_costcodes_to_project", methods=["POST"])
 def add_default_costcodes_to_project_post():
-    project = flask.request.args.get("project")
-    
+    project_code = flask.request.args.get("project")
+    if check_if_project_exists(project_code) is False:
+        flask.abort(404)
+    form = AddDefaultCostcodesForm()
+    if form.validate_on_submit():
+        if check_if_project_has_costcodes(project_code):
+            flask.flash("Costcodes already exist, defaults cannot be imported")
+        elif form.tick_box is True:
+            print("adding default costcodes to project")
+            flask.redirect(flask.url_for("projects.projects"))
+    return flask.render_template(
+        "admin/add_default_costcodes_to_project.html", form=form, project=project_code,
+    )
