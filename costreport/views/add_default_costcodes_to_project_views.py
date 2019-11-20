@@ -21,7 +21,7 @@ blueprint = flask.Blueprint(
 
 
 class AddDefaultCostcodesForm(FlaskForm):
-    tick_box = BooleanField("Apply default costcodes", validators=[DataRequired()])
+    tick_box = BooleanField("Apply default costcodes")
 
 
 @blueprint.route("/add_default_costcodes_to_project", methods=["GET"])
@@ -54,9 +54,10 @@ def add_default_costcodes_to_project_post():
         flask.abort(404)
     form = AddDefaultCostcodesForm()
     if form.validate_on_submit():
+        print("Tick box is", form.tick_box.data)
         if check_if_project_has_costcodes(project_code):
             flask.flash("Costcodes already exist, defaults cannot be imported")
-        elif form.tick_box is True:
+        elif form.tick_box.data is True:
             print("adding default costcodes to project")
             flask.redirect(flask.url_for("projects.projects"))
     return flask.render_template(
