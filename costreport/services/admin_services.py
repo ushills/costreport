@@ -103,12 +103,12 @@ def add_default_costcodes_to_project(project_code):
     print(default_costcodes[0])
     # add the default costcodes to the project
     project_id = Project.query.filter(Project.project_code == project_code).first().id
-    c = Costcode()
     for default_costcode in default_costcodes:
+        c = Costcode()
         c.project_id = project_id
         c.costcode = default_costcode.costcode
         c.costcode_description = default_costcode.costcode_description
-        c.costcode_category = default_costcode.costcode_description
+        c.costcode_category = default_costcode.costcode_category
         db.session.add(c)
     db.session.commit()
     return True

@@ -5,6 +5,7 @@ from wtforms.validators import DataRequired
 from costreport.services.admin_services import (
     create_costcode,
     check_if_project_has_costcodes,
+    add_default_costcodes_to_project,
 )
 from costreport.services.costcode_services import (
     check_if_costcode_exists,
@@ -59,6 +60,7 @@ def add_default_costcodes_to_project_post():
             flask.flash("Costcodes already exist, defaults cannot be imported")
         elif form.tick_box.data is True:
             print("adding default costcodes to project")
+            add_default_costcodes_to_project(project_code)
             flask.redirect(flask.url_for("projects.projects"))
     return flask.render_template(
         "admin/add_default_costcodes_to_project.html", form=form, project=project_code,

@@ -224,6 +224,10 @@ class TestAdminServices:
         project_code = "65432"
         assert admin_services.add_default_costcodes_to_project(project_code) is True
 
+    def test_check_default_costcodes_are_added_to_project(self):
+        costcodes = costcode_services.get_costcodes("65432")
+        assert costcodes is None
+
     def test_check_if_project_has_costcodes(self):
         assert admin_services.check_if_project_has_costcodes("12345") is True
         assert admin_services.check_if_project_has_costcodes("65432") is True
