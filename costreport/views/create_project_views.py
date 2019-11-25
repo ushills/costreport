@@ -1,8 +1,11 @@
 import flask
 from flask_wtf import FlaskForm
-from wtforms import StringField
+from wtforms import StringField, BooleanField
 from wtforms.validators import DataRequired
-from costreport.services.admin_services import create_project
+from costreport.services.admin_services import (
+    create_project,
+    add_default_costcodes_to_project,
+)
 from costreport.services.projects_service import check_if_project_exists
 
 
@@ -14,6 +17,7 @@ blueprint = flask.Blueprint(
 class CreateProjectForm(FlaskForm):
     project_code = StringField("Project Reference", validators=[DataRequired()])
     project_name = StringField("Project Name", validators=[DataRequired()])
+    tick_box = BooleanField("Apply default costcodes")
 
 
 @blueprint.route("create_project", methods=["GET"])
@@ -38,8 +42,9 @@ def create_project_post():
         else:
             # commit the data to the database
             create_project(data)
-            flask.flash(
-                "Project " + form.project_code.data + " created", "alert-success"
-            )
+            flask.flash("Project " + form.project_code.data + " created", "alert-success")
+            # add the default costcodes to the project
+            if form.tick_box.data is True:
+                add_default_costcodes_to_project(data["project_code"])
             return flask.redirect(flask.url_for("create_project.create_project_get"))
     return flask.render_template("admin/create_project.html", form=form)

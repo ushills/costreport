@@ -23,6 +23,9 @@
             {{ form.project_name.label }}
             {{ form.project_name(class="form-control", placeholder="Enter project name")}}
         </div>
+        <div class="form-group">
+            {{ form.tick_box(checked=True) }} Add default costcodes to project
+        </div>
         <button type="submit" class="btn btn-success">Submit</button>
         <a class="btn btn-danger pull-right" href="/projects" role="button">Cancel</a>
     </form>
