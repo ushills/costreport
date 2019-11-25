@@ -12,6 +12,7 @@
     <!-- Insert Transaction Button -->
     <a href="{{ url_for('insert_transaction.insert_transaction_get', project=project_details.project_code, costcode=costcode_details.costcode) }}"
         class="btn btn-success right" role="button">New</a>
+    {% if transactions %}
     <div class="costcode_transactions col-6">
         <div id="searchPageData">
             {% for transaction in transactions %}
@@ -28,6 +29,7 @@
             {% endfor %}
         </div>
     </div>
+    {% endif %}
 </div>
 
 {% endblock %}

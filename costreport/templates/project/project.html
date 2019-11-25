@@ -10,6 +10,7 @@
 
     {% include "shared/project_financial_summary.html" %}
     <div id="searchPageData">
+        {% if project_costcode_detail %}
         <div class="project_costcodes col-6">
             {% for costcode in project_costcode_detail %}
             <div class="searchData">
@@ -33,6 +34,7 @@
             </div>
             {% endfor %}
         </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}
