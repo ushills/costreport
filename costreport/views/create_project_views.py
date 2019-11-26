@@ -2,10 +2,7 @@ import flask
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField
 from wtforms.validators import DataRequired
-from costreport.services.admin_services import (
-    create_project,
-    add_default_costcodes_to_project,
-)
+import costreport.services.admin_services as admin_services
 from costreport.services.projects_service import check_if_project_exists
 
 
@@ -41,10 +38,12 @@ def create_project_post():
             )
         else:
             # commit the data to the database
-            create_project(data)
-            flask.flash("Project " + form.project_code.data + " created", "alert-success")
+            admin_services.create_project(data)
+            flask.flash(
+                "Project " + form.project_code.data + " created", "alert-success"
+            )
             # add the default costcodes to the project
             if form.tick_box.data is True:
-                add_default_costcodes_to_project(data["project_code"])
+                admin_services.add_default_costcodes_to_project(data["project_code"])
             return flask.redirect(flask.url_for("create_project.create_project_get"))
     return flask.render_template("admin/create_project.html", form=form)

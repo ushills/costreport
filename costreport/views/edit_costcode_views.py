@@ -2,12 +2,7 @@ import flask
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
-from costreport.services.costcode_services import (
-    # edit_costcode,
-    check_if_costcode_exists,
-    get_costcodes,
-    get_costcode_data,
-)
+import costreport.services.costcode_services as costcode_services
 from costreport.services.projects_service import check_if_project_exists
 
 
@@ -32,11 +27,18 @@ def edit_costcode_get():
     if check_if_project_exists(project_code) is False:
         flask.abort(404)
     # check if costcode exists
-    if check_if_costcode_exists(project_code=project_code, costcode=costcode) is False:
+    if (
+        costcode_services.check_if_costcode_exists(
+            project_code=project_code, costcode=costcode
+        )
+        is False
+    ):
         flask.abort(404)
     form = CreateCostcodeForm()
     # get costcode data
-    costcode_data = get_costcode_data(project_code=project_code, costcode=costcode)
+    costcode_data = costcode_services.get_costcode_data(
+        project_code=project_code, costcode=costcode
+    )
     return flask.render_template(
         "admin/edit_costcode.html",
         form=form,
@@ -60,7 +62,7 @@ def edit_costcode_post():
     }
     if form.validate_on_submit():
         # check if the costcode already exists for the project_code
-        if check_if_costcode_exists(data):
+        if costcode_services.check_if_costcode_exists(data):
             flask.flash(
                 "Costcode " + form.costcode.data + " already exists", "alert-danger"
             )
@@ -69,7 +71,7 @@ def edit_costcode_post():
             )
         # commit the data to the database
         else:
-            edit_costcode(data)
+            costcode_services.edit_costcode(data)
             flask.flash("Costcode " + form.costcode.data + " created", "alert-success")
             return flask.redirect(
                 flask.url_for("edit_costcode.edit_costcode_get", project=project_code)

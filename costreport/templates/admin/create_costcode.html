@@ -1,7 +1,7 @@
 {% extends "shared/_layout.html" %}
 {% block main_content %}
 
-<h2>Create Costcode - {{ project }}</h2>
+<h2>Create Costcode - {{ project_code }}</h2>
 
 <div class="container-fluid create_costcode">
     {% with messages = get_flashed_messages(with_categories=true) %}
@@ -32,14 +32,14 @@
         <div class="row border-bottom">
             <div class="col-2">
                 <a href="{{ url_for("edit_costcode.edit_costcode_get"
-                    ,project=project        
+                    ,project=project_code        
                     ,costcode=costcode.costcode
                         ) }}">
                     {{ costcode.costcode }}</a>
             </div>
             <div class=" col-4">
                 <a href="{{ url_for("edit_costcode.edit_costcode_get"
-                    ,project=project        
+                    ,project=project_code        
                     ,costcode=costcode.costcode
                         ) }}">
                     {{ costcode.costcode_description}}</a>

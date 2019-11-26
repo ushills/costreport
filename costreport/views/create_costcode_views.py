@@ -2,12 +2,9 @@ import flask
 from flask_wtf import FlaskForm
 from wtforms import StringField
 from wtforms.validators import DataRequired
-from costreport.services.admin_services import create_costcode
-from costreport.services.costcode_services import (
-    check_if_costcode_exists,
-    get_costcodes,
-)
-from costreport.services.projects_service import check_if_project_exists
+import costreport.services.admin_services as admin_services
+import costreport.services.costcode_services as costcode_services
+import costreport.services.projects_service as projects_service
 
 
 blueprint = flask.Blueprint(
@@ -25,17 +22,17 @@ class CreateCostcodeForm(FlaskForm):
 
 @blueprint.route("/create_costcode", methods=["GET"])
 def create_costcode_get():
-    project = flask.request.args.get("project")
+    project_code = flask.request.args.get("project")
     # check if project exists
-    if check_if_project_exists(project) is False:
+    if projects_service.check_if_project_exists(project_code) is False:
         flask.abort(404)
     form = CreateCostcodeForm()
     # get list of costcode data
-    current_costcodes = get_costcodes(project)
+    current_costcodes = costcode_services.get_costcodes(project_code)
     return flask.render_template(
         "admin/create_costcode.html",
         form=form,
-        project=project,
+        project_code=project_code,
         current_costcodes=current_costcodes,
     )
 
@@ -44,7 +41,7 @@ def create_costcode_get():
 def create_costcode_post():
     project = flask.request.args.get("project")
     # get list of costcode data
-    current_costcodes = get_costcodes(project)
+    current_costcodes = costcode_services.get_costcodes(project)
     form = CreateCostcodeForm()
     data = {
         "project_code": project,
@@ -54,13 +51,15 @@ def create_costcode_post():
     }
     if form.validate_on_submit():
         # check if the costcode already exists for the project_code
-        if check_if_costcode_exists(project_code=project, costcode=form.costcode.data):
+        if costcode_services.check_if_costcode_exists(
+            project_code=project, costcode=form.costcode.data
+        ):
             flask.flash(
                 "Costcode " + form.costcode.data + " already exists", "alert-danger"
             )
         else:
             # commit the data to the database
-            create_costcode(data)
+            admin_services.create_costcode(data)
             flask.flash("Costcode " + form.costcode.data + " created", "alert-success")
             return flask.redirect(
                 flask.url_for("create_costcode.create_costcode_get", project=project)

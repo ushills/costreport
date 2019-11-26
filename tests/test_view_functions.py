@@ -170,6 +170,18 @@ class TestProjectViewServices:
         assert project_details.project_name == "Project A"
         assert project_details.project_category is None
 
+    def test_get_forecast_cost(self):
+        assert project_view_services.get_forecast_cost("12345") == 10999
+        assert project_view_services.get_forecast_cost("54321") == 1000
+
+    def test_get_project_financial_summary(self):
+        assert project_view_services.get_project_financial_summary("12345") == {
+            "forecast_income": 2636636,
+            "forecast_cost": 10999,
+            "forecast_profit": 324231,
+            "forecast_profit_percentage": 0.085,
+        }
+
 
 class TestTransactionServices:
     def test_get_current_transactions(self):

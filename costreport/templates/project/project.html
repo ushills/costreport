@@ -21,13 +21,13 @@
                             {{ costcode.costcode }}
                         </a>
                     </div>
-                    <div class="col-3">
+                    <div class="col-7">
                         <a
                             href="{{ url_for('project_view.single_costcode_view', project=project_details.project_code, costcode=costcode.costcode)}}">
                             {{ costcode.costcode_description }}
                         </a>
                     </div>
-                    <div class="values col-2">
+                    <div class="values col-3">
                         {{ '{:+,.2f}'.format(costcode.transaction_sum) }}
                     </div>
                 </div>
