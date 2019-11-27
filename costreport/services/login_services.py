@@ -12,14 +12,6 @@ def check_user_credentials(username, password):
         return True
 
 
-def get_password_hash(password):
-    return generate_password_hash(password)
-
-
-def check_password(password_hash, password):
-    return check_password_hash(password_hash, password)
-
-
 def register_user(user_data):
     password_hash = get_password_hash(user_data["password"])
     u = User()

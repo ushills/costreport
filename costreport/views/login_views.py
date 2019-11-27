@@ -29,8 +29,8 @@ def login_post():
         flask.flash("Logged in")
 
         next = flask.request.args.get("next")
-        if not flask_login.is_safe_url(next):
-            return flask.abort(400)
+        # if not flask_login.is_safe_url(next):
+        #     return flask.abort(400)
 
-        return flask.redirect(next or flask.url_for("project.projects"))
+        return flask.redirect(next or flask.url_for("projects.projects"))
     return flask.render_template("login/login.html", form=form)

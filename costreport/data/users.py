@@ -21,3 +21,9 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String, nullable=False)
     active = db.Column(db.Boolean, nullable=False)
 
+    def get_password_hash(self, password):
+        return generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password, password)
+
