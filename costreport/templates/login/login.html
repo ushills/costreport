@@ -1,0 +1,19 @@
+{% extends "shared/_layout.html" %}
+{% block main_content %}
+
+<h2>Login</h2>
+
+<div class="container login">
+    <form action="" method="POST">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            {{ form.username(class="form-control", placeholder="username") }}
+        </div>
+        <div class="form-group">
+            {{ form.password(class="form-control", placeholder="password") }}
+        </div>
+        <button type="submit" class="btn btn-success">Login</button>
+        <a class="btn btn-danger pull-right" href="/projects" role="button">Cancel</a>
+    </form>
+</div>
+{% endblock %}
