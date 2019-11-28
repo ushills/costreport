@@ -11,13 +11,12 @@ class LoginForm(FlaskForm):
     username = StringField("username", validators=[DataRequired()])
     password = PasswordField("password", validators=[DataRequired()])
 
-
 @blueprint.route("/login", methods=["GET"])
 def login_get():
     if flask_login.current_user.is_authenticated:
-        return redirect(flask.url_for("project.projects"))
+        return flask.redirect(flask.url_for("project.projects"))
     form = LoginForm()
-    return flask.render_template("login/login.html", form=form)
+    return flask.render_template("user/login.html", form=form)
 
 
 @blueprint.route("/login", methods=["POST"])
@@ -33,4 +32,4 @@ def login_post():
         #     return flask.abort(400)
 
         return flask.redirect(next or flask.url_for("projects.projects"))
-    return flask.render_template("login/login.html", form=form)
+    return flask.render_template("user/login.html", form=form)

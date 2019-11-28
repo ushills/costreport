@@ -2,6 +2,7 @@ import datetime
 import os
 import sys
 from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
 # Make it run more easily outside of VSCode
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "..")))
@@ -16,14 +17,16 @@ class User(UserMixin, db.Model):
     created_date: datetime.datetime = db.Column(
         db.DateTime, default=datetime.datetime.now, index=True
     )
-    username = db.Column(db.String, nullable=False, index=True)
-    user_email = db.Column(db.String, nullable=False)
-    password = db.Column(db.String, nullable=False)
+    username = db.Column(db.String, nullable=False, unique=True, index=True)
+    email = db.Column(db.String, unique=True, nullable=False)
+    password_hash = db.Column(db.String, nullable=False)
     active = db.Column(db.Boolean, nullable=False)
 
-    def get_password_hash(self, password):
-        return generate_password_hash(password)
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
 
     def check_password(self, password):
-        return check_password_hash(self.password, password)
+        return check_password_hash(self.password_hash, password)
+
+
 
